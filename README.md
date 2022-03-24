@@ -3,6 +3,9 @@
 通过修改xvp节点上的
 
 `cat /etc/modprobe.d/kvm-nested.conf `
+
 `options kvm_intel nested = 1 `
+
 `options kvm ignore_msrs = 1`
+
 即可
