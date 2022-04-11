@@ -7,3 +7,12 @@ options kvm_intel nested = 1
 options kvm ignore_msrs = 1
 ```
 即可
+
+安徽外事办xvp ceph写入速度慢
+ceph版本导致，升级ceph版本解决
+
+飞腾s2500安装xvp问题：
+```
+安装时需要开启CPU兼容模式并将cpu socket 设置为1
+安装完xvp之后需要将CPU兼容模式关闭且cpu socket恢复为2
+```
