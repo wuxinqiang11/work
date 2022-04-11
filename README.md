@@ -8,8 +8,10 @@ options kvm ignore_msrs = 1
 ```
 即可
 
-安徽外事办xvp ceph写入速度慢
+安徽外事办ceph问题
+```
 ceph版本导致，升级ceph版本解决
+```
 
 飞腾s2500安装xvp问题：
 ```
