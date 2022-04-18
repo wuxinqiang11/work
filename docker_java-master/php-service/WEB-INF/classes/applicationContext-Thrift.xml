@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:phprpc="http://www.lvmama.com/schema/phprpc"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+        	http://www.springframework.org/schema/beans/spring-beans.xsd
+        	http://www.lvmama.com/schema/phprpc
+        	http://www.lvmama.com/schema/phprpc/phprpc.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:property-placeholder location="classpath:dubbo.properties" />
+
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<phprpc:registry address="zookeeper://${zookeeper.address}" />
+	
+	<!-- 使用zookeeper注册中心注册监控服务 -->
+	<phprpc:monitor protocol="registry" />
+
+	<!-- 用thrift协议在8090端口暴露服务 -->
+	<phprpc:protocol name="thrift" port="${zookeeper.thrift.port}" />
+
+	<!-- 声明需要暴露的服务接口 -->
+	<phprpc:service interface="com.lvmama.phprpc.monitor.MonitorService$Iface" ref="monitorService"></phprpc:service>
+	<phprpc:service interface="com.lvmama.phpsrv.Service.UserService$Iface" ref="userService"></phprpc:service>
+	<phprpc:service interface="com.lvmama.phpsrv.Service.VstService$Iface" ref="vstService"></phprpc:service>
+	<phprpc:service interface="com.lvmama.phpsrv.Service.PhotoService$Iface" ref="photoService"></phprpc:service>
+	<phprpc:service interface="com.lvmama.phpsrv.Service.SearchService$Iface" ref="searchService"></phprpc:service>
+	<phprpc:service interface="com.lvmama.phpsrv.Service.ProductService$Iface" ref="productService"></phprpc:service>
+	<phprpc:service interface="com.lvmama.phpsrv.Service.OrderService$Iface" ref="orderService"></phprpc:service>
+	<phprpc:service interface="com.lvmama.phpsrv.Service.ScenicService$Iface" ref="scenicService"></phprpc:service>
+	<phprpc:service interface="com.lvmama.phpsrv.Service.BuyPresentService$Iface" ref="buyPresentService"></phprpc:service>
+	<phprpc:service interface="com.lvmama.phpsrv.Service.PromotionService$Iface" ref="promotionService"></phprpc:service>
+	<phprpc:service interface="com.lvmama.phpsrv.Service.RebateService$Iface" ref="rebateService"></phprpc:service>
+	<phprpc:service interface="com.lvmama.phpsrv.Service.UnityProductService$Iface" ref="unityProductService"></phprpc:service>
+	<phprpc:service interface="com.lvmama.phpsrv.Service.IpLocationService$Iface" ref="ipLocationService"></phprpc:service>
+	<phprpc:service interface="com.lvmama.phpsrv.Service.DestDistrictService$Iface" ref="destDistrictService"></phprpc:service>
+	<phprpc:service interface="com.lvmama.phpsrv.Service.BusStationService$Iface" ref="busStationService"></phprpc:service>
+
+	<!-- 具体的实现bean -->
+	<bean id="monitorService" class="com.lvmama.phpsrv.controller.MonitorController" />
+	<bean id="userService" class="com.lvmama.phpsrv.controller.UserController" />
+	<bean id="vstService" class="com.lvmama.phpsrv.controller.VstController" />
+	<bean id="photoService" class="com.lvmama.phpsrv.controller.PhotoController" />
+	<bean id="searchService" class="com.lvmama.phpsrv.controller.SearchController" />
+	<bean id="productService" class="com.lvmama.phpsrv.controller.ProductController" />
+	<bean id="orderService" class="com.lvmama.phpsrv.controller.OrderController" />
+	<bean id="scenicService" class="com.lvmama.phpsrv.controller.ScenicController" />
+	<bean id="buyPresentService" class="com.lvmama.phpsrv.controller.BuyPresentController" />
+	<bean id="promotionService" class="com.lvmama.phpsrv.controller.PromotionController" />
+	<bean id="rebateService" class="com.lvmama.phpsrv.controller.RebateController" />
+	<bean id="unityProductService" class="com.lvmama.phpsrv.controller.UnityProductController" />
+	<bean id="ipLocationService" class="com.lvmama.phpsrv.controller.IpLocationController" />
+	<bean id="destDistrictService" class="com.lvmama.phpsrv.controller.DestDistrictController" />
+	<bean id="busStationService" class="com.lvmama.phpsrv.controller.BusStationController" />
+
+</beans>

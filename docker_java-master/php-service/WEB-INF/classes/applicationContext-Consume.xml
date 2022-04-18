@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- dubbo 消费者配置 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:dubbo.properties" />
+
+
+    <!--消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
+    <dubbo:application name="php-service" />
+
+    <!--zookeeper注册中心  -->
+    <dubbo:registry id="default" protocol="zookeeper" address="${dubbo.registry.address}" />
+    <dubbo:registry id="monitor" protocol="zookeeper" address="${zookeeper.address}" default="false" />
+
+    <!-- 协议 -->
+    <dubbo:protocol name="dubbo"/>
+
+    <!-- 生成远程服务代理，可以和本地bean一样使用demoService-->
+    <dubbo:reference id="monitorService" interface="com.alibaba.dubbo.monitor.MonitorService" registry="monitor" check="false"/>
+
+    <!-- vst_pet -->
+    <dubbo:reference id="userUserProxy" interface="com.lvmama.comm.pet.service.user.UserUserProxy" registry="default" check="false"/>
+
+    <!-- vst_comm -->
+	<dubbo:reference id="pushAdapterServiceRemote" interface="com.lvmama.vst.back.pub.service.PushAdapterServiceRemote" registry="default" check="false"/>
+    <dubbo:reference id="prodProductClientService" interface="com.lvmama.vst.back.client.prod.service.ProdProductClientService" registry="default" check="false" />
+    <dubbo:reference id="prodTagClientService" interface="com.lvmama.vst.back.client.biz.service.ProdTagClientService" registry="default" check="false" />
+    <dubbo:reference id="promotionService" interface="com.lvmama.vst.back.client.prom.service.PromotionService" registry="default" check="false"/>
+
+    <!-- lvmama_common -->
+	<dubbo:reference id="photoService" interface="com.lvmama.comm.pet.service.photo.PhotoService" registry="default" check="false"/>
+
+    <!-- vst_searchclient -->
+    <dubbo:reference id="lvmamaSearchService" interface="com.lvmama.searchclient.search.service.LvmamaSearchService" registry="default" check="false" />
+    <dubbo:reference id="simpleSearchService" interface="com.lvmama.searchclient.search.service.SimpleSearchService" registry="default" check="false" />
+
+    <!-- vst_api -->
+    <dubbo:reference id="vstTicketProductService" interface="com.lvmama.vst.api.ticket.prod.service.VstTicketProductService" registry="default" check="false" />
+    <dubbo:reference id="vstHotelProductService" interface="com.lvmama.vst.api.hotel.prod.service.VstProductService" registry="default" check="false" />
+    <dubbo:reference id="vstProductService" interface="com.lvmama.vst.api.prod.service.VstProductService" registry="default" check="false" />
+    <dubbo:reference id="vstRouteService" interface="com.lvmama.vst.api.route.prod.service.VstRouteService" registry="default" check="false" />
+    <dubbo:reference id="vstPromotionService" interface="com.lvmama.vst.api.prom.service.VstPromotionService" registry="default" check="false" />
+
+    <!-- cmt_dist -->
+    <dubbo:reference id="vstCmtTitleStatistisService" interface="com.lvmama.cmt.comment.service.VstCmtTitleStatistisService" registry="default" check="false" />
+
+    <!-- vst_prom -->
+    <!-- 优惠券相关服务 -->
+    <dubbo:reference id="markCouponService" interface="com.lvmama.comm.pet.service.mark.MarkCouponService" registry="default" check="false"/>
+    <dubbo:reference id="markCouponUserService" interface="com.lvmama.comm.pet.service.mark.MarkCouponUserService" registry="default" check="false"/>
+    <!-- losc码相关服务 -->
+    <dubbo:reference id="markChannelService" interface="com.lvmama.comm.pet.service.mark.MarkChannelService" registry="default" check="false"/>
+	
+	<!-- scenic_api 景点相关服务-->
+	<dubbo:reference id="scenicSuppGoodsClientService" interface="com.lvmama.scenic.api.back.client.goods.service.ScenicSuppGoodsClientService" registry="default" check="false"/>
+	<dubbo:reference id="scenicSuppGoodsTicketClientService" interface="com.lvmama.scenic.api.back.client.goods.service.ScenicSuppGoodsTicketClientService" registry="default" check="false"/>
+	
+    <!-- 返现相关服务 -->
+    <dubbo:reference id="suppGoodsRebateClientService" interface="com.lvmama.vst.back.client.goods.service.SuppGoodsRebateClientService" registry="default" check="false"/>
+    
+    <!-- 买赠相关服务 -->
+    <dubbo:reference id="buyPresentClientService" interface="com.lvmama.vst.back.client.prom.service.BuyPresentClientService" registry="default" check="false"/>
+
+    <!-- 特卖服务 -->
+    <dubbo:reference id="unityProductService" interface="com.lvmama.comm.bee.service.prod.UnityProductService" registry="default" check="false"/>
+    
+    <dubbo:reference id="ipLocationService" interface="com.lvmama.phppid.ip.service.IpLocationService" registry="default" check="false"/>
+	
+	<!-- 特卖详情页链接 -->
+    <dubbo:reference id="tMHInfoService" interface="com.lvmama.comm.pet.service.businessCoupon.TMHInfoService" registry="default" check="false"/>
+
+    <dubbo:reference id="shipCompShipService" interface="com.lvmama.ship.api.comship.prod.service.ShipCompShipService" registry="default" check="false"/>
+
+    <dubbo:reference id="kafkaMessageService" interface="com.lvmama.phppid.message.service.KafkaMessageService" registry="default" check="false"/>
+
+    <!--<dubbo:reference id="distGoodsClientService" interface="com.lvmama.scenic.back.client.dist.service.DistGoodsClientService" registry="default" check="false"/>-->
+
+    <dubbo:reference id="scenicDistGoodsClientService" interface="com.lvmama.scenic.api.back.client.dist.service.ScenicDistGoodsClientService" registry="default" check="false"/>
+
+    <dubbo:reference id="destDistrictService" interface="com.lvmama.phppid.destination.service.DestDistrictService" registry="default" check="false"/>
+    
+    <dubbo:reference id="productPoolService" interface="com.lvmama.phppid.productpool.service.ProductPoolService" registry="default" check="false"/>
+
+    <dubbo:reference id="busStationService" interface="com.lvmama.phppid.bus.service.BusStationService" registry="default" check="false"/>
+
+    <!-- 签证相关服务 -->
+    <dubbo:reference id="visaProdProductBranchService" interface="com.lvmama.visa.api.service.VisaProdProductBranchService" registry="default" check="false"/>
+      <!--poi产品信息-->
+    <dubbo:reference id="keywordSearchService" interface="com.lvmama.searchclient.search.service.KeywordSearchService" registry="default" check="false"/>
+
+    <!--  攻略详情接口  -->
+    <dubbo:reference id="guideOrgService" interface="com.lvmama.phppid.guide.service.GuideOrgService" registry="default" check="false"/>
+
+</beans>

@@ -1,0 +1,4 @@
+# zookeeper相关配置
+dubbo.registry.address=10.200.2.86:2181
+zookeeper.address=10.200.2.86:2181
+zookeeper.thrift.port=8090
