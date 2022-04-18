@@ -9,10 +9,10 @@ LABEL Name="Java SpringBoot Demo App" Version=2.1.7
 LABEL org.opencontainers.image.source = "https://github.com/benc-uk/java-demoapp"
 
 WORKDIR /build 
-COPY /java-demoapp-master/.mvn/ ./.mvn
-COPY /java-demoapp-master/mvnw ./mvnw
-COPY /java-demoapp-master/pom.xml .
-COPY /java-demoapp-master/src ./src
+ADD java-demoapp-master/.mvn/ ./.mvn
+ADD java-demoapp-master/mvnw ./mvnw
+ADD java-demoapp-master/pom.xml .
+ADD java-demoapp-master/src ./src
 
  
 RUN ./mvnw -ntp clean package -Dapp.version=$APP_VERSION -DskipTests -Dmaven.test.skip=true -Dcheckstyle.skip=true
