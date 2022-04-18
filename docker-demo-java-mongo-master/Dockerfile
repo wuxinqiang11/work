@@ -1,4 +1,4 @@
-FROM 192.168.16.80:443/xae/maven
+FROM maven:3.3.3
 
 ADD pom.xml /tmp/build/
 RUN cd /tmp/build && mvn -q dependency:resolve
