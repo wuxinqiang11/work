@@ -9,7 +9,8 @@ LABEL Name="Java SpringBoot Demo App" Version=2.1.7
 LABEL org.opencontainers.image.source = "https://github.com/benc-uk/java-demoapp"
 
 #WORKDIR /build 
-COPY java-demoapp-master/mvn ./.mvn
+
+COPY java-demoapp-master/.mvn ./.mvn
 COPY java-demoapp-master/mvnw ./mvnw
 COPY java-demoapp-master/pom.xml .
 COPY java-demoapp-master/src ./src
