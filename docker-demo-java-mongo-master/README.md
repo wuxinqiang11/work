@@ -1,1 +1,0 @@
-# docker-demo-java-mongo
