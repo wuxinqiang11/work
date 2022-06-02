@@ -1,0 +1,174 @@
+{
+  "name": "构建任务",
+  "version": "1.0.0",
+  "decription": "构建任务管理表格",
+  "bind": { "model": "project.adapt.job", "withs": { "adapt": {} } },
+  "hooks": {
+    "after:search": "flows.hooks.job.after_search",
+    "after:find": "flows.hooks.job.after_find"
+  },
+  "apis": {
+    "search": {
+      "default": [
+        {
+          "orders": [{ "column": "id", "option": "desc" }],
+          "withs": { "adapt": {} }
+        },
+        null,
+        100
+      ]
+    }
+  },
+  "columns": {
+    "适配测试": { "@": "components.所属适配测试" },
+    "CPU厂商": { "@": "components.CPU厂商" },
+    "OS类型": { "@": "components.OS类型" },
+    "Posthook脚本": {
+      "@": "components.TextArea",
+      "in": ["Posthook脚本", ":script", 4]
+    },
+    "构建结果": {
+      "@": "components.ReadOnly",
+      "in": ["构建结果", ":detail", 6]
+    },
+    "步骤": {
+      "label": "步骤",
+      "edit": {
+        "type": "extend",
+        "props": {
+          "link": "/jobs/steps",
+          "value": "detail"
+        }
+      }
+    },
+    "制品": {
+      "label": "制品",
+      "edit": {
+        "type": "extend",
+        "props": {
+          "link": "/jobs/artifacts",
+          "value": ":detail.artifacts"
+        }
+      }
+    },
+    "参数": {
+      "label": "参数",
+      "edit": {
+        "type": "extend",
+        "props": {
+          "link": "/jobs/build_args",
+          "value": ":detail.customize_args"
+        }
+      }
+    },
+    "DockerFile": {
+      "label": "DockerFile",
+      "edit": {
+        "type": "extend",
+        "props": {
+          "link": "/jobs/dockerfile",
+          "value": ":detail.df_content"
+        }
+      }
+    },
+    "当前任务": {
+      "label": "当前任务",
+      "view": {
+        "type": "formModal",
+        "props": {
+          "type": "view",
+          "value": ":job_id",
+          "formId": ":id",
+          "formName": "project.detail.adapt.report"
+        }
+      }
+    },
+    "状态": {
+      "label": "状态",
+      "view": {
+        "type": "formModal",
+        "props": {
+          "type": "view",
+          "value": ":result",
+          "formId": ":id",
+          "formName": "project.detail.adapt.report"
+        }
+      }
+    },
+    "测试报告": {
+      "label": "测试报告",
+      "view": {
+        "type": "formModal",
+        "props": {
+          "type": "view",
+          "value": ":report_name",
+          "formId": ":id",
+          "formName": "project.detail.adapt.report"
+        }
+      }
+    }
+  },
+  "filters": {},
+  "list": {
+    "primary": "id",
+    "layout": {
+      "columns": [
+        { "name": "当前任务" },
+        { "name": "CPU厂商" },
+        { "name": "OS类型" },
+        { "name": "镜像Tag" },
+        { "name": "状态" },
+        { "name": "测试报告" }
+      ],
+      "filters": []
+    },
+    "actions": {
+      "create": {
+        "type": "button",
+        "props": { "label": "添加", "icon": "fas fa-plus" }
+      }
+    },
+    "option": {
+      "operation": {
+        "unfold": true,
+        "hideView": true,
+        "width": 220,
+        "items": [
+          {
+            "useModal": false,
+            "type": "view",
+            "title": "查看-Modal",
+            "icon": "icon-eye",
+            "formName": "project.detail.adapt.job",
+            "formId": ":id"
+          }
+        ]
+      }
+    }
+  },
+  "edit": {
+    "primary": "id",
+    "layout": {
+      "fieldset": [
+        {
+          "columns": [
+            { "name": "适配测试", "width": 24 },
+            { "name": "代码分支(或Tag)", "width": 12 },
+            { "name": "镜像Tag", "width": 12 },
+            { "name": "CPU厂商", "width": 12 },
+            { "name": "OS类型", "width": 12 },
+            { "name": "编译环境", "width": 12 },
+            { "name": "Dockerfile位置", "width": 12 },
+            { "name": "制品包存放路径", "width": 24 },
+            { "name": "Posthook脚本", "width": 24 }
+          ]
+        }
+      ]
+    },
+    "actions": {
+      "cancel": {},
+      "save": { "@": "action.保存" },
+      "delete": { "@": "action.删除" }
+    }
+  }
+}

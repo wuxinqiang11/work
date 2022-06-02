@@ -1,0 +1,18 @@
+{
+  "label": "设置搜索结果",
+  "version": "1.0.0",
+  "description": "设置搜索结果",
+  "nodes": [
+    {
+      "name": "data",
+      "process": "xiang.helper.ArrayMapSet",
+      "args": ["{{$in.0.data}}", "report_name", "查看报告"]
+    },
+    {
+      "name": "处理结果",
+      "process": "xiang.helper.MapSet",
+      "args": ["{{$in.0}}", "data", "{{$res.data}}"]
+    }
+  ],
+  "output": "{{$res.处理结果}}"
+}

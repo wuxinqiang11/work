@@ -1,0 +1,23 @@
+{
+  "label": "通过",
+  "version": "1.0.0",
+  "description": "通过",
+  "nodes": [
+    {
+      "name": "通过",
+      "process": "models.project.save",
+      "args": [
+        {
+          "id": "{{$in.0.id}}",
+          "status": "已完成",
+          "result": "通过"
+        }
+      ]
+    }
+  ],
+  "output": {
+    "id": "{{$in.0.id}}",
+    "status": "已完成",
+    "result": "通过"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "label": "Token",
+  "version": "1.0.0",
+  "description": "用户登录JWT Token",
+  "nodes": [
+    {
+      "name": "用户",
+      "process": "models.manu.user.Find",
+      "args": [
+        "?:$in.0",
+        {
+          "select": ["id", "email", "mobile", "name", "manu_id"]
+        }
+      ]
+    },
+    {
+      "name": "菜单",
+      "process": "flows.login.menu",
+      "args": ["{{$res.用户.id}}"]
+    },
+    {
+      "name": "SID",
+      "process": "session.start"
+    },
+    {
+      "name": "JWT",
+      "process": "xiang.helper.JWTMake",
+      "args": [
+        "{{$res.用户.0.id}}",
+        {},
+        {
+          "timeout": 3600,
+          "sid": "{{$res.SID}}"
+        }
+      ]
+    },
+    {
+      "name": "设置会话数据",
+      "process": "session.set",
+      "args": ["user", "{{$res.用户}}"]
+    },
+    {
+      "name": "设置会话用户ID",
+      "process": "session.set",
+      "args": ["user_id", "{{$res.用户.id}}"]
+    }
+  ],
+  "output": {
+    "sid": "{{$res.SID}}",
+    "user": "{{$res.用户}}",
+    "menus": "{{$res.菜单}}",
+    "token": "{{$res.JWT.token}}",
+    "expires_at": "{{$res.JWT.expires_at}}"
+  }
+}

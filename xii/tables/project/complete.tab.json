@@ -1,0 +1,189 @@
+{
+  "name": "适配结果",
+  "version": "1.0.0",
+  "decription": "测试完成项目管理表格",
+  "bind": {
+    "model": "project",
+    "withs": { "product": { "query": { "withs": { "manu": {} } } } }
+  },
+  "apis": {
+    "search": {
+      "default": [
+        {
+          "withs": { "product": { "query": { "withs": { "manu": {} } } } },
+          "wheres": [{ "column": "status", "op": "in", "value": ["已完成"] }],
+          "orders": [{ "column": "updated_at", "option": "desc" }]
+        },
+        null,
+        10
+      ]
+    }
+  },
+  "columns": {
+    "产品": { "@": "components.所属产品" },
+    "项目说明": { "@": "components.TextArea", "in": ["项目说明", ":desc", 4] },
+    "送测日期": {
+      "@": "components.DatePicker",
+      "in": ["送测日期", ":create_time", "YYYY年MM月DD日", false]
+    },
+    "功能清单": {
+      "@": "components.Table",
+      "in": [
+        "功能清单",
+        "project.detail.feature",
+        { "where.project_id.eq": ":id" }
+      ]
+    },
+    "测试用例": {
+      "@": "components.Table",
+      "in": [
+        "测试用例",
+        "project.detail.case",
+        { "where.project_id.eq": ":id" }
+      ]
+    },
+    "测试记录": {
+      "@": "components.Table",
+      "in": [
+        "测试记录",
+        "project.detail.test",
+        { "where.project_id.eq": ":id" }
+      ]
+    },
+    "基础软硬件": {
+      "@": "components.Table",
+      "in": [
+        "基础软硬件",
+        "project.detail.package",
+        { "where.project_id.eq": ":id" }
+      ]
+    },
+    "资源需求": {
+      "@": "components.Table",
+      "in": [
+        "资源需求",
+        "project.detail.resource",
+        { "where.project_id.eq": ":id" }
+      ]
+    }
+  },
+  "filters": {
+    "关键词": { "@": "filter.关键词", "in": ["where.name.match"] }
+  },
+  "list": {
+    "primary": "id",
+    "layout": {
+      "columns": [
+        { "name": "ID", "width": 80 },
+        { "name": "产品" },
+        { "name": "名称" },
+        { "name": "状态" },
+        { "name": "测试结果" },
+        { "name": "送测日期" }
+      ],
+      "filters": [{ "name": "关键词" }]
+    },
+    "actions": {
+      "pagination": { "props": { "showTotal": true } }
+    },
+    "option": {
+      "operation": {
+        "width": 120,
+        "unfold": true,
+        "hideEdit": true,
+        "items": [
+          {
+            "title": "报告",
+            "icon": "icon-arrow-down",
+            "link": "/docx/test.html",
+            "data": {
+              "id": ":id"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "edit": {
+    "primary": "id",
+    "layout": {
+      "fieldset": [
+        {
+          "columns": [
+            { "name": "名称", "width": 18 },
+            { "name": "测试结果", "width": 6 },
+            { "name": "产品", "width": 18 },
+            { "name": "送测日期", "width": 6 },
+            { "name": "测试记录", "width": 24 },
+            { "name": "测试用例", "width": 24 },
+            { "name": "功能清单", "width": 24 },
+            { "name": "项目说明", "width": 24 },
+            { "name": "基础软硬件", "width": 24 },
+            { "name": "资源需求", "width": 24 }
+          ]
+        }
+      ]
+    },
+    "actions": {
+      "cancel": {},
+      "save": { "@": "action.保存" },
+      "delete": { "@": "action.删除" }
+    },
+    "option": {
+      "dev": false,
+      "operation": [
+        {
+          "title": "登记表",
+          "icon": "icon-arrow-down",
+          "link": "/docx/test.html",
+          "data": {
+            "id": ":id"
+          }
+        },
+        {
+          "title": "计划",
+          "icon": "icon-arrow-down",
+          "link": "/docx/test.html",
+          "data": {
+            "id": ":id"
+          }
+        },
+        {
+          "title": "需求",
+          "icon": "icon-arrow-down",
+          "link": "/docx/test.html",
+          "data": {
+            "id": ":id"
+          }
+        },
+        {
+          "title": "用例",
+          "icon": "icon-arrow-down",
+          "link": "/docx/test.html",
+          "data": {
+            "id": ":id"
+          }
+        },
+        {
+          "title": "记录",
+          "icon": "icon-arrow-down",
+          "link": "/docx/test.html",
+          "data": {
+            "id": ":id"
+          }
+        },
+        {
+          "title": "报告",
+          "icon": "icon-arrow-down",
+          "type": "success",
+          "link": "/docx/test.html",
+          "data": {
+            "id": ":id"
+          }
+        }
+      ]
+    }
+  },
+  "insert": {},
+  "view": {}
+}

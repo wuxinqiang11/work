@@ -1,0 +1,21 @@
+<div>
+  {{#detail.stages}}
+  <div class="group">
+    <div class="title">{{name}}</div>
+    <div class="body">
+      {{#steps}}
+      <a class="item">
+        <i class="icon-chevron-right fold-icon"></i>
+        <i class="icon-check {{status}}-icon"></i>
+        <div class="content">
+          <div class="name">{{name}}</div>
+          <div class="log">
+            <pre>{{#output}}{{message}}{{/output}}</pre>
+          </div>
+        </div>
+      </a>
+      {{/steps}}
+    </div>
+  </div>
+  {{/detail.stages}} {{^detail.stages}} 暂无步骤信息 {{/detail.stages}}
+</div>

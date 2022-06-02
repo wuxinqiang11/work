@@ -1,0 +1,19 @@
+{
+  "label": "场景分布占比",
+  "version": "1.0.0",
+  "description": "场景分布占比",
+  "nodes": [
+    {
+      "name": "场景分布占比",
+      "engine": "xiang",
+      "query": {
+        "debug": true,
+        "select": [":COUNT(id) as 数量", "scene as 名称"],
+        "wheres": [{ ":scene": "场景", "is": "not null" }],
+        "groups": "名称",
+        "from": "$product"
+      }
+    }
+  ],
+  "output": "{{$res.场景分布占比}}"
+}

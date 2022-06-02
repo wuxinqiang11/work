@@ -1,0 +1,75 @@
+{
+  "name": "证书",
+  "table": {
+    "name": "training_cert",
+    "comment": "证书",
+    "engine": "InnoDB"
+  },
+  "columns": [
+    {
+      "label": "ID",
+      "name": "id",
+      "type": "ID",
+      "comment": "ID"
+    },
+    {
+      "label": "人才",
+      "name": "trainee_id",
+      "type": "bigInteger",
+      "index": true,
+      "comment": "人才"
+    },
+    {
+      "label": "考试",
+      "name": "exam_id",
+      "type": "bigInteger",
+      "index": true,
+      "comment": "考试"
+    },
+    {
+      "label": "得分",
+      "name": "score",
+      "type": "integer",
+      "index": true,
+      "comment": "得分"
+    },
+    {
+      "label": "添加时间",
+      "name": "create_time",
+      "type": "timestamp",
+      "comment": "时刻",
+      "nullable": true,
+      "index": true
+    },
+    {
+      "label": "状态",
+      "name": "status",
+      "type": "enum",
+      "default": "未通过",
+      "option": ["未通过", "已颁发"],
+      "comment": "进行状态: 未通过, 已颁发",
+      "index": true
+    }
+  ],
+  "relations": {
+    "trainee": {
+      "type": "hasOne",
+      "model": "trainee",
+      "key": "id",
+      "foreign": "trainee_id",
+      "query": {
+        "select": ["id", "name"]
+      }
+    },
+    "exam": {
+      "type": "hasOne",
+      "model": "training.exam",
+      "key": "id",
+      "foreign": "exam_id",
+      "query": {
+        "select": ["id", "name"]
+      }
+    }
+  },
+  "option": { "timestamps": true }
+}

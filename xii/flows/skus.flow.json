@@ -1,0 +1,29 @@
+{
+    "label": "资源选择器",
+    "version": "1.0.0",
+    "description": "资源选择器",
+    "nodes": [{
+            "name": "关键词",
+            "process": "scripts.string.Concat",
+            "args": [
+                ["%", "{{$in.0.name.0}}", "%"]
+            ]
+        },
+        {
+            "name": "资源",
+            "engine": "xiang",
+            "query": {
+                "debug": true,
+                "select": [
+                    "id as sku_id",
+                    ":concat(type, ':',name, '(', cpu, '核/', memory, 'M/', disk, 'G)') as name"
+                ],
+                "from": "$resource.sku",
+                "wheres": [{ ":name": "名称", "like": "?:$res.关键词" }],
+                "orders": "id asc",
+                "limit": 500
+            }
+        }
+    ],
+    "output": "{{$res.资源}}"
+}

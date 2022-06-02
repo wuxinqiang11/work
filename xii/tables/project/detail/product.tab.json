@@ -1,0 +1,76 @@
+{
+  "name": "产品",
+  "version": "1.0.0",
+  "decription": "产品管理表格",
+  "bind": {
+    "model": "project.product",
+    "withs": {
+      "product": { "query": { "withs": { "manu": {}, "kind": {} } } },
+      "project": {}
+    }
+  },
+  "apis": {
+    "search": {
+      "default": [
+        {
+          "withs": {
+            "product": { "query": { "withs": { "manu": {}, "kind": {} } } },
+            "project": {}
+          }
+        },
+        null,
+        10
+      ]
+    }
+  },
+  "columns": {
+    "项目": { "@": "components.所属项目" },
+    "产品": { "@": "components.所属产品" },
+    "厂商": { "@": "components.Label", "in": ["厂商", ":manu.name"] },
+    "产品类型": { "@": "components.Label", "in": ["产品类型", ":kind.name"] }
+  },
+  "filters": {
+    "关键词": { "@": "filter.关键词", "in": ["where.key.match"] }
+  },
+  "list": {
+    "primary": "id",
+    "layout": {
+      "columns": [
+        { "name": "ID", "width": 80 },
+        { "name": "产品类型", "width": 160 },
+        { "name": "产品", "width": 260 },
+        { "name": "厂商" }
+      ],
+      "filters": [{ "name": "关键词" }]
+    },
+    "actions": {
+      "pagination": { "props": { "showTotal": true } },
+      "create": {
+        "type": "button",
+        "props": { "label": "添加", "icon": "fas fa-plus" }
+      }
+    },
+    "option": { "operation": { "width": 120, "unfold": true, "items": [] } }
+  },
+  "edit": {
+    "primary": "id",
+    "layout": {
+      "fieldset": [
+        {
+          "columns": [
+            { "name": "项目", "width": 24 },
+            { "name": "产品", "width": 24 },
+            { "name": "类型", "width": 24 }
+          ]
+        }
+      ]
+    },
+    "actions": {
+      "cancel": {},
+      "save": { "@": "action.保存" },
+      "delete": { "@": "action.删除" }
+    }
+  },
+  "insert": {},
+  "view": {}
+}

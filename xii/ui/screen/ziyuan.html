@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>信创人才</title>
+    <script src="js/vue.js"></script>
+    <script src="js/datav.map.vue.js"></script>
+    <script src="js/jwmeyy.js"></script>
+    <link rel="stylesheet" href="css/ziyuan.css" />
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/wow.js"></script>
+    <script>
+      new WOW().init();
+    </script>
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+    <script src="js/axios.min.js"></script>
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app" v-cloak>
+      <div class="container">
+        <div class="top" id="title" onclick="parent.toggleFullScreen()">
+          <p>中国化工行业信创适配中心</p>
+        </div>
+        <div class="content">
+          <div class="con_left">
+            <div class="left_box_1">
+              <div class="left_box_1_t">
+                <img class="img" src="images/sanjiao.png" alt="" />
+                <p>虚拟机数量</p>
+                <img src="images/sanjiao.png" alt="" />
+              </div>
+              <div class="biaoji">
+                <div class="biaoji_1">
+                  <img src="images/s_1.png" alt="" />
+                  <p>运行中</p>
+                </div>
+                <!-- <div class="biaoji_1">
+                <img src="images/s_2.png" alt="">
+                <p>模板</p>
+              </div> -->
+                <div class="biaoji_1">
+                  <img src="images/s_3.png" alt="" />
+                  <p>已停止</p>
+                </div>
+              </div>
+              <div class="left_box_1_b">
+                <div id="icharts_5" class="icharts_5"></div>
+              </div>
+            </div>
+
+            <div class="left_box_2">
+              <div class="left_box_2_t">
+                <img class="img" src="images/sanjiao.png" alt="" />
+                <p>轻虚拟机数量</p>
+                <img src="images/sanjiao.png" alt="" />
+              </div>
+              <div class="biaoji">
+                <div class="biaoji_1">
+                  <img src="images/s_1.png" alt="" />
+                  <p>运行中</p>
+                </div>
+                <!-- <div class="biaoji_1">
+                <img src="images/s_2.png" alt="">
+                <p>模板</p>
+              </div> -->
+                <div class="biaoji_1">
+                  <img src="images/s_3.png" alt="" />
+                  <p>已停止</p>
+                </div>
+              </div>
+              <div class="left_box_2_b">
+                <div id="icharts_6" class="icharts_6"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="con_mid">
+            <div class="mid_nav zoomIn">
+              <a class="mid_nav1" href="zhihui.html">
+                <p>指挥中心</p>
+              </a>
+              <a class="mid_nav1" href="shipei.html">
+                <p>适配测试</p>
+              </a>
+              <a class="mid_nav1" href="chengguo.html">
+                <p>信创成果</p>
+              </a>
+              <a class="mid_nav1" href="rencai.html">
+                <p>信创人才</p>
+              </a>
+              <a class="mid_nav1 active" href="ziyuan.html">
+                <p>平台资源</p>
+              </a>
+            </div>
+
+            <div class="mid_con zoomIn">
+              <div class="mid_con_1">
+                <div class="mid_con_1_1">
+                  <!-- <dv-charts :option="option3" /> -->
+                  <div class="icharts_7" id="icharts_7"></div>
+                  <div class="zimiaoshu">
+                    <p>{{liyonglv}}%</p>
+                    <p>资源利用率</p>
+                  </div>
+                </div>
+                <div class="mid_con_1_2">
+                  <img src="images/ziyuanbg.png" alt="" />
+                  <div class="mid_con_1_2_c">
+                    <div class="mid_con_1_2_c_t">
+                      <p>主机</p>
+                    </div>
+                    <div class="mid_con_1_2_c_c">
+                      <div class="mid_con_1_2_c_c1">
+                        <p>{{wuli.在线}}</p>
+                        <p>{{wuli.状态}}</p>
+                      </div>
+                      <div class="mid_con_1_2_c_c2">
+                        <p>{{wuli.离线}}</p>
+                        <p>{{wuli.状态}}</p>
+                      </div>
+                    </div>
+                    <div class="mid_con_1_2_c_b">
+                      <!-- <p>{{wuli.状态}}</p> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="mid_con_1_2">
+                  <img src="images/ziyuanbg.png" alt="" />
+                  <div class="mid_con_1_2_c">
+                    <div class="mid_con_1_2_c_t">
+                      <p>虚拟机</p>
+                    </div>
+                    <div class="mid_con_1_2_c_c">
+                      <div class="mid_con_1_2_c_c1">
+                        <p>{{xuni.在线}}</p>
+                        <p>{{xuni.状态}}</p>
+                      </div>
+                      <div class="mid_con_1_2_c_c2">
+                        <p>{{xuni.离线}}</p>
+                        <p>{{xuni.状态}}</p>
+                      </div>
+                    </div>
+                    <div class="mid_con_1_2_c_b">
+                      <!-- <p>{{xuni.状态}}</p> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="mid_con_1_2">
+                  <img src="images/ziyuanbg.png" alt="" />
+                  <div class="mid_con_1_2_c">
+                    <div class="mid_con_1_2_c_t">
+                      <p>轻虚拟机</p>
+                    </div>
+                    <div class="mid_con_1_2_c_c">
+                      <div class="mid_con_1_2_c_c1">
+                        <p>{{qxuni.在线}}</p>
+                        <p>{{qxuni.状态}}</p>
+                      </div>
+                      <div class="mid_con_1_2_c_c2">
+                        <p>{{qxuni.离线}}</p>
+                        <p>{{qxuni.状态}}</p>
+                      </div>
+                    </div>
+                    <div class="mid_con_1_2_c_b">
+                      <!-- <p>{{qxuni.状态}}</p> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mid_con_2 zoomIn">
+                <div class="mid_con_2_1">
+                  <div class="mid_con_2_1_t">
+                    <div class="zi">
+                      <img src="images/cpu.png" alt="" />
+                      <p>CPU</p>
+                    </div>
+                    <p>100%</p>
+                  </div>
+                  <div class="mid_con_2_1_b">
+                    <div id="icharts_5_1" class="icharts_5_1"></div>
+                  </div>
+                  <div class="dibu">
+                    <p>60秒</p>
+                    <p>0</p>
+                  </div>
+                </div>
+                <div class="mid_con_2_1">
+                  <div class="mid_con_2_1_t">
+                    <div class="zi">
+                      <img src="images/neicun.png" alt="" />
+                      <p>内存</p>
+                    </div>
+                    <p>64G</p>
+                  </div>
+                  <div class="mid_con_2_1_b">
+                    <div id="icharts_5_2" class="icharts_5_2"></div>
+                  </div>
+                  <div class="dibu">
+                    <p>60秒</p>
+                    <p>0</p>
+                  </div>
+                </div>
+                <div class="mid_con_2_1">
+                  <div class="mid_con_2_1_t">
+                    <div class="zi">
+                      <img src="images/cipan.png" alt="" />
+                      <p>磁盘</p>
+                    </div>
+                    <p>100%</p>
+                  </div>
+                  <div class="mid_con_2_1_b">
+                    <div id="icharts_5_3" class="icharts_5_3"></div>
+                  </div>
+                  <div class="dibu">
+                    <p>60秒</p>
+                    <p>0</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mid_con_6_1">
+                <img src="images/zhuan.png" alt="" />
+              </div>
+              <!-- <div class="mid_con_7"> 
+            </div> -->
+
+              <div class="bottom_circle">
+                <div class="bottom_circle1"></div>
+                <div class="bottom_circle2"></div>
+                <div class="bottom_circle3"></div>
+                <div class="bottom_circle4"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="con_right">
+            <div class="right_box_1">
+              <div class="right_box_1_t">
+                <img class="img" src="images/sanjiao.png" alt="" />
+                <p>子网/容器数量</p>
+                <img src="images/sanjiao.png" alt="" />
+              </div>
+              <div class="right_box_1_b">
+                <div class="right_box_1_b_1">
+                  <div class="right_box_1_b_left">
+                    <p>子网数量</p>
+                    <h2>{{ziwang.总数}}</h2>
+                  </div>
+                  <img src="images/ziwang.png" alt="" />
+                </div>
+
+                <div class="right_box_1_b_1">
+                  <div class="right_box_1_b_left">
+                    <p>容器数量</p>
+                    <h2>{{rongqi.在线}}/<span>{{rongqi.离线}}</span></h2>
+                  </div>
+                  <img src="images/rongqi.png" alt="" />
+                </div>
+              </div>
+            </div>
+
+            <div class="right_box_2">
+              <div class="right_box_2_t">
+                <img class="img" src="images/sanjiao.png" alt="" />
+                <p>物理机数量</p>
+                <img src="images/sanjiao.png" alt="" />
+              </div>
+              <div class="right_box_2_b">
+                <!-- <dv-charts :option="option" /> -->
+                <div id="icharts_1" class="icharts_1"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          ziwang: "",
+          rongqi: "",
+          wuli: "",
+          xuni: "",
+          qxuni: "",
+          web: "/api",
+          shuju: "",
+          xonlinenum: [],
+          xofflinenum: [],
+          xtime: [],
+
+          qonlinenum: [],
+          qofflinenum: [],
+          qtime: [],
+
+          wulijinum: [],
+          wulijitime: [],
+
+          chulinum: [],
+          neicunnum: [],
+          cipannum: [],
+          quanzhi: [],
+        },
+        watch: {
+          xonlinenum() {
+            this.drawxuniji();
+          },
+          qonlinenum() {
+            this.drawqxuniji();
+          },
+          wulijinum() {
+            this.drawwuliji();
+          },
+          chulinum() {
+            this.drawcpu();
+          },
+          neicunnum() {
+            this.drawneicun();
+          },
+          cipannum() {
+            this.drawcipan();
+          },
+          quanzhi() {
+            this.drawquan();
+          },
+        },
+        methods: {
+          //控制字体
+          fontSize(res) {
+            var docEl = document.documentElement,
+              clientWidth =
+                window.innerWidth ||
+                document.documentElement.clientWidth ||
+                document.body.clientWidth;
+            if (!clientWidth) return;
+            return (res * clientWidth) / 1920;
+          },
+
+          //数据摘要
+          getshuju() {
+            axios({
+              method: "get",
+              url: this.web + "/screen/resource/stat",
+            })
+              .then((res) => {
+                console.log(res.data);
+                this.shuju = res.data;
+                this.ziwang = res.data["子网"];
+                this.rongqi = res.data["容器"];
+                this.wuli = res.data["物理机"];
+                this.xuni = res.data["虚拟机"];
+                this.qxuni = res.data["轻虚拟机"];
+                this.liyonglv = res.data["资源利用率"];
+
+                console.log(this.ziwang);
+                console.log(this.rongqi);
+                console.log(this.wuli);
+                console.log(this.xuni);
+                console.log(this.qxuni);
+
+                this.drawquan();
+              })
+              .catch((err) => {});
+          },
+
+          //虚拟机数量
+          getxuni() {
+            axios({
+              method: "get",
+              url: this.web + "/screen/resource/vms",
+            })
+              .then((res) => {
+                console.log(res.data);
+                for (var i = 0; i < res.data.下线.length; i++) {
+                  this.xofflinenum.push(res.data.下线[i].数量);
+                  this.xtime.push(res.data.下线[i].创建时间);
+                }
+                for (var i = 0; i < res.data.在线.length; i++) {
+                  this.xonlinenum.push(res.data.在线[i].数量);
+                }
+
+                console.log(this.xonlinenum);
+                console.log(this.xofflinenum);
+              })
+              .catch((err) => {});
+          },
+
+          //虚拟机数量图表
+          drawxuniji() {
+            var myChart5 = echarts.init(document.getElementById("icharts_5"));
+            myChart5.setOption({
+              grid: {
+                left: 30,
+                right: 30,
+                top: 30,
+                bottom: 15,
+                containLabel: true,
+              },
+              tooltip: {
+                trigger: "axis",
+                axisPointer: {
+                  type: "line",
+                  lineStyle: {
+                    color: "#00c9fb",
+                    opacity: 0.7,
+                    type: "dashed",
+                    width: 1,
+                  },
+                  z: 1,
+                },
+                padding: [15, 22],
+                backgroundColor: "rgba(0,0,0,0.9)",
+                borderColor: "#01a3ce",
+                borderWidth: 1,
+                textStyle: {
+                  fontSize: this.fontSize(14),
+                  lineHeight: this.fontSize(32),
+                  color: "#ffffff",
+                },
+              },
+              xAxis: {
+                data: this.xtime,
+                boundaryGap: false,
+                axisLine: { show: false },
+                axisTick: {
+                  show: true,
+                  lineStyle: { color: "#0187c4", width: 1, opacity: 1 },
+                },
+                axisLabel: {
+                  textStyle: { fontSize: this.fontSize(12), color: "#939aaa" },
+                  margin: this.fontSize(15),
+                  interval: 0,
+                  rotate: 20,
+                },
+                splitLine: { show: false },
+              },
+              yAxis: {
+                type: "value",
+                axisLine: { show: false },
+                axisTick: {
+                  show: true,
+                  lineStyle: { color: "#0187c4", width: 1, opacity: 1 },
+                },
+                axisLabel: {
+                  textStyle: { fontSize: this.fontSize(12), color: "#939aaa" },
+                  opacity: 0.7,
+                  margin: this.fontSize(15),
+                },
+                splitLine: {
+                  show: true,
+                  lineStyle: { color: "#1f3d61", width: 1, opacity: 0.2 },
+                },
+                min: 0,
+                max: 20,
+              },
+              animationDelay: 900,
+              animationDuration: 2000,
+              animationDurationUpdate: 800,
+              series: [
+                {
+                  type: "line",
+                  name: "运行中",
+                  symbol: "circle",
+                  symbolSize: this.fontSize(12),
+                  showSymbol: false,
+                  smooth: true,
+                  itemStyle: {
+                    color: "#03b1b3",
+                    borderColor: "#ffffff",
+                    borderWidth: 3,
+                    borderType: "solid",
+                  },
+                  lineStyle: { color: "#03b1b3", width: 1 },
+                  areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                      { offset: 0, color: "#03b1b3" },
+                      { offset: 1, color: "transparent" },
+                    ]),
+                    opacity: 0.3,
+                  },
+                  data: this.xonlinenum,
+                },
+                // {
+                //   type: 'line',
+                //   name: '模板',
+                //   symbol: 'circle',
+                //   symbolSize: this.fontSize(12),
+                //   showSymbol: false,
+                //   smooth: true,
+                //   itemStyle: { color: "#4989fb", borderColor: '#ffffff', borderWidth: 3, borderType: 'solid' },
+                //   lineStyle: { color: "#4989fb", width: 1 },
+                //   areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{ offset: 0, color: '#4989fb' }, { offset: 1, color: 'transparent' }]), opacity: 0.3 },
+                //   data: data5y2
+                // },
+                {
+                  type: "line",
+                  name: "已停止",
+                  symbol: "circle",
+                  symbolSize: this.fontSize(12),
+                  showSymbol: false,
+                  smooth: true,
+                  itemStyle: {
+                    color: "#ffdc66",
+                    borderColor: "#ffffff",
+                    borderWidth: 3,
+                    borderType: "solid",
+                  },
+                  lineStyle: { color: "#ffdc66", width: 1 },
+                  areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                      { offset: 0, color: "#ffdc66" },
+                      { offset: 1, color: "transparent" },
+                    ]),
+                    opacity: 0.3,
+                  },
+                  data: this.xofflinenum,
+                },
+              ],
+            });
+          },
+
+          //获取轻虚拟机
+          getqing() {
+            axios({
+              method: "get",
+              url: this.web + "/screen/resource/lvms",
+            })
+              .then((res) => {
+                console.log(res.data);
+                for (var i = 0; i < res.data.下线.length; i++) {
+                  this.qofflinenum.push(res.data.下线[i].数量);
+                  this.qtime.push(res.data.下线[i].创建时间);
+                }
+                for (var i = 0; i < res.data.在线.length; i++) {
+                  this.qonlinenum.push(res.data.在线[i].数量);
+                }
+
+                console.log(this.qonlinenum);
+                console.log(this.qofflinenum);
+              })
+              .catch((err) => {});
+          },
+
+          //轻虚拟机图表
+          drawqxuniji() {
+            var myChart6 = echarts.init(document.getElementById("icharts_6"));
+            myChart6.setOption({
+              grid: {
+                left: 30,
+                right: 30,
+                top: 30,
+                bottom: 20,
+                containLabel: true,
+              },
+              tooltip: {
+                trigger: "axis",
+                axisPointer: {
+                  type: "shadow",
+                  shadowStyle: { color: "rgba(0,156,255,0.2)" },
+                  z: 1,
+                },
+                padding: [15, 22],
+                backgroundColor: "rgba(0,0,0,0.9)",
+                borderColor: "#01a3ce",
+                borderWidth: 1,
+                textStyle: {
+                  fontSize: this.fontSize(12),
+                  lineHeight: this.fontSize(32),
+                  color: "#ffffff",
+                },
+              },
+              xAxis: {
+                data: this.qtime,
+                axisLine: { show: false },
+                axisTick: {
+                  show: true,
+                  lineStyle: { color: "#0187c4", width: 1, opacity: 1 },
+                },
+                axisLabel: {
+                  textStyle: { fontSize: this.fontSize(12), color: "#3c5689" },
+                  margin: this.fontSize(15),
+                  interval: 0,
+                  rotate: 20,
+                },
+                splitLine: { show: false },
+              },
+              yAxis: {
+                type: "value",
+                axisLine: { show: false },
+                axisTick: {
+                  show: true,
+                  lineStyle: { color: "#0187c4", width: 1, opacity: 1 },
+                },
+                axisLabel: {
+                  textStyle: { fontSize: this.fontSize(12), color: "#3c5689" },
+                  opacity: 0.7,
+                  margin: this.fontSize(15),
+                },
+                splitLine: {
+                  show: true,
+                  lineStyle: { color: "#3cd1ff", width: 1, opacity: 0.2 },
+                },
+              },
+              animationDelay: 900,
+              animationDuration: 2000,
+              animationDurationUpdate: 800,
+              series: [
+                {
+                  type: "pictorialBar",
+                  z: 13,
+                  symbolSize: [this.fontSize(10), this.fontSize(7)],
+                  symbolOffset: [this.fontSize(-7), this.fontSize(-3)],
+                  symbolPosition: "end",
+                  tooltip: { show: false },
+                  itemStyle: { color: "#167c7e" },
+                  barWidth: this.fontSize(10),
+                  data: this.qonlinenum,
+                },
+                {
+                  type: "bar",
+                  name: "运行中",
+                  z: 12,
+                  barGap: "30%",
+                  itemStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                      { offset: 0, color: "#03b3b4" },
+                      { offset: 1, color: "rgba(3,179,180,0.05)" },
+                    ]),
+                  },
+                  barWidth: this.fontSize(10),
+                  data: this.qonlinenum,
+                },
+                // {
+                //   type: 'pictorialBar',
+                //   z: 13,
+                //   symbolSize: [this.fontSize(10), this.fontSize(7)],
+                //   symbolOffset: [0, this.fontSize(-3)],
+                //   symbolPosition: 'end',
+                //   tooltip: { show: false },
+                //   itemStyle: { color: '#006ab2' },
+                //   barWidth: this.fontSize(10),
+                //   data: this.qonlinenum
+                // },
+                // {
+                //   type: 'bar',
+                //   name: '模板',
+                //   z: 12,
+                //   barGap: "30%",
+                //   itemStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{ offset: 0, color: '#488afb' }, { offset: 1, color: 'rgba(72,138,251,0.05)' }]) },
+                //   barWidth: this.fontSize(10),
+                //   data: data6y2
+                // },
+                {
+                  type: "pictorialBar",
+                  z: 13,
+                  symbolSize: [this.fontSize(10), this.fontSize(7)],
+                  symbolOffset: [this.fontSize(7), this.fontSize(-3)],
+                  symbolPosition: "end",
+                  tooltip: { show: false },
+                  itemStyle: { color: "#f29b54" },
+                  barWidth: this.fontSize(10),
+                  data: this.qofflinenum,
+                },
+                {
+                  type: "bar",
+                  name: "已停止",
+                  z: 12,
+                  barGap: "30%",
+                  itemStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                      { offset: 0, color: "#ffdd66" },
+                      { offset: 1, color: "rgba(255,221,102,0.05)" },
+                    ]),
+                  },
+                  barWidth: this.fontSize(10),
+                  data: this.qofflinenum,
+                },
+              ],
+            });
+          },
+
+          //物理机数量
+          getwuli() {
+            axios({
+              method: "get",
+              url: this.web + "/screen/resource/ms",
+            })
+              .then((res) => {
+                console.log(res.data);
+                for (var i = 0; i < res.data.在线.length; i++) {
+                  this.wulijinum.push(res.data.在线[i].数量);
+                  this.wulijitime.push(res.data.在线[i].创建时间);
+                }
+              })
+              .catch((err) => {});
+          },
+          //物理机图表
+          drawwuliji() {
+            var myChart1 = echarts.init(document.getElementById("icharts_1"));
+            myChart1.setOption({
+              grid: {
+                left: 30,
+                right: 30,
+                top: 30,
+                bottom: 15,
+                containLabel: true,
+              },
+              tooltip: {
+                trigger: "axis",
+                axisPointer: {
+                  type: "shadow",
+                  shadowStyle: { color: "rgba(0,156,255,0.2)" },
+                  z: 1,
+                },
+                padding: [15, 22],
+                backgroundColor: "rgba(0,0,0,0.9)",
+                borderColor: "#01a3ce",
+                borderWidth: 1,
+                textStyle: {
+                  fontSize: this.fontSize(16),
+                  lineHeight: this.fontSize(32),
+                  color: "#ffffff",
+                },
+              },
+              xAxis: {
+                data: this.wulijitime,
+                axisLine: { show: false },
+                axisTick: {
+                  show: true,
+                  lineStyle: { color: "#0187c4", width: 1, opacity: 1 },
+                },
+                axisLabel: {
+                  textStyle: { fontSize: this.fontSize(11), color: "#45649d" },
+                  margin: this.fontSize(25),
+                  interval: 0,
+                  rotate: 20,
+                },
+                splitLine: { show: false },
+              },
+              yAxis: {
+                position: "right",
+                type: "value",
+                axisLine: { show: false },
+                axisTick: {
+                  show: true,
+                  lineStyle: { color: "#0187c4", width: 1, opacity: 1 },
+                },
+                axisLabel: {
+                  textStyle: { fontSize: this.fontSize(12), color: "#45649d" },
+                  opacity: 0.7,
+                  margin: this.fontSize(15),
+                },
+                splitLine: {
+                  show: true,
+                  lineStyle: { color: "#3cd1ff", width: 1, opacity: 0.2 },
+                },
+                min: 0,
+                max: 60,
+              },
+              animationDelay: 900,
+              animationDuration: 2000,
+              animationDurationUpdate: 800,
+              series: [
+                {
+                  type: "pictorialBar",
+                  z: 13,
+                  symbolSize: [this.fontSize(15), this.fontSize(8)],
+                  symbolOffset: [0, this.fontSize(-5)],
+                  symbolPosition: "end",
+                  tooltip: { show: false },
+                  itemStyle: { color: "#00a8e6" },
+                  data: this.wulijinum,
+                },
+                {
+                  type: "bar",
+                  z: 12,
+                  itemStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                      { offset: 0, color: "#4988f9" },
+                      { offset: 1, color: "rgba(0,146,255,0.05)" },
+                    ]),
+                  },
+                  label: {
+                    show: false,
+                    position: "top",
+                    distance: this.fontSize(15),
+                    fontSize: this.fontSize(14),
+                    color: "#3cd1ff",
+                    lineHeight: this.fontSize(30),
+                    fontFamily: "DIN-Medium",
+                  },
+                  emphasis: {
+                    label: { color: "#f1e06e" },
+                  },
+                  barWidth: this.fontSize(15),
+                  data: this.wulijinum,
+                },
+              ],
+            });
+          },
+
+          //资源利用率
+          getziyuan() {
+            axios({
+              method: "get",
+              url: this.web + "/screen/resource/usage",
+            })
+              .then((res) => {
+                console.log(res.data);
+                for (var i = 0; i < res.data.length; i++) {
+                  this.chulinum.push(res.data[i].处理器);
+                  this.neicunnum.push(res.data[i].内存);
+                  this.cipannum.push(res.data[i].磁盘);
+                }
+                console.log(this.chulinum);
+                console.log(this.neicunnum);
+                console.log(this.cipannum);
+              })
+              .catch((err) => {});
+          },
+
+          //cpu图表
+          drawcpu() {
+            var myChart5_1 = echarts.init(
+              document.getElementById("icharts_5_1")
+            );
+            myChart5_1.setOption({
+              grid: {
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0,
+                containLabel: true,
+              },
+              tooltip: {
+                trigger: "axis",
+                axisPointer: {
+                  type: "line",
+                  lineStyle: {
+                    color: "#00c9fb",
+                    opacity: 0.7,
+                    type: "dashed",
+                    width: 1,
+                  },
+                  z: 1,
+                },
+                padding: [15, 22],
+                backgroundColor: "rgba(0,0,0,0.9)",
+                borderColor: "#01a3ce",
+                borderWidth: 1,
+                textStyle: {
+                  fontSize: this.fontSize(14),
+                  lineHeight: this.fontSize(32),
+                  color: "#ffffff",
+                },
+              },
+              xAxis: {
+                data: ["60秒", " ", " ", " ", " ", "0"],
+                boundaryGap: false,
+                axisLine: { show: false },
+                axisTick: {
+                  show: false,
+                  lineStyle: { color: "#0187c4", width: 1, opacity: 1 },
+                },
+                axisLabel: {
+                  show: false,
+                  textStyle: { fontSize: this.fontSize(12), color: "#939aaa" },
+                  margin: this.fontSize(15),
+                  interval: 0,
+                },
+                splitLine: { show: false },
+                splitLine: {
+                  show: true,
+                  lineStyle: { color: "#1f3d61", width: 1, opacity: 0.4 },
+                },
+              },
+              yAxis: {
+                type: "value",
+                axisLine: { show: false },
+                axisTick: {
+                  show: false,
+                  lineStyle: { color: "#0187c4", width: 1, opacity: 1 },
+                },
+                axisLabel: {
+                  show: false,
+                  textStyle: { fontSize: this.fontSize(12), color: "#939aaa" },
+                  opacity: 0.7,
+                  margin: this.fontSize(15),
+                },
+                splitLine: {
+                  show: true,
+                  lineStyle: { color: "#1f3d61", width: 1, opacity: 0.4 },
+                },
+                min: 0,
+                max: 200,
+                nameGap: 0,
+                boundaryGap: false,
+              },
+              animationDelay: 900,
+              animationDuration: 2000,
+              animationDurationUpdate: 800,
+              series: [
+                {
+                  type: "line",
+                  name: "CPU",
+                  symbol: "circle",
+                  symbolSize: this.fontSize(12),
+                  showSymbol: false,
+                  smooth: false,
+                  itemStyle: {
+                    color: "#ffc666",
+                    borderColor: "#ffffff",
+                    borderWidth: 0,
+                    borderType: "solid",
+                  },
+                  lineStyle: { color: "#ffc666", width: 1 },
+                  areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                      { offset: 0, color: "#ffc666" },
+                      { offset: 1, color: "transparent" },
+                    ]),
+                    opacity: 0.3,
+                  },
+                  data: this.chulinum,
+                },
+              ],
+            });
+          },
+
+          //内存图表
+          drawneicun() {
+            var myChart5_2 = echarts.init(
+              document.getElementById("icharts_5_2")
+            );
+            myChart5_2.setOption({
+              grid: {
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0,
+                containLabel: true,
+              },
+              tooltip: {
+                trigger: "axis",
+                axisPointer: {
+                  type: "line",
+                  lineStyle: {
+                    color: "#00c9fb",
+                    opacity: 0.7,
+                    type: "dashed",
+                    width: 1,
+                  },
+                  z: 1,
+                },
+                padding: [15, 22],
+                backgroundColor: "rgba(0,0,0,0.9)",
+                borderColor: "#01a3ce",
+                borderWidth: 1,
+                textStyle: {
+                  fontSize: this.fontSize(14),
+                  lineHeight: this.fontSize(32),
+                  color: "#ffffff",
+                },
+              },
+              xAxis: {
+                data: ["60秒", " ", " ", " ", " ", "0"],
+                boundaryGap: false,
+                axisLine: { show: false },
+                axisTick: {
+                  show: false,
+                  lineStyle: { color: "#0187c4", width: 1, opacity: 1 },
+                },
+                axisLabel: {
+                  show: false,
+                  textStyle: { fontSize: this.fontSize(12), color: "#939aaa" },
+                  margin: this.fontSize(15),
+                  interval: 0,
+                },
+                splitLine: { show: false },
+                splitLine: {
+                  show: true,
+                  lineStyle: { color: "#1f3d61", width: 1, opacity: 0.4 },
+                },
+              },
+              yAxis: {
+                type: "value",
+                axisLine: { show: false },
+                axisTick: {
+                  show: false,
+                  lineStyle: { color: "#0187c4", width: 1, opacity: 1 },
+                },
+                axisLabel: {
+                  show: false,
+                  textStyle: { fontSize: this.fontSize(12), color: "#939aaa" },
+                  opacity: 0.7,
+                  margin: this.fontSize(15),
+                },
+                splitLine: {
+                  show: true,
+                  lineStyle: { color: "#1f3d61", width: 1, opacity: 0.4 },
+                },
+                min: 0,
+                max: 100,
+                nameGap: 0,
+                boundaryGap: false,
+              },
+              animationDelay: 900,
+              animationDuration: 2000,
+              animationDurationUpdate: 800,
+              series: [
+                {
+                  type: "line",
+                  name: "内存",
+                  symbol: "circle",
+                  symbolSize: this.fontSize(12),
+                  showSymbol: false,
+                  smooth: false,
+                  itemStyle: {
+                    color: "#029ef1",
+                    borderColor: "#ffffff",
+                    borderWidth: 0,
+                    borderType: "solid",
+                  },
+                  lineStyle: { color: "#029ef1", width: 1 },
+                  areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                      { offset: 0, color: "#029ef1" },
+                      { offset: 1, color: "transparent" },
+                    ]),
+                    opacity: 0.3,
+                  },
+                  data: this.neicunnum,
+                },
+              ],
+            });
+          },
+
+          //磁盘图表
+          drawcipan() {
+            var myChart5_3 = echarts.init(
+              document.getElementById("icharts_5_3")
+            );
+            myChart5_3.setOption({
+              grid: {
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0,
+                containLabel: true,
+              },
+              tooltip: {
+                trigger: "axis",
+                axisPointer: {
+                  type: "line",
+                  lineStyle: {
+                    color: "#00c9fb",
+                    opacity: 0.7,
+                    type: "dashed",
+                    width: 1,
+                  },
+                  z: 1,
+                },
+                padding: [15, 22],
+                backgroundColor: "rgba(0,0,0,0.9)",
+                borderColor: "#01a3ce",
+                borderWidth: 1,
+                textStyle: {
+                  fontSize: this.fontSize(14),
+                  lineHeight: this.fontSize(32),
+                  color: "#ffffff",
+                },
+              },
+              xAxis: {
+                data: ["60秒", " ", " ", " ", " ", "0"],
+                boundaryGap: false,
+                axisLine: { show: false },
+                axisTick: {
+                  show: false,
+                  lineStyle: { color: "#0187c4", width: 1, opacity: 1 },
+                },
+                axisLabel: {
+                  show: false,
+                  textStyle: { fontSize: this.fontSize(12), color: "#939aaa" },
+                  margin: this.fontSize(15),
+                  interval: 0,
+                },
+                splitLine: { show: false },
+                splitLine: {
+                  show: true,
+                  lineStyle: { color: "#1f3d61", width: 1, opacity: 0.4 },
+                },
+              },
+              yAxis: {
+                type: "value",
+                axisLine: { show: false },
+                axisTick: {
+                  show: false,
+                  lineStyle: { color: "#0187c4", width: 1, opacity: 1 },
+                },
+                axisLabel: {
+                  show: false,
+                  textStyle: { fontSize: this.fontSize(12), color: "#939aaa" },
+                  opacity: 0.7,
+                  margin: this.fontSize(15),
+                },
+                splitLine: {
+                  show: true,
+                  lineStyle: { color: "#1f3d61", width: 1, opacity: 0.4 },
+                },
+                min: 0,
+                max: 100,
+                nameGap: 0,
+                boundaryGap: false,
+              },
+              animationDelay: 900,
+              animationDuration: 2000,
+              animationDurationUpdate: 800,
+              series: [
+                {
+                  type: "line",
+                  name: "磁盘",
+                  symbol: "circle",
+                  symbolSize: this.fontSize(12),
+                  showSymbol: false,
+                  smooth: false,
+                  itemStyle: {
+                    color: "#03cbd5",
+                    borderColor: "#ffffff",
+                    borderWidth: 0,
+                    borderType: "solid",
+                  },
+                  lineStyle: { color: "#03cbd5", width: 1 },
+                  areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                      { offset: 0, color: "#03cbd5" },
+                      { offset: 1, color: "transparent" },
+                    ]),
+                    opacity: 0.3,
+                  },
+                  data: this.cipannum,
+                },
+              ],
+            });
+          },
+
+          //圈圈
+          drawquan() {
+            console.log("liyonglv===", this.liyonglv);
+            var myChart7 = echarts.init(document.getElementById("icharts_7"));
+            myChart7.setOption({
+              series: [
+                {
+                  type: "gauge",
+                  axisLine: {
+                    lineStyle: {
+                      width: this.fontSize(10),
+                      color: [
+                        [0.2, "#02c3bf"],
+                        [0.8, "#0f62e3"],
+                        [1, "#fd4c4d"],
+                      ],
+                    },
+                  },
+                  pointer: {
+                    width: this.fontSize(40),
+                    length: "70%",
+                    offsetCenter: [0, 15],
+                    // icon: 'image://http://www.yy-17.net/pointer.png',
+                    icon: "image://images/pointer.png",
+                    keepAspect: true,
+                  },
+                  axisTick: {
+                    distance: 0,
+                    length: this.fontSize(8),
+                    lineStyle: {
+                      color: "#25486c",
+                      width: this.fontSize(2),
+                    },
+                  },
+                  splitLine: {
+                    distance: 0,
+                    length: this.fontSize(10),
+                    lineStyle: {
+                      color: "#25486c",
+                      width: this.fontSize(4),
+                    },
+                  },
+                  axisLabel: {
+                    color: "auto",
+                    distance: this.fontSize(20),
+                    fontSize: this.fontSize(12),
+                  },
+                  detail: {
+                    show: false,
+                    valueAnimation: true,
+                    formatter: "{value}",
+                    color: "auto",
+                  },
+                  data: [
+                    {
+                      value: this.liyonglv,
+                    },
+                  ],
+                },
+              ],
+            });
+          },
+        },
+        mounted() {
+          this.getshuju();
+          this.getxuni();
+          this.drawxuniji();
+          this.getqing();
+          this.drawqxuniji();
+          this.getwuli();
+          // setInterval(() => {
+          this.getziyuan();
+          // }, 5000);
+          this.drawcpu();
+          this.drawneicun();
+          // this.drawquan();
+        },
+      });
+    </script>
+
+    <script>
+      /*更新数据*/
+      var data5x_1 = ["60秒", " ", " ", " ", " ", "0"];
+      var data5y1_1 = [4, 15, 10, 18, 10, 13];
+
+      // option5_1.xAxis.data = data5x_1;
+      // option5_1.series[0].data = data5y1_1;
+      // // option5.series[3].data = data5y4;
+      // myChart5_1.setOption(option5_1, true);
+
+      /*更新数据*/
+      var data5x_2 = ["60秒", " ", " ", " ", " ", "0"];
+      var data5y1_2 = [4, 15, 10, 18, 10, 13];
+
+      // option5_2.xAxis.data = data5x_2;
+      // option5_2.series[0].data = data5y1_2;
+      // // option5.series[3].data = data5y4;
+      // myChart5_2.setOption(option5_2, true);
+
+      /*更新数据*/
+      var data5x_3 = ["60秒", " ", " ", " ", " ", "0"];
+      var data5y1_3 = [4, 15, 10, 18, 10, 13];
+
+      // option5_3.xAxis.data = data5x_3;
+      // option5_3.series[0].data = data5y1_3;
+      // // option5.series[3].data = data5y4;
+      // myChart5_3.setOption(option5_3, true);
+    </script>
+
+    <script>
+      setInterval(() => {
+        window.location.href = "zhihui.html";
+      }, 30000);
+    </script>
+  </body>
+</html>

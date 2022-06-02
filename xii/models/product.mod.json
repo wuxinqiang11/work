@@ -1,0 +1,85 @@
+{
+  "name": "产品",
+  "table": {
+    "name": "product",
+    "comment": "产品",
+    "engine": "InnoDB"
+  },
+  "columns": [
+    {
+      "label": "ID",
+      "name": "id",
+      "type": "ID",
+      "comment": "ID"
+    },
+    {
+      "label": "所属厂商",
+      "name": "manu_id",
+      "type": "bigInteger",
+      "index": true,
+      "nullable": true,
+      "comment": "所属厂商"
+    },
+    {
+      "label": "产品类型",
+      "name": "kind_id",
+      "type": "bigInteger",
+      "index": true,
+      "nullable": true,
+      "comment": "产品类型"
+    },
+    {
+      "label": "名称",
+      "name": "name",
+      "type": "string",
+      "length": 200,
+      "comment": "产品名称",
+      "index": true
+    },
+    {
+      "label": "场景",
+      "name": "scene",
+      "type": "string",
+      "length": 200,
+      "comment": "使用场景",
+      "nullable": true,
+      "index": true
+    },
+    {
+      "label": "介绍",
+      "name": "desc",
+      "type": "text",
+      "comment": "介绍",
+      "nullable": true
+    },
+    {
+      "label": "添加时间",
+      "name": "create_time",
+      "type": "timestamp",
+      "comment": "时刻",
+      "nullable": true,
+      "index": true
+    }
+  ],
+  "relations": {
+    "manu": {
+      "type": "hasOne",
+      "model": "manu",
+      "key": "id",
+      "foreign": "manu_id",
+      "query": {
+        "select": ["id", "name", "short_name"]
+      }
+    },
+    "kind": {
+      "type": "hasOne",
+      "model": "product.kind",
+      "key": "id",
+      "foreign": "kind_id",
+      "query": {
+        "select": ["id", "name"]
+      }
+    }
+  },
+  "option": { "timestamps": true }
+}
