@@ -1,0 +1,21 @@
+{
+  "label": "申请证书",
+  "version": "1.0.0",
+  "description": "申请证书",
+  "nodes": [
+    {
+      "name": "提交申请",
+      "process": "models.cert.save",
+      "args": [
+        {
+          "id": "{{$in.0.id}}",
+          "status": "已提交"
+        }
+      ]
+    }
+  ],
+  "output": {
+    "id": "{{$in.0.id}}",
+    "status": "已提交"
+  }
+}

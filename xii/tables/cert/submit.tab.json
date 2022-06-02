@@ -1,0 +1,103 @@
+{
+  "name": "待审核证书",
+  "version": "1.0.0",
+  "decription": "产品证书申请管理表格",
+  "bind": {
+    "model": "cert",
+    "withs": { "product": {} }
+  },
+  "apis": {
+    "search": {
+      "default": [
+        {
+          "withs": { "product": { "query": { "withs": { "manu": {} } } } },
+          "wheres": [{ "column": "status", "op": "in", "value": ["已提交"] }]
+        },
+        null,
+        10
+      ]
+    }
+  },
+  "columns": {
+    "产品": { "@": "components.所属产品" },
+    "厂商": { "@": "components.Label", "in": ["厂商", ":manu.name"] },
+    "适配测试": {
+      "@": "components.Table",
+      "in": [
+        "适配测试",
+        "project.complete",
+        { "where.product_id.eq": ":product_id" }
+      ]
+    }
+  },
+  "filters": {
+    "关键词": { "@": "filter.关键词", "in": ["where.product.name.match"] }
+  },
+  "list": {
+    "primary": "id",
+    "layout": {
+      "columns": [
+        { "name": "ID", "width": 80 },
+        { "name": "厂商", "width": 260 },
+        { "name": "联系人" },
+        { "name": "联系电话" },
+        { "name": "联系地址" },
+        { "name": "产品" },
+        { "name": "状态" }
+      ],
+      "filters": [{ "name": "关键词" }]
+    },
+    "actions": {
+      "pagination": { "props": { "showTotal": true } }
+    },
+    "option": { "operation": { "width": 120, "unfold": true, "items": [] } }
+  },
+  "edit": {
+    "primary": "id",
+    "layout": {
+      "fieldset": [
+        {
+          "columns": [
+            { "name": "产品", "width": 24 },
+            { "name": "联系人", "width": 12 },
+            { "name": "联系电话", "width": 12 },
+            { "name": "联系地址", "width": 24 },
+            { "name": "适配测试", "width": 24 }
+          ]
+        }
+      ]
+    },
+    "actions": {
+      "cancel": {},
+      "save": { "@": "action.保存" },
+      "delete": { "@": "action.删除" }
+    },
+    "option": {
+      "dev": false,
+      "operation": [
+        {
+          "title": "驳回",
+          "icon": "icon-arrow-up",
+          "confirm": true,
+          "type": "danger",
+          "api": "/api/cert/reject",
+          "data": {
+            "id": ":id"
+          }
+        },
+        {
+          "title": "同意",
+          "icon": "icon-arrow-up",
+          "confirm": true,
+          "type": "success",
+          "api": "/api/cert/resole",
+          "data": {
+            "id": ":id"
+          }
+        }
+      ]
+    }
+  },
+  "insert": {},
+  "view": {}
+}

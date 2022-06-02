@@ -1,0 +1,21 @@
+{
+  "label": "希云配置",
+  "version": "1.0.0",
+  "description": "相关案例选择器",
+  "nodes": [
+    {
+      "name": "配置",
+      "process": "xiang.helper.EnvMultiGet",
+      "args": [
+        "XII_CSPHERE_HOST",
+        "XII_CSPHERE_KEY",
+        "XII_XVP_HOST",
+        "XII_XVP_KEY",
+        "XII_XVP_NOVNC",
+        "XII_XVP_USER",
+        "XII_XVP_PASSWORD"
+      ]
+    }
+  ],
+  "output": "{{$res.配置}}"
+}

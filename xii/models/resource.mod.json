@@ -1,0 +1,76 @@
+{
+  "name": "资源",
+  "table": {
+    "name": "resource",
+    "comment": "资源",
+    "engine": "InnoDB"
+  },
+  "columns": [
+    {
+      "label": "ID",
+      "name": "id",
+      "type": "ID",
+      "comment": "ID"
+    },
+    {
+      "label": "型号",
+      "name": "sku_id",
+      "type": "bigInteger",
+      "comment": "型号",
+      "index": true
+    },
+    {
+      "label": "项目",
+      "name": "project_id",
+      "type": "bigInteger",
+      "comment": "所属项目",
+      "nullable": true,
+      "index": true
+    },
+    {
+      "label": "资源ID",
+      "name": "rid",
+      "type": "string",
+      "length": 100,
+      "comment": "资源ID",
+      "nullable": true,
+      "index": true
+    },
+    {
+      "label": "添加时间",
+      "name": "create_time",
+      "type": "timestamp",
+      "comment": "时刻",
+      "nullable": true,
+      "index": true
+    },
+    {
+      "label": "状态",
+      "name": "status",
+      "type": "enum",
+      "default": "在线",
+      "option": ["在线", "下线"],
+      "comment": "进行状态:在线, 下线",
+      "index": true
+    }
+  ],
+  "relations": {
+    "project": {
+      "type": "hasOne",
+      "model": "project",
+      "key": "id",
+      "foreign": "project_id",
+      "query": { "select": ["id", "name"] }
+    },
+    "sku": {
+      "type": "hasOne",
+      "model": "resource.sku",
+      "key": "id",
+      "foreign": "sku_id",
+      "query": {
+        "select": ["id", "name", "memory", "cpu", "disk", "type"],
+        "withs": {}
+      }
+    }
+  }
+}

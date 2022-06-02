@@ -1,0 +1,21 @@
+{
+  "label": "送测",
+  "version": "1.0.0",
+  "description": "送测",
+  "nodes": [
+    {
+      "name": "提交送测",
+      "process": "models.project.save",
+      "args": [
+        {
+          "id": "{{$in.0.id}}",
+          "status": "待审核"
+        }
+      ]
+    }
+  ],
+  "output": {
+    "id": "{{$in.0.id}}",
+    "status": "待审核"
+  }
+}

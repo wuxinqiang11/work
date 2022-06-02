@@ -1,0 +1,24 @@
+{
+  "label": "项目选择器",
+  "version": "1.0.0",
+  "description": "项目选择器",
+  "nodes": [
+    {
+      "name": "关键词",
+      "process": "scripts.string.Concat",
+      "args": [["%", "{{$in.0.name.0}}", "%"]]
+    },
+    {
+      "name": "项目",
+      "engine": "xiang",
+      "query": {
+        "select": ["id as value", "name as label"],
+        "from": "$project",
+        "wheres": [{ ":name": "名称", "like": "?:$res.关键词" }],
+        "orders": "id asc",
+        "limit": 500
+      }
+    }
+  ],
+  "output": "{{$res.项目}}"
+}

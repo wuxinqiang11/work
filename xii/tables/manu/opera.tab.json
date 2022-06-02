@@ -1,0 +1,170 @@
+{
+  "name": "厂商",
+  "version": "1.0.0",
+  "decription": "厂商管理表格",
+  "bind": {
+    "model": "manu",
+    "withs": {}
+  },
+  "hooks": {
+    "after:find": "flows.hooks.manu.after_find",
+    "after:search": "flows.hooks.manu.after_search",
+    "before:save": "flows.hooks.manu.before_save",
+    "after:save": "flows.hooks.manu.after_save"
+  },
+  "apis": {
+    "search": {
+      "default": [
+        {
+          "wheres": [
+            {
+              "column": "tags",
+              "value": "操作系统",
+              "op": "match"
+            }
+          ]
+        },
+        null,
+        10
+      ]
+    },
+    "save": {
+      "process": "scripts.manu.Save",
+      "guard": "scripts.guard.manu.ParamsCheck"
+    }
+  },
+  "columns": {
+    "省份": {
+      "label": "省份",
+      "view": {
+        "type": "label",
+        "props": {
+          "value": ":province_name"
+        }
+      },
+      "edit": {
+        "type": "cascader",
+        "props": {
+          "showSearch": true,
+          "value": ":area",
+          "placeholder": "请选择所省份城市",
+          "remote": {
+            "api": "/api/select/area",
+            "query": { "select": ["id", "name"] }
+          }
+        }
+      }
+    },
+    "城市": {
+      "label": "城市",
+      "view": {
+        "type": "label",
+        "props": {
+          "value": ":city_name"
+        }
+      },
+      "edit": {
+        "type": "cascader",
+        "props": {
+          "showSearch": true,
+          "value": ":area",
+          "placeholder": "请选择所省份城市",
+          "remote": {
+            "api": "/api/select/area",
+            "query": { "select": ["id", "name"] }
+          }
+        }
+      }
+    },
+    "所在城市": {
+      "label": "所在城市",
+      "view": {
+        "type": "label",
+        "props": {
+          "value": ":city"
+        }
+      },
+      "edit": {
+        "type": "cascader",
+        "props": {
+          "showSearch": true,
+          "value": ":area",
+          "placeholder": "请选择所省份城市",
+          "remote": {
+            "api": "/api/select/area",
+            "query": { "select": ["id", "name"] }
+          }
+        }
+      }
+    },
+    "标签": {
+      "label": "标签",
+      "view": { "type": "label", "props": { "value": ":tags" } },
+      "edit": {
+        "type": "select",
+        "props": {
+          "value": ":tags",
+          "options": [
+            { "label": "操作系统", "value": "操作系统" },
+            { "label": "数据库", "value": "数据库" },
+            { "label": "中间件", "value": "中间件" }
+          ]
+        }
+      }
+    }
+  },
+  "filters": {
+    "关键词": { "@": "filter.关键词", "in": ["where.name.match"] }
+  },
+  "list": {
+    "primary": "id",
+    "layout": {
+      "columns": [
+        { "name": "ID", "width": 80 },
+        { "name": "公司名称" },
+        { "name": "公司简称" },
+        { "name": "省份" },
+        { "name": "城市" },
+        { "name": "联系人" },
+        { "name": "联系电话" },
+        { "name": "标签" }
+      ],
+      "filters": [{ "name": "关键词" }]
+    },
+    "actions": {
+      "pagination": { "props": { "showTotal": true } },
+      "create": {
+        "type": "button",
+        "props": { "label": "添加厂商", "icon": "fas fa-plus" }
+      }
+    },
+    "option": {
+      "operation": { "items": [], "unfold": true }
+    }
+  },
+  "edit": {
+    "primary": "id",
+    "layout": {
+      "fieldset": [
+        {
+          "columns": [
+            { "name": "公司名称", "width": 12 },
+            { "name": "公司简称", "width": 12 },
+            { "name": "所在城市", "width": 12 },
+            { "name": "标签", "width": 12 },
+            { "name": "联系人", "width": 12 },
+            { "name": "联系电话", "width": 12 },
+            { "name": "地址", "width": 24 }
+          ]
+        }
+      ]
+    },
+    "actions": {
+      "cancel": {},
+      "save": { "@": "action.保存" },
+      "delete": { "@": "action.删除" }
+    }
+  },
+  "insert": {},
+  "view": {}
+}

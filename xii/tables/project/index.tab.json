@@ -1,0 +1,209 @@
+{
+  "name": "适配项目",
+  "version": "1.0.0",
+  "decription": "测试中项目管理表格",
+  "bind": {
+    "model": "project",
+    "withs": { "product": { "query": { "withs": { "manu": {} } } } }
+  },
+  "hooks": {
+    "after:find": "scripts.index.AfterSearch",
+    "before:save": "scripts.index.BeforeSave"
+  },
+  "apis": {
+    "search": {
+      "default": [
+        {
+          "withs": { "product": { "query": { "withs": { "manu": {} } } } },
+          "wheres": [{ "column": "status", "op": "in", "value": ["进行中"] }],
+          "orders": [{ "column": "updated_at", "option": "desc" }]
+        },
+        null,
+        10
+      ]
+    }
+  },
+  "columns": {
+    "产品": { "@": "components.所属产品" },
+    "项目说明": { "@": "components.TextArea", "in": ["项目说明", ":desc", 4] },
+    "送测日期": {
+      "@": "components.DatePicker",
+      "in": ["送测日期", ":create_time", "YYYY年MM月DD日", false]
+    },
+    "功能清单": {
+      "@": "components.Table",
+      "in": [
+        "功能清单",
+        "project.detail.feature",
+        { "where.project_id.eq": ":id" }
+      ]
+    },
+    "测试用例": {
+      "@": "components.Table",
+      "in": [
+        "测试用例",
+        "project.detail.case",
+        { "where.project_id.eq": ":id" }
+      ]
+    },
+    "测试记录": {
+      "label": "测试记录",
+      "edit": {
+        "type": "dynamicList",
+        "props": {
+          "setting": "test_record",
+          "value": ":test_record",
+          "query": { "sort": "$index" }
+        }
+      }
+    },
+    "基础软硬件": {
+      "label": "基础软硬件",
+      "edit": {
+        "type": "dynamicList",
+        "props": {
+          "setting": "soft",
+          "value": ":soft",
+          "query": { "sort": "$index" }
+        }
+      }
+    },
+    "资源需求": {
+      "label": "资源需求",
+      "edit": {
+        "type": "dynamicList",
+        "props": {
+          "setting": "package",
+          "value": ":package",
+          "query": { "sort": "$index" }
+        }
+      }
+    },
+    "适配测试": {
+      "label": "适配测试",
+      "edit": {
+        "type": "dynamicList",
+        "props": {
+          "setting": "match_test",
+          "value": ":match_test",
+          "query": { "sort": "$index" }
+        }
+      }
+    }
+  },
+  "filters": {
+    "关键词": { "@": "filter.关键词", "in": ["where.name.match"] }
+  },
+  "list": {
+    "primary": "id",
+    "layout": {
+      "columns": [
+        { "name": "ID", "width": 80 },
+        { "name": "产品" },
+        { "name": "名称" },
+        { "name": "状态" },
+        { "name": "送测日期" }
+      ],
+      "filters": [{ "name": "关键词" }]
+    },
+    "actions": {
+      "pagination": { "props": { "showTotal": true } }
+    },
+    "option": {
+      "operation": { "width": 120, "unfold": true, "items": [] }
+    }
+  },
+  "edit": {
+    "primary": "id",
+    "layout": {
+      "fieldset": [
+        {
+          "columns": [
+            { "name": "名称", "width": 24 },
+            { "name": "产品", "width": 18 },
+            { "name": "送测日期", "width": 6 },
+            { "name": "适配测试", "width": 24 },
+            { "name": "测试记录", "width": 24 },
+            { "name": "测试用例", "width": 24 },
+            { "name": "功能清单", "width": 24 },
+            { "name": "项目说明", "width": 24 },
+            { "name": "基础软硬件", "width": 24 },
+            { "name": "资源需求", "width": 24 }
+          ]
+        }
+      ]
+    },
+    "actions": {
+      "cancel": {},
+      "save": { "@": "action.保存" },
+      "delete": { "@": "action.删除" }
+    },
+    "option": {
+      "dev": false,
+      "operation": [
+        {
+          "title": "登记表",
+          "icon": "icon-arrow-down",
+          "link": "/docx/test.html",
+          "data": {
+            "id": ":id"
+          }
+        },
+        {
+          "title": "计划",
+          "icon": "icon-arrow-down",
+          "link": "/docx/test.html",
+          "data": {
+            "id": ":id"
+          }
+        },
+        {
+          "title": "需求",
+          "icon": "icon-arrow-down",
+          "link": "/docx/test.html",
+          "data": {
+            "id": ":id"
+          }
+        },
+        {
+          "title": "用例",
+          "icon": "icon-arrow-down",
+          "link": "/docx/test.html",
+          "data": {
+            "id": ":id"
+          }
+        },
+        {
+          "title": "记录",
+          "icon": "icon-arrow-down",
+          "link": "/docx/test.html",
+          "data": {
+            "id": ":id"
+          }
+        },
+        {
+          "title": "不通过",
+          "icon": "icon-x-circle",
+          "confirm": true,
+          "type": "danger",
+          "api": "/api/project/fail",
+          "data": {
+            "id": ":id"
+          }
+        },
+        {
+          "title": "通过",
+          "icon": "icon-check-circle",
+          "confirm": true,
+          "type": "success",
+          "api": "/api/project/pass",
+          "data": {
+            "id": ":id"
+          }
+        }
+      ]
+    }
+  },
+  "insert": {},
+  "view": {}
+}

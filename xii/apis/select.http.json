@@ -1,0 +1,159 @@
+{
+  "name": "选择器接口",
+  "version": "1.0.0",
+  "description": "厂商API",
+  "group": "select",
+  "guard": "bearer-jwt",
+  "paths": [
+    {
+      "path": "/manu",
+      "method": "GET",
+      "process": "flows.select.Manu",
+      "in": [":query"],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "path": "/area",
+      "method": "GET",
+      "process": "flows.select.area.data",
+      "in": [":query"],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "path": "/kind",
+      "method": "GET",
+      "process": "flows.select.Kind",
+      "in": [":query"],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "path": "/product",
+      "method": "GET",
+      "process": "flows.select.Product",
+      "in": [":query"],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "path": "/user/product",
+      "method": "GET",
+      "process": "flows.select.user.Product",
+      "in": [":query"],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "path": "/package",
+      "method": "GET",
+      "process": "flows.select.Package",
+      "in": [":query"],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "path": "/project",
+      "method": "GET",
+      "process": "flows.select.Project",
+      "in": [":query"],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "path": "/sku",
+      "method": "GET",
+      "process": "flows.select.Sku",
+      "in": [":query"],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "path": "/feature",
+      "method": "GET",
+      "process": "flows.select.Feature",
+      "in": [":query"],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "path": "/case",
+      "method": "GET",
+      "process": "flows.select.Case",
+      "in": [":query"],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "path": "/case_list",
+      "method": "GET",
+      "process": "flows.select.Caselist",
+      "in": [":query"],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "path": "/exam",
+      "method": "GET",
+      "process": "flows.select.Exam",
+      "in": [":query"],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "path": "/trainee",
+      "method": "GET",
+      "process": "flows.select.Trainee",
+      "in": [":query"],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "path": "/sku_list",
+      "method": "GET",
+      "process": "flows.skus",
+      "in": [":query"],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "path": "/package_list",
+      "method": "GET",
+      "process": "flows.package",
+      "in": [":query"],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    }
+  ]
+}

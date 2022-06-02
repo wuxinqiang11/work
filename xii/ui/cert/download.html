@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <script src="js/jquery.js"></script>
+    <script src="js/dom-to-image.min.js" />
+    <script src="js/filesaver.js"></script>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      #cert {
+        width: 800px;
+      }
+      #manu1 {
+        cursor: default;
+        position: absolute;
+        font-size: 26px;
+        top: 155px;
+        font-weight: 500;
+        left: 120px;
+      }
+      #manu2 {
+        cursor: default;
+        position: absolute;
+        font-size: 20px;
+        top: 355px;
+        font-weight: 500;
+        left: 120px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="cert">
+      <div id="manu1" class="manu">厂商名称</div>
+      <div id="manu2" class="manu">厂商名称</div>
+      <img src="pic.png" width="800" />
+    </div>
+
+    <script language="javascript">
+      var url = window.location.href;
+      var id = url.split("?id=")[1];
+      var token = sessionStorage.getItem("token");
+      if (!token) {
+        window.location = "/xiang/login/admin";
+      }
+
+      (function () {
+        // Date.prototype.toYMD = Date_toYMD;
+        // generate();
+
+        $.ajax({
+          url: "/api/xiang/table/cert.index/find/" + id,
+          type: "GET",
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+          },
+          data: {},
+          success: function (data) {
+            $(".manu").html(data.manu.name);
+            var node = document.getElementById("cert");
+
+            // 转换为证书
+            domtoimage
+              .toPng(node)
+              .then(function (dataUrl) {
+                var a = document.createElement("a"); //Create <a>
+                a.href = dataUrl; //Image Base64 Goes here
+                a.download = data.manu.name + ".png"; //File name Here
+                a.click(); //Downloaded file
+              })
+              .catch(function (error) {
+                console.error("oops, something went wrong!", error);
+              });
+          },
+          error: function () {},
+        });
+      })();
+    </script>
+  </body>
+</html>

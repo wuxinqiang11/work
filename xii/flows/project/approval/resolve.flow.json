@@ -1,0 +1,26 @@
+{
+  "label": "审批同意",
+  "version": "1.0.0",
+  "description": "审批同意",
+  "nodes": [
+    {
+      "name": "审批同意",
+      "process": "models.project.save",
+      "args": [
+        {
+          "id": "{{$in.0.id}}",
+          "status": "进行中"
+        }
+      ]
+    },
+    {
+      "name": "创建资源",
+      "process": "scripts.project.MakeResource",
+      "args": ["{{$in.0.id}}"]
+    }
+  ],
+  "output": {
+    "id": "{{$in.0.id}}",
+    "status": "进行中"
+  }
+}

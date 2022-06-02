@@ -1,0 +1,30 @@
+{
+  "label": "查询主机节点",
+  "version": "1.0.0",
+  "description": "查询主机节点",
+  "nodes": [
+    {
+      "name": "配置",
+      "process": "flows.xii.config"
+    },
+    {
+      "name": "Host",
+      "process": "xiang.helper.StrConcat",
+      "args": ["{{$res.配置.XII_XVP_HOST}}", "/json/cluster/resources"]
+    },
+    {
+      "name": "结果",
+      "process": "xiang.network.Get",
+      "args": [
+        "{{$res.Host}}",
+        "{{$in.0}}",
+        { "Authorization": "{{$res.配置.XII_XVP_KEY}}" }
+      ],
+      "script": "data"
+    }
+  ],
+  "output": {
+    "data": "{{$res.结果.data}}",
+    "total": 1000
+  }
+}

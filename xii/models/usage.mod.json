@@ -1,0 +1,49 @@
+{
+  "name": "资源消耗",
+  "table": {
+    "name": "usage",
+    "comment": "资源消耗",
+    "engine": "InnoDB"
+  },
+  "columns": [
+    {
+      "label": "ID",
+      "name": "id",
+      "type": "ID",
+      "comment": "ID"
+    },
+    {
+      "label": "CPU",
+      "name": "cpu",
+      "type": "float",
+      "comment": "CPU",
+      "nullable": true,
+      "index": true
+    },
+    {
+      "label": "内存",
+      "name": "memory",
+      "type": "float",
+      "comment": "内存",
+      "nullable": true,
+      "index": true
+    },
+    {
+      "label": "磁盘",
+      "name": "disk",
+      "type": "float",
+      "comment": "磁盘",
+      "nullable": true,
+      "index": true
+    },
+    {
+      "label": "时刻",
+      "name": "time",
+      "type": "timestamp",
+      "comment": "时刻",
+      "nullable": true,
+      "index": true
+    }
+  ],
+  "option": { "timestamps": true }
+}

@@ -1,0 +1,70 @@
+{
+  "name": "基础软硬件",
+  "table": {
+    "name": "package",
+    "comment": "基础软硬件",
+    "engine": "InnoDB"
+  },
+  "columns": [
+    {
+      "label": "ID",
+      "name": "id",
+      "type": "ID",
+      "comment": "ID"
+    },
+    {
+      "label": "所属厂商",
+      "name": "manu_id",
+      "type": "bigInteger",
+      "index": true,
+      "nullable": true,
+      "comment": "所属厂商"
+    },
+    {
+      "label": "类型",
+      "name": "type",
+      "type": "enum",
+      "option": [
+        "CPU",
+        "服务器",
+        "存储",
+        "云平台",
+        "操作系统",
+        "中间件",
+        "数据库",
+        "软件包",
+        "安全"
+      ],
+      "index": true,
+      "nullable": true,
+      "comment": "类型"
+    },
+    {
+      "label": "名称",
+      "name": "name",
+      "type": "string",
+      "length": 200,
+      "comment": "产品名称",
+      "index": true
+    },
+    {
+      "label": "介绍",
+      "name": "desc",
+      "type": "text",
+      "comment": "介绍",
+      "nullable": true
+    }
+  ],
+  "relations": {
+    "manu": {
+      "type": "hasOne",
+      "model": "manu",
+      "key": "id",
+      "foreign": "manu_id",
+      "query": {
+        "select": ["id", "name", "short_name"]
+      }
+    }
+  },
+  "option": { "timestamps": true }
+}

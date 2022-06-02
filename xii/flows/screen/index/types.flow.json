@@ -1,0 +1,35 @@
+{
+  "label": "信创业务系统类目",
+  "version": "1.0.0",
+  "description": "信创业务系统类目",
+  "nodes": [
+    {
+      "name": "类型分布",
+      "engine": "xiang",
+      "query": {
+        "select": [":COUNT(product.id) as 数量", "kind.name as name"],
+        "groups": "name",
+        "from": "$product",
+        "joins": [
+          {
+            "from": "product_kind as kind",
+            "key": "kind.id",
+            "foreign": "product.kind_id",
+            "left": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "场景分布占比",
+      "engine": "xiang",
+      "query": {
+        "select": [":COUNT(id) as 数量", "scene as name"],
+        "wheres": [{ ":scene": "场景", "is": "not null" }],
+        "groups": "scene",
+        "from": "$product"
+      }
+    }
+  ],
+  "output": "{{$res.场景分布占比}}"
+}

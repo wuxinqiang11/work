@@ -1,0 +1,22 @@
+{
+  "name": "希云应用引擎",
+  "short": "希云XAE",
+  "version": "1.0.0",
+  "description": "希云应用引擎",
+  "plugins": {},
+  "option": {
+    "hide_user": true,
+    "hide_menu": true,
+
+    "login": {
+      "entry": {
+        "admin": "/kanban/index",
+        "user": "/table/product.user.index"
+      },
+      "password": {
+        "captcha": "/api/user/captcha",
+        "login": "/api/user/login"
+      }
+    }
+  }
+}

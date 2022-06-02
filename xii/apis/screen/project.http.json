@@ -1,0 +1,64 @@
+{
+  "name": "数据大屏-数据适配接口",
+  "version": "1.0.0",
+  "description": "数据大屏-数据适配 API",
+  "group": "screen/project",
+  "guard": "cross-domain",
+  "paths": [
+    {
+      "comment": "数据概览",
+      "path": "/stat",
+      "method": "GET",
+      "process": "flows.screen.project.stat",
+      "in": [],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "comment": "送测项目数量",
+      "path": "/prepare",
+      "method": "GET",
+      "process": "flows.screen.project.prepare",
+      "in": [],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "comment": "已适配项目数量",
+      "path": "/complete",
+      "method": "GET",
+      "process": "flows.screen.project.complete",
+      "in": [],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "comment": "正在适配项目",
+      "path": "/pending",
+      "method": "GET",
+      "process": "flows.screen.project.pending",
+      "in": [],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "comment": "报告情况",
+      "path": "/report",
+      "method": "GET",
+      "process": "flows.screen.project.report",
+      "in": [],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    }
+  ]
+}

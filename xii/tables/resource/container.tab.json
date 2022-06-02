@@ -1,0 +1,96 @@
+{
+  "name": "容器",
+  "version": "1.0.0",
+  "decription": "容器管理查看",
+  "bind": { "model": "resource.xii" },
+  "apis": {
+    "search": { "process": "flows.xii.container.search" },
+    "find": { "process": "flows.xii.container.find" }
+  },
+  "columns": {
+    "ID": { "@": "components.ContainerView", "in": ["ID", ":id"] },
+    "名称": { "@": "components.ContainerView", "in": ["名称", ":name"] },
+    "镜像": { "@": "components.ContainerView", "in": ["镜像", ":Image"] },
+    "Command": {
+      "@": "components.ContainerView",
+      "in": ["Command", ":Command"]
+    },
+    "状态": { "@": "components.ContainerView", "in": ["状态", ":Status"] },
+    "创建时间": {
+      "@": "components.ContainerView",
+      "in": ["创建时间", ":created_at"]
+    },
+
+    "EID": { "@": "components.ContainerEdit", "in": ["ID", ":id"] },
+    "E名称": { "@": "components.ContainerEdit", "in": ["名称", ":name"] },
+    "E镜像": { "@": "components.ContainerEdit", "in": ["镜像", ":Image"] },
+    "ECommand": {
+      "@": "components.ContainerEdit",
+      "in": ["Command", ":Command"]
+    },
+    "E状态": { "@": "components.ContainerEdit", "in": ["状态", ":Status"] },
+    "E创建时间": {
+      "@": "components.ContainerEdit",
+      "in": ["创建时间", ":created_at"]
+    }
+  },
+  "filters": {
+    "关键词": { "@": "filter.关键词", "in": ["where.name.match"] }
+  },
+  "list": {
+    "primary": "Id",
+    "layout": {
+      "columns": [
+        { "name": "ID" },
+        { "name": "名称", "width": 200 },
+        { "name": "镜像", "width": 260 },
+        { "name": "Command" },
+        { "name": "状态" },
+        { "name": "创建时间" }
+      ],
+      "filters": [{ "name": "关键词" }]
+    },
+    "actions": {},
+    "option": {
+      "operation": {
+        "width": 120,
+        "unfold": true,
+        "hideEdit": true,
+        "hideView": true,
+        "items": [
+          {
+            "useModal": true,
+            "type": "view",
+            "icon": "icon-eye",
+            "formId": ":Id",
+            "formName": "resource.container"
+          }
+        ]
+      }
+    }
+  },
+  "edit": {
+    "primary": "id",
+    "layout": {
+      "fieldset": [
+        {
+          "columns": [
+            { "name": "EID", "width": 12 },
+            { "name": "E状态", "width": 12 },
+            { "name": "E名称", "width": 24 },
+            { "name": "E镜像", "width": 24 },
+            { "name": "ECommand", "width": 12 },
+            { "name": "E创建时间", "width": 12 }
+          ]
+        }
+      ]
+    },
+    "actions": {
+      "cancel": {},
+      "save": { "@": "action.保存" },
+      "delete": { "@": "action.删除" }
+    }
+  },
+  "insert": {},
+  "view": {}
+}

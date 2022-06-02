@@ -1,0 +1,34 @@
+{
+  "label": "数据统计",
+  "version": "1.0.0",
+  "description": "数据统计",
+  "nodes": [
+    {
+      "name": "信创人才",
+      "engine": "xiang",
+      "query": {
+        "select": [":COUNT(id) as 数量", "title"],
+        "groups": "title ROLLUP 信创人才总数",
+        "orders": "title",
+        "from": "$trainee"
+      }
+    },
+    {
+      "name": "课程数",
+      "engine": "xiang",
+      "query": {
+        "select": [":COUNT(id) as 数量"],
+        "first": true,
+        "from": "$training.course"
+      }
+    }
+  ],
+  "output": {
+    "信创人才总数": "{{$res.信创人才.0.数量}}",
+    "中级工程师": "{{$res.信创人才.1.数量}}",
+    "信创专家": "{{$res.信创人才.2.数量}}",
+    "初级工程师": "{{$res.信创人才.3.数量}}",
+    "高级工程师": "{{$res.信创人才.4.数量}}",
+    "课程数": "{{$res.课程数.数量}}"
+  }
+}
