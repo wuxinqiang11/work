@@ -1,9 +1,0 @@
-{
-  "api": "/api/builder/projects/61d7b9a2594c100e97ef8682/start",
-  "method": "POST",
-  "payload": {
-    "build_args": [0, 1],
-    "customize_args": [{}, {}]
-  },
-  "response": ["61d7bd18594c100e97ef868e", "61d7bd18594c100e97ef8690"]
-}
