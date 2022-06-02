@@ -1,0 +1,67 @@
+{
+  "name": "轻虚拟机",
+  "version": "1.0.0",
+  "decription": "轻虚拟机管理查看",
+  "bind": { "model": "resource.xii" },
+  "apis": {
+    "search": { "process": "flows.xii.lvm.search" },
+    "find": { "process": "flows.xii.lvm.find" }
+  },
+  "columns": {
+    "ID": { "@": "components.VMView", "in": ["ID", ":id"] },
+    "名称": { "@": "components.VMView", "in": ["名称", ":name"] },
+    "CPU": { "@": "components.VMView", "in": ["CPU", ":maxcpu"] },
+    "内存": { "@": "components.VMView", "in": ["内存", ":memory"] },
+    "磁盘": { "@": "components.VMView", "in": ["磁盘", ":disk"] },
+    "状态": { "@": "components.VMView", "in": ["状态", ":status"] },
+    "运行时间": {
+      "@": "components.VMView",
+      "in": ["运行时间", ":uptime"]
+    }
+  },
+  "filters": {
+    "关键词": { "@": "filter.关键词", "in": ["where.name.match"] }
+  },
+  "list": {
+    "primary": "id",
+    "layout": {
+      "columns": [
+        { "name": "ID" },
+        { "name": "名称" },
+        { "name": "CPU" },
+        { "name": "内存" },
+        { "name": "磁盘" },
+        { "name": "状态" },
+        { "name": "运行时间" }
+      ],
+      "filters": [{ "name": "关键词" }]
+    },
+    "actions": {},
+    "option": {
+      "operation": {
+        "width": 0,
+        "unfold": true,
+        "hideEdit": true,
+        "hideView": true,
+        "items": []
+      }
+    }
+  },
+  "edit": {
+    "primary": "id",
+    "layout": {
+      "fieldset": [
+        {
+          "columns": []
+        }
+      ]
+    },
+    "actions": {
+      "cancel": {},
+      "save": { "@": "action.保存" },
+      "delete": { "@": "action.删除" }
+    }
+  },
+  "insert": {},
+  "view": {}
+}

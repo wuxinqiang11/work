@@ -1,0 +1,212 @@
+{
+  "label": "导入测试数据",
+  "version": "1.0.0",
+  "description": "导入测试数据",
+  "nodes": [
+    {
+      "name": "数据",
+      "script": "data"
+    },
+    {
+      "name": "厂商",
+      "process": "xiang.helper.ArraySplit",
+      "args": ["{{$res.数据.厂商}}"]
+    },
+    {
+      "name": "插入厂商",
+      "process": "models.manu.Insert",
+      "args": ["{{$res.厂商.columns}}", "{{$res.厂商.values}}"]
+    },
+    {
+      "name": "厂商用户",
+      "process": "xiang.helper.ArraySplit",
+      "args": ["{{$res.数据.厂商用户}}"]
+    },
+    {
+      "name": "插入厂商用户",
+      "process": "models.manu.user.Insert",
+      "args": ["{{$res.厂商用户.columns}}", "{{$res.厂商用户.values}}"]
+    },
+    {
+      "name": "产品",
+      "process": "xiang.helper.ArraySplit",
+      "args": ["{{$res.数据.产品}}"]
+    },
+    {
+      "name": "插入产品",
+      "process": "models.product.Insert",
+      "args": ["{{$res.产品.columns}}", "{{$res.产品.values}}"]
+    },
+    {
+      "name": "产品类型",
+      "process": "xiang.helper.ArraySplit",
+      "args": ["{{$res.数据.产品类型}}"]
+    },
+    {
+      "name": "插入产品类型",
+      "process": "models.product.kind.Insert",
+      "args": ["{{$res.产品类型.columns}}", "{{$res.产品类型.values}}"]
+    },
+    {
+      "name": "项目",
+      "process": "xiang.helper.ArraySplit",
+      "args": ["{{$res.数据.项目}}"]
+    },
+    {
+      "name": "插入项目",
+      "process": "models.project.Insert",
+      "args": ["{{$res.项目.columns}}", "{{$res.项目.values}}"]
+    },
+    {
+      "name": "证书",
+      "process": "xiang.helper.ArraySplit",
+      "args": ["{{$res.数据.证书}}"]
+    },
+    {
+      "name": "插入证书",
+      "process": "models.cert.Insert",
+      "args": ["{{$res.证书.columns}}", "{{$res.证书.values}}"]
+    },
+    {
+      "name": "人才",
+      "process": "xiang.helper.ArraySplit",
+      "args": ["{{$res.数据.人才}}"]
+    },
+    {
+      "name": "插入人才",
+      "process": "models.trainee.Insert",
+      "args": ["{{$res.人才.columns}}", "{{$res.人才.values}}"]
+    },
+    {
+      "name": "题库",
+      "process": "xiang.helper.ArraySplit",
+      "args": ["{{$res.数据.题库}}"]
+    },
+    {
+      "name": "插入题库",
+      "process": "models.training.question.Insert",
+      "args": ["{{$res.题库.columns}}", "{{$res.题库.values}}"]
+    },
+    {
+      "name": "考试",
+      "process": "xiang.helper.ArraySplit",
+      "args": ["{{$res.数据.考试}}"]
+    },
+    {
+      "name": "插入考试",
+      "process": "models.training.exam.Insert",
+      "args": ["{{$res.考试.columns}}", "{{$res.考试.values}}"]
+    },
+    {
+      "name": "考试证书",
+      "process": "xiang.helper.ArraySplit",
+      "args": ["{{$res.数据.考试证书}}"]
+    },
+    {
+      "name": "插入考试证书",
+      "process": "models.training.cert.Insert",
+      "args": ["{{$res.考试证书.columns}}", "{{$res.考试证书.values}}"]
+    },
+    {
+      "name": "工单",
+      "process": "xiang.helper.ArraySplit",
+      "args": ["{{$res.数据.工单}}"]
+    },
+    {
+      "name": "插入工单",
+      "process": "models.support.ticket.Insert",
+      "args": ["{{$res.工单.columns}}", "{{$res.工单.values}}"]
+    },
+    {
+      "name": "词条",
+      "process": "xiang.helper.ArraySplit",
+      "args": ["{{$res.数据.词条}}"]
+    },
+    {
+      "name": "插入词条",
+      "process": "models.wiki.entry.Insert",
+      "args": ["{{$res.词条.columns}}", "{{$res.词条.values}}"]
+    },
+    {
+      "name": "FAQ",
+      "process": "xiang.helper.ArraySplit",
+      "args": ["{{$res.数据.FAQ}}"]
+    },
+    {
+      "name": "插入FAQ",
+      "process": "models.wiki.faq.Insert",
+      "args": ["{{$res.FAQ.columns}}", "{{$res.FAQ.values}}"]
+    },
+    {
+      "name": "资源型号",
+      "process": "xiang.helper.ArraySplit",
+      "args": ["{{$res.数据.资源型号}}"]
+    },
+    {
+      "name": "插入资源型号",
+      "process": "models.resource.sku.Insert",
+      "args": ["{{$res.资源型号.columns}}", "{{$res.资源型号.values}}"]
+    },
+    {
+      "name": "资源",
+      "process": "xiang.helper.ArraySplit",
+      "args": ["{{$res.数据.资源}}"]
+    },
+    {
+      "name": "插入资源",
+      "process": "models.resource.Insert",
+      "args": ["{{$res.资源.columns}}", "{{$res.资源.values}}"]
+    },
+    {
+      "name": "资源消耗",
+      "process": "xiang.helper.ArraySplit",
+      "args": ["{{$res.数据.资源消耗}}"]
+    },
+    {
+      "name": "插入资源消耗",
+      "process": "models.usage.Insert",
+      "args": ["{{$res.资源消耗.columns}}", "{{$res.资源消耗.values}}"]
+    },
+    {
+      "name": "适配测试",
+      "process": "xiang.helper.ArraySplit",
+      "args": ["{{$res.数据.适配测试}}"]
+    },
+    {
+      "name": "插入适配测试",
+      "process": "models.project.adapt.Insert",
+      "args": ["{{$res.适配测试.columns}}", "{{$res.适配测试.values}}"]
+    },
+    {
+      "name": "构建任务",
+      "process": "xiang.helper.ArraySplit",
+      "args": ["{{$res.数据.构建任务}}"]
+    },
+    {
+      "name": "插入构建任务",
+      "process": "models.project.adapt.job.Insert",
+      "args": ["{{$res.构建任务.columns}}", "{{$res.构建任务.values}}"]
+    },
+    {
+      "name": "NPM软件包",
+      "process": "scripts.fake.npmPackages"
+    },
+    {
+      "name": "国产操作系统",
+      "process": "scripts.fake.chinaOS"
+    },
+    {
+      "name": "待测项目",
+      "process": "scripts.fake.testSubmit"
+    },
+    {
+      "name": "适配项目",
+      "process": "scripts.fake.testPending"
+    },
+    {
+      "name": "适配结果",
+      "process": "scripts.fake.testComplete"
+    }
+  ],
+  "output": "suceess"
+}

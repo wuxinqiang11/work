@@ -1,0 +1,65 @@
+{
+  "name": "测试",
+  "version": "1.0.0",
+  "decription": "测试管理表格",
+  "bind": {
+    "model": "project.test",
+    "withs": { "case": {}, "project": {} }
+  },
+  "apis": {
+    "search": {
+      "default": [{ "withs": { "case": {}, "project": {} } }, null, 10]
+    }
+  },
+  "columns": {
+    "项目": { "@": "components.所属项目" },
+    "用例": { "@": "components.所属用例" },
+    "测试数据": { "@": "components.TextArea", "in": ["测试数据", ":input", 4] },
+    "实际结果": { "@": "components.TextArea", "in": ["实际结果", ":output", 4] }
+  },
+  "filters": {
+    "关键词": { "@": "filter.关键词", "in": ["where.key.match"] }
+  },
+  "list": {
+    "primary": "id",
+    "layout": {
+      "columns": [
+        { "name": "ID", "width": 80 },
+        { "name": "用例" },
+        { "name": "测试结论" }
+      ],
+      "filters": [{ "name": "关键词" }]
+    },
+    "actions": {
+      "pagination": { "props": { "showTotal": true } },
+      "create": {
+        "type": "button",
+        "props": { "label": "添加", "icon": "fas fa-plus" }
+      }
+    },
+    "option": { "operation": { "unfold": true, "items": [], "width": 120 } }
+  },
+  "edit": {
+    "primary": "id",
+    "layout": {
+      "fieldset": [
+        {
+          "columns": [
+            { "name": "项目", "width": 24 },
+            { "name": "用例", "width": 12 },
+            { "name": "测试结论", "width": 12 },
+            { "name": "测试数据", "width": 24 },
+            { "name": "实际结果", "width": 24 }
+          ]
+        }
+      ]
+    },
+    "actions": {
+      "cancel": {},
+      "save": { "@": "action.保存" },
+      "delete": { "@": "action.删除" }
+    }
+  },
+  "insert": {},
+  "view": {}
+}

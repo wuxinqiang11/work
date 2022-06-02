@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>信创成果</title>
+    <script src="js/vue.js"></script>
+    <script src="js/datav.map.vue.js"></script>
+    <script src="js/jwmeyy.js"></script>
+    <link rel="stylesheet" href="css/chengguo.css" />
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/wow.js"></script>
+    <script>
+      new WOW().init();
+    </script>
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+    <script src="js/axios.min.js"></script>
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app" v-cloak>
+      <div class="container">
+        <div class="top" id="title" onclick="parent.toggleFullScreen()">
+          <p>中国化工行业信创适配中心</p>
+        </div>
+        <div class="content">
+          <div class="con_left">
+            <div class="left_box_1">
+              <div class="left_box_1_t">
+                <img class="img" src="images/sanjiao.png" alt="" />
+                <p>已适配系统总数</p>
+                <img src="images/sanjiao.png" alt="" />
+              </div>
+              <div class="left_box_1_b">
+                <div id="icharts_2" class="icharts_2"></div>
+              </div>
+            </div>
+
+            <div class="left_box_2">
+              <div class="left_box_2_t">
+                <img class="img" src="images/sanjiao.png" alt="" />
+                <p>业务系统分类</p>
+                <img src="images/sanjiao.png" alt="" />
+              </div>
+              <div class="left_box_2_b">
+                <div id="icharts_3" class="icharts_3"></div>
+              </div>
+              <div class="newbiaoji">
+                <ul>
+                  <li v-for="(item,index) in seriesData3" v::key="index">
+                    <p>{{item.value}}</p>
+                    <i></i>
+                    <p>{{item.name}}</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="con_mid">
+            <div class="mid_nav zoomIn">
+              <a class="mid_nav1" href="zhihui.html">
+                <p>指挥中心</p>
+              </a>
+              <a class="mid_nav1" href="shipei.html">
+                <p>适配测试</p>
+              </a>
+              <a class="mid_nav1 active" href="chengguo.html">
+                <p>信创成果</p>
+              </a>
+              <a class="mid_nav1" href="rencai.html">
+                <p>信创人才</p>
+              </a>
+              <a class="mid_nav1" href="ziyuan.html">
+                <p>平台资源</p>
+              </a>
+            </div>
+
+            <div class="mid_con zoomIn">
+              <div class="mid_con_1">
+                <div class="mid_con_1_1">
+                  <div class="mid_con_1_t">
+                    <p>实时数据库</p>
+                  </div>
+                  <div class="mid_con_1_m">
+                    <img src="images/shebei_3_1.png" alt="" />
+                    <img src="images/shebei_3_2.png" alt="" />
+                  </div>
+                </div>
+                <div class="mid_con_1_1">
+                  <div class="mid_con_1_t">
+                    <p>一卡通</p>
+                  </div>
+                  <div class="mid_con_1_m">
+                    <img src="images/shebei_3_1.png" alt="" />
+                    <img src="images/shebei_3_2.png" alt="" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="mid_con_2 zoomIn">
+                <div class="mid_con_2_1">
+                  <div class="mid_con_1_t">
+                    <p>ERP</p>
+                  </div>
+                  <div class="mid_con_1_m">
+                    <img src="images/shebei_3_1.png" alt="" />
+                    <img src="images/shebei_3_2.png" alt="" />
+                  </div>
+                </div>
+                <div class="mid_con_2_1">
+                  <div class="mid_con_1_t">
+                    <p>IWM</p>
+                  </div>
+                  <div class="mid_con_1_m">
+                    <img src="images/shebei_3_1.png" alt="" />
+                    <img src="images/shebei_3_2.png" alt="" />
+                  </div>
+                </div>
+
+                <div class="mid_con_2_1">
+                  <div class="mid_con_1_t">
+                    <p>LIMS</p>
+                  </div>
+                  <div class="mid_con_1_m">
+                    <img src="images/shebei_3_1.png" alt="" />
+                    <img src="images/shebei_3_2.png" alt="" />
+                  </div>
+                </div>
+
+                <div class="mid_con_2_1">
+                  <div class="mid_con_1_t">
+                    <p>SAP</p>
+                  </div>
+                  <div class="mid_con_1_m">
+                    <img src="images/shebei_3_1.png" alt="" />
+                    <img src="images/shebei_3_2.png" alt="" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="mid_con_3 zoomIn">
+                <div class="mid_con_3_1">
+                  <div class="mid_con_1_t">
+                    <p>计划管理系统</p>
+                  </div>
+                  <div class="mid_con_1_m">
+                    <img src="images/shebei_3_1.png" alt="" />
+                    <img src="images/shebei_3_2.png" alt="" />
+                  </div>
+                </div>
+                <div class="mid_con_3_1">
+                  <div class="mid_con_1_t">
+                    <p>Aspen</p>
+                  </div>
+                  <div class="mid_con_1_m">
+                    <img src="images/shebei_3_1.png" alt="" />
+                    <img src="images/shebei_3_2.png" alt="" />
+                  </div>
+                </div>
+
+                <div class="mid_con_3_1">
+                  <div class="mid_con_1_t">
+                    <p>可视化监控系统</p>
+                  </div>
+                  <div class="mid_con_1_m">
+                    <img src="images/shebei_3_1.png" alt="" />
+                    <img src="images/shebei_3_2.png" alt="" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="mid_con_6_1">
+                <img src="images/zhuan.png" alt="" />
+              </div>
+              <div class="mid_con_7">
+                <!-- <div class="mid_con_7_1"></div>            -->
+              </div>
+              <div class="bottom_circle">
+                <div class="bottom_circle1"></div>
+                <div class="bottom_circle2"></div>
+                <div class="bottom_circle3"></div>
+                <div class="bottom_circle4"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="con_right">
+            <div class="right_box_1">
+              <div class="right_box_1_t">
+                <img class="img" src="images/sanjiao.png" alt="" />
+                <p>已适配系统</p>
+                <img src="images/sanjiao.png" alt="" />
+              </div>
+              <div class="right_box_1_b">
+                <div class="right_box_1_b_t">
+                  <p>系统名称</p>
+                  <p>适配完成日期</p>
+                </div>
+                <div class="right_box_1_b_list">
+                  <ul>
+                    <li
+                      class="right_box_1_b_list_1"
+                      v-for="(item,index) in list"
+                      v::key="key"
+                    >
+                      <p>{{item.名称}}</p>
+                      <p>{{item.创建时间}}</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="right_box_2">
+              <div class="right_box_2_t">
+                <img class="img" src="images/sanjiao.png" alt="" />
+                <p>信创产品</p>
+                <img src="images/sanjiao.png" alt="" />
+              </div>
+              <div class="right_box_2_b">
+                <!-- <dv-capsule-chart :config="config2" style="margin:auto;width:80%;height:100%" /> -->
+                <div class="right_box_2_b_1">
+                  <div class="c_1">
+                    <p>数据库</p>
+                    <!-- <p>20</p> -->
+                  </div>
+                  <div class="c_2">
+                    <div id="icharts_4" class="icharts_4"></div>
+                    <div class="beijing"></div>
+                  </div>
+                </div>
+
+                <div class="right_box_2_b_1">
+                  <div class="c_1">
+                    <p>管理系统</p>
+                    <!-- <p>15</p> -->
+                  </div>
+                  <div class="c_2">
+                    <div id="icharts_4_1" class="icharts_4_1"></div>
+                    <div class="beijing"></div>
+                  </div>
+                </div>
+
+                <div class="right_box_2_b_1">
+                  <div class="c_1">
+                    <p>安全</p>
+                    <!-- <p>18</p> -->
+                  </div>
+                  <div class="c_2">
+                    <div id="icharts_4_2" class="icharts_4_2"></div>
+                    <div class="beijing"></div>
+                  </div>
+                </div>
+
+                <div class="right_box_2_b_1">
+                  <div class="c_1">
+                    <p>云平台</p>
+                    <!-- <p>27</p> -->
+                  </div>
+                  <div class="c_2">
+                    <div id="icharts_4_3" class="icharts_4_3"></div>
+                    <div class="beijing"></div>
+                  </div>
+                </div>
+
+                <div class="right_box_2_b_1">
+                  <div class="c_1">
+                    <p>中间件</p>
+                    <!-- <p>22</p> -->
+                  </div>
+                  <div class="c_2">
+                    <div id="icharts_4_4" class="icharts_4_4"></div>
+                    <div class="beijing"></div>
+                  </div>
+                </div>
+
+                <div class="right_box_2_b_1">
+                  <div class="c_1">
+                    <p>服务器</p>
+                    <!-- <p>21</p> -->
+                  </div>
+                  <div class="c_2">
+                    <div id="icharts_4_5" class="icharts_4_5"></div>
+                    <div class="beijing"></div>
+                  </div>
+                </div>
+
+                <div class="right_box_2_b_1">
+                  <div class="c_1">
+                    <p>软件包</p>
+                    <!-- <p>16</p> -->
+                  </div>
+                  <div class="c_2">
+                    <div id="icharts_4_6" class="icharts_4_6"></div>
+                    <div class="beijing"></div>
+                  </div>
+                </div>
+
+                <div class="right_box_2_b_1">
+                  <div class="c_1">
+                    <p>存储</p>
+                    <!-- <p>21</p> -->
+                  </div>
+                  <div class="c_2">
+                    <div id="icharts_4_7" class="icharts_4_7"></div>
+                    <div class="beijing"></div>
+                  </div>
+                </div>
+
+                <div class="right_box_2_b_1">
+                  <div class="c_1">
+                    <p>CPU</p>
+                    <!-- <p>11</p> -->
+                  </div>
+                  <div class="c_2">
+                    <div id="icharts_4_8" class="icharts_4_8"></div>
+                    <div class="beijing"></div>
+                  </div>
+                </div>
+
+                <div class="right_box_2_b_1">
+                  <div class="c_1">
+                    <p>操作系统</p>
+                    <!-- <p>12</p> -->
+                  </div>
+                  <div class="c_2">
+                    <div id="icharts_4_9" class="icharts_4_9"></div>
+                    <div class="beijing"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          web: "/api",
+          allxitong: "",
+          allxitongnum: [],
+          allxitongtime: [],
+          xitong: [],
+          seriesData3: [],
+          list: [],
+          xinzong: [],
+        },
+        watch: {
+          allxitongnum() {
+            this.drawallxt();
+          },
+          seriesData3() {
+            this.drawchangjing();
+          },
+          xinzong() {
+            this.drawpro_1();
+            this.drawpro_2();
+            this.drawpro_3();
+            this.drawpro_4();
+            this.drawpro_5();
+            this.drawpro_6();
+            this.drawpro_7();
+            this.drawpro_8();
+            this.drawpro_9();
+            this.drawpro_10();
+          },
+        },
+        methods: {
+          //控制字体
+          fontSize(res) {
+            var docEl = document.documentElement,
+              clientWidth =
+                window.innerWidth ||
+                document.documentElement.clientWidth ||
+                document.body.clientWidth;
+            if (!clientWidth) return;
+            return (res * clientWidth) / 1920;
+          },
+
+          //已分配系统总数
+          getallxt() {
+            axios({
+              method: "get",
+              url: this.web + "/screen/result/total",
+            })
+              .then((res) => {
+                console.log(res.data);
+                for (var i = 0; i < res.data.length; i++) {
+                  this.allxitongtime.push(res.data[i].创建时间);
+                  this.allxitongnum.push(res.data[i].数量);
+                }
+              })
+              .catch((err) => {});
+          },
+
+          // 已分配系统总数图表
+          drawallxt() {
+            var myChart2 = echarts.init(document.getElementById("icharts_2"));
+            myChart2.setOption({
+              grid: {
+                left: 30,
+                right: 30,
+                top: 30,
+                bottom: 10,
+                containLabel: true,
+              },
+              tooltip: {
+                trigger: "axis",
+                axisPointer: {
+                  type: "line",
+                  lineStyle: {
+                    color: "#00c9fb",
+                    opacity: 0.7,
+                    type: "dashed",
+                    width: 1,
+                  },
+                  z: 1,
+                },
+                padding: [15, 22],
+                backgroundColor: "rgba(0,0,0,0.9)",
+                borderColor: "#01a3ce",
+                borderWidth: 1,
+                textStyle: {
+                  fontSize: this.fontSize(16),
+                  lineHeight: this.fontSize(32),
+                  color: "#ffffff",
+                },
+              },
+              xAxis: {
+                data: this.allxitongtime,
+                boundaryGap: false,
+                axisLine: { show: false },
+                axisTick: {
+                  show: true,
+                  lineStyle: { color: "#0187c4", width: 1, opacity: 1 },
+                },
+                axisLabel: {
+                  textStyle: { fontSize: this.fontSize(12), color: "#a8b2be" },
+                  margin: this.fontSize(20),
+                  interval: 0,
+                  rotate: 20,
+                },
+                splitLine: { show: false },
+              },
+              yAxis: {
+                type: "value",
+                axisLine: { show: false },
+                axisTick: {
+                  show: true,
+                  lineStyle: { color: "#0187c4", width: 1, opacity: 1 },
+                },
+                axisLabel: {
+                  textStyle: { fontSize: this.fontSize(12), color: "#a8b2be" },
+                  opacity: 0.7,
+                  margin: this.fontSize(15),
+                },
+                splitLine: {
+                  show: true,
+                  lineStyle: { color: "#a8b2be", width: 1, opacity: 0.2 },
+                },
+                min: 0,
+                max: 30,
+              },
+              animationDelay: 900,
+              animationDuration: 2000,
+              animationDurationUpdate: 800,
+              series: [
+                {
+                  type: "line",
+                  symbol: "circle",
+                  symbolSize: 5,
+                  showSymbol: false,
+                  smooth: true,
+                  areaStyle: {
+                    show: true,
+                    shadowColor: "rgba(0, 0, 0, 0.7)",
+                    shadowBlur: 10,
+                  },
+                  itemStyle: {
+                    color: "#019cec",
+                    borderColor: "#ffffff",
+                    borderWidth: 1,
+                    borderType: "solid",
+                  },
+                  lineStyle: { color: "#019cec", width: 1 },
+                  areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                      { offset: 0, color: "#019cec" },
+                      { offset: 1, color: "transparent" },
+                    ]),
+                    opacity: 0.35,
+                  },
+                  data: this.allxitongnum,
+                },
+              ],
+            });
+          },
+
+          //场景分部比
+          getchangjing() {
+            axios({
+              method: "get",
+              url: this.web + "/screen/result/scene",
+            })
+              .then((res) => {
+                console.log(res.data);
+                var qiuname = [];
+                var qiunum = [];
+                for (var i = 0; i < res.data.length; i++) {
+                  qiuname.push(res.data[i].名称);
+                  qiunum.push(res.data[i].数量);
+                }
+                for (var i = 0; i < qiunum.length; i++) {
+                  this.seriesData3.push({
+                    name: qiuname[i],
+                    value: qiunum[i],
+                  });
+                }
+                var s = 0;
+                for (var i = qiunum.length - 1; i >= 0; i--) {
+                  undefined;
+
+                  s += qiunum[i];
+                }
+
+                console.log(s);
+                this.qiuzong = s;
+              })
+              .catch((err) => {});
+          },
+
+          //场景分布比图表
+          drawchangjing() {
+            var myChart3 = echarts.init(document.getElementById("icharts_3"));
+            myChart3.setOption({
+              title: {
+                text: this.qiuzong,
+                subtext: "共计",
+                left: "center",
+                top: "center",
+                textStyle: {
+                  color: "#fff",
+                  fontSize: this.fontSize(23),
+                },
+                subtextStyle: {
+                  color: "#fff",
+                  fontSize: this.fontSize(15),
+                },
+              },
+              color: ["#01c4c0", "#fed265", "#925bff", "#00a9fe", "#fe8a4d"],
+              tooltip: {
+                padding: [15, 22],
+                backgroundColor: "rgba(0,0,0,0.9)",
+                borderColor: "#01a3ce",
+                borderWidth: 1,
+                textStyle: {
+                  fontSize: this.fontSize(15),
+                  lineHeight: this.fontSize(32),
+                  color: "#ffffff",
+                },
+              },
+              animationDelay: 900,
+              animationDuration: 2000,
+              animationDurationUpdate: 800,
+              series: [
+                {
+                  type: "pie",
+                  radius: ["46%", "68%"],
+                  minAngle: 20,
+                  label: {
+                    formatter: ["{a|{b}}", "{b|{c}%}"].join("\n"),
+                    rich: {
+                      a: {
+                        fontSize: this.fontSize(13),
+                        lineHeight: this.fontSize(32),
+                        color: "#6697c2",
+                      },
+                      b: {
+                        fontSize: this.fontSize(12),
+                        fontWeight: "bold",
+                        lineHeight: this.fontSize(26),
+                        color: "#3cd1ff",
+                        fontFamily: "DIN-Medium",
+                      },
+                    },
+                  },
+                  labelLine: {
+                    length: this.fontSize(28),
+                    length2: this.fontSize(14),
+                  },
+                  // itemStyle: { shadowColor: '#000', shadowBlur: 65, shadowOffsetX: '20', shadowOffsetY: '0', },
+                  data: this.seriesData3,
+                },
+              ],
+            });
+          },
+
+          //已适配系统
+          getshpei() {
+            axios({
+              method: "get",
+              url: this.web + "/screen/result/success",
+            })
+              .then((res) => {
+                console.log(res.data);
+                this.list = res.data;
+              })
+              .catch((err) => {});
+          },
+
+          //信创产品
+          getpro() {
+            axios({
+              method: "get",
+              url: this.web + "/screen/result/product",
+            })
+              .then((res) => {
+                console.log(res.data);
+                this.xinzong = res.data;
+              })
+              .catch((err) => {});
+          },
+
+          //信创产品图表，分割
+          drawpro_1() {
+            var myChart4 = echarts.init(document.getElementById("icharts_4"));
+            console.log(this.xinzong[0].name);
+            myChart4.setOption({
+              tooltip: {
+                trigger: "axis",
+                axisPointer: {
+                  type: "none",
+                },
+                formatter: "{b}:{c}%",
+              },
+              xAxis: {
+                type: "value",
+                show: false,
+                min: 0,
+                max: 100,
+              },
+              grid: {
+                height: "60%",
+                width: "100%",
+                top: "20%",
+                left: "0",
+              },
+              yAxis: {
+                position: "right",
+                type: "category",
+                data: [this.xinzong[0].name],
+                axisTick: {
+                  show: false,
+                },
+                axisLine: {
+                  // 坐标轴 轴线
+                  show: false, // 是否显示
+                },
+                axisLabel: {
+                  show: false,
+                  fontWeight: "bold",
+                  color: "#37e9fc",
+                  fontSize: this.fontSize(16),
+                },
+              },
+              series: [
+                {
+                  data: [this.xinzong[0].数量],
+                  type: "bar",
+                  // showBackground: true,
+                  backgroundStyle: {
+                    color: "#053160",
+                    borderType: "solid",
+                    barBorderRadius: [40, 30, 40, 30],
+                  },
+                  label: {
+                    show: true,
+                    position: [170, -30],
+                    distance: this.fontSize(11),
+                    fontSize: this.fontSize(12),
+                    color: "#ffffff",
+                    lineHeight: this.fontSize(30),
+                    fontFamily: "DIN-Medium",
+                  },
+                  itemStyle: {
+                    // 图形的形状
+                    barBorderRadius: [20, 20, 20, 20],
+                    color: "#00acff",
+                  },
+                  barCategoryGap: "50%",
+                  barWidth: "40%",
+                },
+              ],
+            });
+          },
+
+          drawpro_2() {
+            var myChart4_1 = echarts.init(
+              document.getElementById("icharts_4_1")
+            );
+            myChart4_1.setOption({
+              tooltip: {
+                trigger: "axis",
+                axisPointer: {
+                  type: "none",
+                },
+                formatter: "{b}:{c}%",
+              },
+              xAxis: {
+                type: "value",
+                show: false,
+                min: 0,
+                max: 100,
+              },
+              grid: {
+                height: "60%",
+                width: "100%",
+                top: "20%",
+                left: "0",
+              },
+              yAxis: {
+                position: "right",
+                type: "category",
+                data: [this.xinzong[1].name],
+                axisTick: {
+                  show: false,
+                },
+                axisLine: {
+                  // 坐标轴 轴线
+                  show: false, // 是否显示
+                },
+                axisLabel: {
+                  show: false,
+                  fontWeight: "bold",
+                  color: "#37e9fc",
+                  fontSize: this.fontSize(16),
+                },
+              },
+              series: [
+                {
+                  data: [this.xinzong[1].数量],
+                  type: "bar",
+                  // showBackground: true,
+                  backgroundStyle: {
+                    color: "#053160",
+                    barBorderRadius: [20, 20, 20, 20],
+                  },
+                  label: {
+                    show: true,
+                    position: [170, -30],
+                    distance: this.fontSize(11),
+                    fontSize: this.fontSize(12),
+                    color: "#ffffff",
+                    lineHeight: this.fontSize(30),
+                    fontFamily: "DIN-Medium",
+                  },
+                  itemStyle: {
+                    // 图形的形状
+                    barBorderRadius: [20, 20, 20, 20],
+                    color: "#00acff",
+                  },
+                  barCategoryGap: "50%",
+                  barWidth: "40%",
+                },
+              ],
+            });
+          },
+
+          drawpro_3() {
+            var myChart4_2 = echarts.init(
+              document.getElementById("icharts_4_2")
+            );
+            myChart4_2.setOption({
+              tooltip: {
+                trigger: "axis",
+                axisPointer: {
+                  type: "none",
+                },
+                formatter: "{b}:{c}%",
+              },
+              xAxis: {
+                type: "value",
+                show: false,
+                min: 0,
+                max: 100,
+              },
+              grid: {
+                height: "60%",
+                width: "100%",
+                top: "20%",
+                left: "0",
+              },
+              yAxis: {
+                position: "right",
+                type: "category",
+                data: [this.xinzong[2].name],
+                axisTick: {
+                  show: false,
+                },
+                axisLine: {
+                  // 坐标轴 轴线
+                  show: false, // 是否显示
+                },
+                axisLabel: {
+                  show: false,
+                  fontWeight: "bold",
+                  color: "#37e9fc",
+                  fontSize: this.fontSize(16),
+                },
+              },
+              series: [
+                {
+                  data: [this.xinzong[2].数量],
+                  type: "bar",
+                  // showBackground: true,
+                  backgroundStyle: {
+                    color: "#053160",
+                    barBorderRadius: [20, 20, 20, 20],
+                  },
+                  label: {
+                    show: true,
+                    position: [170, -30],
+                    distance: this.fontSize(11),
+                    fontSize: this.fontSize(12),
+                    color: "#ffffff",
+                    lineHeight: this.fontSize(30),
+                    fontFamily: "DIN-Medium",
+                  },
+                  itemStyle: {
+                    // 图形的形状
+                    barBorderRadius: [20, 20, 20, 20],
+                    color: "#ff9c65",
+                  },
+                  barCategoryGap: "50%",
+                  barWidth: "40%",
+                },
+              ],
+            });
+          },
+
+          drawpro_4() {
+            var myChart4_3 = echarts.init(
+              document.getElementById("icharts_4_3")
+            );
+            myChart4_3.setOption({
+              tooltip: {
+                trigger: "axis",
+                axisPointer: {
+                  type: "none",
+                },
+                formatter: "{b}:{c}%",
+              },
+              xAxis: {
+                type: "value",
+                show: false,
+                min: 0,
+                max: 100,
+              },
+              grid: {
+                height: "60%",
+                width: "100%",
+                top: "20%",
+                left: "0",
+              },
+              yAxis: {
+                position: "right",
+                type: "category",
+                data: [this.xinzong[3].name],
+                axisTick: {
+                  show: false,
+                },
+                axisLine: {
+                  // 坐标轴 轴线
+                  show: false, // 是否显示
+                },
+                axisLabel: {
+                  show: false,
+                  fontWeight: "bold",
+                  color: "#37e9fc",
+                  fontSize: this.fontSize(16),
+                },
+              },
+              series: [
+                {
+                  data: [this.xinzong[3].数量],
+                  type: "bar",
+                  // showBackground: true,
+                  backgroundStyle: {
+                    color: "#053160",
+                    barBorderRadius: [20, 20, 20, 20],
+                  },
+                  label: {
+                    show: true,
+                    position: [170, -30],
+                    distance: this.fontSize(11),
+                    fontSize: this.fontSize(12),
+                    color: "#ffffff",
+                    lineHeight: this.fontSize(30),
+                    fontFamily: "DIN-Medium",
+                  },
+                  itemStyle: {
+                    // 图形的形状
+                    barBorderRadius: [20, 20, 20, 20],
+                    color: "#ff9c65",
+                  },
+                  barCategoryGap: "50%",
+                  barWidth: "40%",
+                },
+              ],
+            });
+          },
+
+          drawpro_5() {
+            var myChart4_4 = echarts.init(
+              document.getElementById("icharts_4_4")
+            );
+            myChart4_4.setOption({
+              tooltip: {
+                trigger: "axis",
+                axisPointer: {
+                  type: "none",
+                },
+                formatter: "{b}:{c}%",
+              },
+              xAxis: {
+                type: "value",
+                show: false,
+                min: 0,
+                max: 100,
+              },
+              grid: {
+                height: "60%",
+                width: "100%",
+                top: "20%",
+                left: "0",
+              },
+              yAxis: {
+                position: "right",
+                type: "category",
+                data: [this.xinzong[4].name],
+                axisTick: {
+                  show: false,
+                },
+                axisLine: {
+                  // 坐标轴 轴线
+                  show: false, // 是否显示
+                },
+                axisLabel: {
+                  show: false,
+                  fontWeight: "bold",
+                  color: "#37e9fc",
+                  fontSize: this.fontSize(16),
+                },
+              },
+              series: [
+                {
+                  data: [this.xinzong[4].数量],
+                  type: "bar",
+                  // showBackground: true,
+                  backgroundStyle: {
+                    color: "#053160",
+                    barBorderRadius: [20, 20, 20, 20],
+                  },
+                  label: {
+                    show: true,
+                    position: [170, -30],
+                    distance: this.fontSize(11),
+                    fontSize: this.fontSize(12),
+                    color: "#ffffff",
+                    lineHeight: this.fontSize(30),
+                    fontFamily: "DIN-Medium",
+                  },
+                  itemStyle: {
+                    // 图形的形状
+                    barBorderRadius: [20, 20, 20, 20],
+                    color: "#02d8d0",
+                  },
+                  barCategoryGap: "50%",
+                  barWidth: "40%",
+                },
+              ],
+            });
+          },
+
+          drawpro_6() {
+            var myChart4_5 = echarts.init(
+              document.getElementById("icharts_4_5")
+            );
+            myChart4_5.setOption({
+              tooltip: {
+                trigger: "axis",
+                axisPointer: {
+                  type: "none",
+                },
+                formatter: "{b}:{c}%",
+              },
+              xAxis: {
+                type: "value",
+                show: false,
+                min: 0,
+                max: 100,
+              },
+              grid: {
+                height: "60%",
+                width: "100%",
+                top: "20%",
+                left: "0",
+              },
+              yAxis: {
+                position: "right",
+                type: "category",
+                data: [this.xinzong[5].name],
+                axisTick: {
+                  show: false,
+                },
+                axisLine: {
+                  // 坐标轴 轴线
+                  show: false, // 是否显示
+                },
+                axisLabel: {
+                  show: false,
+                  fontWeight: "bold",
+                  color: "#37e9fc",
+                  fontSize: this.fontSize(16),
+                },
+              },
+              series: [
+                {
+                  data: [this.xinzong[5].数量],
+                  type: "bar",
+                  // showBackground: true,
+                  backgroundStyle: {
+                    color: "#053160",
+                    barBorderRadius: [20, 20, 20, 20],
+                  },
+                  label: {
+                    show: true,
+                    position: [170, -30],
+                    distance: this.fontSize(11),
+                    fontSize: this.fontSize(12),
+                    color: "#ffffff",
+                    lineHeight: this.fontSize(30),
+                    fontFamily: "DIN-Medium",
+                  },
+                  itemStyle: {
+                    // 图形的形状
+                    barBorderRadius: [20, 20, 20, 20],
+                    color: "#02d8d0",
+                  },
+                  barCategoryGap: "50%",
+                  barWidth: "40%",
+                },
+              ],
+            });
+          },
+
+          drawpro_7() {
+            var myChart4_6 = echarts.init(
+              document.getElementById("icharts_4_6")
+            );
+            myChart4_6.setOption({
+              tooltip: {
+                trigger: "axis",
+                axisPointer: {
+                  type: "none",
+                },
+                formatter: "{b}:{c}%",
+              },
+              xAxis: {
+                type: "value",
+                show: false,
+                min: 0,
+                max: 100,
+              },
+              grid: {
+                height: "60%",
+                width: "100%",
+                top: "20%",
+                left: "0",
+              },
+              yAxis: {
+                position: "right",
+                type: "category",
+                data: [this.xinzong[6].name],
+                axisTick: {
+                  show: false,
+                },
+                axisLine: {
+                  // 坐标轴 轴线
+                  show: false, // 是否显示
+                },
+                axisLabel: {
+                  show: false,
+                  fontWeight: "bold",
+                  color: "#37e9fc",
+                  fontSize: this.fontSize(16),
+                },
+              },
+              series: [
+                {
+                  data: [this.xinzong[6].数量],
+                  type: "bar",
+                  // showBackground: true,
+                  backgroundStyle: {
+                    color: "#053160",
+                    barBorderRadius: [20, 20, 20, 20],
+                  },
+                  label: {
+                    show: true,
+                    position: [170, -30],
+                    distance: this.fontSize(11),
+                    fontSize: this.fontSize(12),
+                    color: "#ffffff",
+                    lineHeight: this.fontSize(30),
+                    fontFamily: "DIN-Medium",
+                  },
+                  itemStyle: {
+                    // 图形的形状
+                    barBorderRadius: [20, 20, 20, 20],
+                    color: "#02d8d0",
+                  },
+                  barCategoryGap: "50%",
+                  barWidth: "40%",
+                },
+              ],
+            });
+          },
+
+          drawpro_8() {
+            var myChart4_7 = echarts.init(
+              document.getElementById("icharts_4_7")
+            );
+            myChart4_7.setOption({
+              tooltip: {
+                trigger: "axis",
+                axisPointer: {
+                  type: "none",
+                },
+                formatter: "{b}:{c}%",
+              },
+              xAxis: {
+                type: "value",
+                show: false,
+                min: 0,
+                max: 100,
+              },
+              grid: {
+                height: "60%",
+                width: "100%",
+                top: "20%",
+                left: "0",
+              },
+              yAxis: {
+                position: "right",
+                type: "category",
+                data: [this.xinzong[7].name],
+                axisTick: {
+                  show: false,
+                },
+                axisLine: {
+                  // 坐标轴 轴线
+                  show: false, // 是否显示
+                },
+                axisLabel: {
+                  show: false,
+                  fontWeight: "bold",
+                  color: "#37e9fc",
+                  fontSize: this.fontSize(16),
+                },
+              },
+              series: [
+                {
+                  data: [this.xinzong[7].数量],
+                  type: "bar",
+                  // showBackground: true,
+                  backgroundStyle: {
+                    color: "#053160",
+                    barBorderRadius: [20, 20, 20, 20],
+                  },
+                  label: {
+                    show: true,
+                    position: [170, -30],
+                    distance: this.fontSize(11),
+                    fontSize: this.fontSize(12),
+                    color: "#ffffff",
+                    lineHeight: this.fontSize(30),
+                    fontFamily: "DIN-Medium",
+                  },
+                  itemStyle: {
+                    // 图形的形状
+                    barBorderRadius: [20, 20, 20, 20],
+                    color: "#fecd66",
+                  },
+                  barCategoryGap: "50%",
+                  barWidth: "40%",
+                },
+              ],
+            });
+          },
+
+          drawpro_9() {
+            var myChart4_8 = echarts.init(
+              document.getElementById("icharts_4_8")
+            );
+            myChart4_8.setOption({
+              tooltip: {
+                trigger: "axis",
+                axisPointer: {
+                  type: "none",
+                },
+                formatter: "{b}:{c}%",
+              },
+              xAxis: {
+                type: "value",
+                show: false,
+                min: 0,
+                max: 100,
+              },
+              grid: {
+                height: "60%",
+                width: "100%",
+                top: "20%",
+                left: "0",
+              },
+              yAxis: {
+                position: "right",
+                type: "category",
+                data: [this.xinzong[8].name],
+                axisTick: {
+                  show: false,
+                },
+                axisLine: {
+                  // 坐标轴 轴线
+                  show: false, // 是否显示
+                },
+                axisLabel: {
+                  show: false,
+                  fontWeight: "bold",
+                  color: "#37e9fc",
+                  fontSize: this.fontSize(16),
+                },
+              },
+              series: [
+                {
+                  data: [this.xinzong[8].数量],
+                  type: "bar",
+                  // showBackground: true,
+                  backgroundStyle: {
+                    color: "#053160",
+                    barBorderRadius: [20, 20, 20, 20],
+                  },
+                  label: {
+                    show: true,
+                    position: [170, -30],
+                    distance: this.fontSize(11),
+                    fontSize: this.fontSize(12),
+                    color: "#ffffff",
+                    lineHeight: this.fontSize(30),
+                    fontFamily: "DIN-Medium",
+                  },
+                  itemStyle: {
+                    // 图形的形状
+                    barBorderRadius: [20, 20, 20, 20],
+                    color: "#fecd66",
+                  },
+                  barCategoryGap: "50%",
+                  barWidth: "40%",
+                },
+              ],
+            });
+          },
+
+          drawpro_10() {
+            var myChart4_9 = echarts.init(
+              document.getElementById("icharts_4_9")
+            );
+            myChart4_9.setOption({
+              tooltip: {
+                trigger: "axis",
+                axisPointer: {
+                  type: "none",
+                },
+                formatter: "{b}:{c}%",
+              },
+              xAxis: {
+                type: "value",
+                show: false,
+                min: 0,
+                max: 100,
+              },
+              grid: {
+                height: "60%",
+                width: "100%",
+                top: "20%",
+                left: "0",
+              },
+              yAxis: {
+                position: "right",
+                type: "category",
+                data: [this.xinzong[9].name],
+                axisTick: {
+                  show: false,
+                },
+                axisLine: {
+                  // 坐标轴 轴线
+                  show: false, // 是否显示
+                },
+                axisLabel: {
+                  show: false,
+                  fontWeight: "bold",
+                  color: "#37e9fc",
+                  fontSize: this.fontSize(16),
+                },
+              },
+              series: [
+                {
+                  data: [this.xinzong[9].数量],
+                  type: "bar",
+                  // showBackground: true,
+                  backgroundStyle: {
+                    color: "#053160",
+                    barBorderRadius: [20, 20, 20, 20],
+                  },
+                  label: {
+                    show: true,
+                    position: [170, -30],
+                    distance: this.fontSize(11),
+                    fontSize: this.fontSize(12),
+                    color: "#ffffff",
+                    lineHeight: this.fontSize(30),
+                    fontFamily: "DIN-Medium",
+                  },
+                  itemStyle: {
+                    // 图形的形状
+                    barBorderRadius: [20, 20, 20, 20],
+                    color: "#945cff",
+                  },
+                  barCategoryGap: "50%",
+                  barWidth: "40%",
+                },
+              ],
+            });
+          },
+        },
+        mounted() {
+          this.getallxt();
+          this.drawallxt();
+          this.getchangjing();
+          this.drawchangjing();
+          this.getshpei();
+          this.getpro();
+          this.drawpro_1();
+          this.drawpro_2();
+          this.drawpro_3();
+          this.drawpro_4();
+          this.drawpro_5();
+          this.drawpro_6();
+          this.drawpro_7();
+          this.drawpro_8();
+          this.drawpro_9();
+          this.drawpro_10();
+        },
+      });
+    </script>
+
+    <script>
+      $(function () {
+        var $this = $(".right_box_1_b_list");
+        var scrollTimer;
+        $this
+          .hover(
+            function () {
+              clearInterval(scrollTimer);
+            },
+            function () {
+              scrollTimer = setInterval(function () {
+                scrollNews($this);
+              }, 2000);
+            }
+          )
+          .trigger("mouseout");
+      });
+      function scrollNews(obj) {
+        var $self = obj.find("ul:first");
+        var lineHeight = $self.find("li:first").height();
+        $self.animate({ "margin-top": -lineHeight + "px" }, 600, function () {
+          $self.css({ "margin-top": "0px" }).find("li:first").appendTo($self);
+        });
+      }
+    </script>
+
+    <script>
+      setInterval(() => {
+        window.location.href = "rencai.html";
+      }, 30000);
+    </script>
+  </body>
+</html>

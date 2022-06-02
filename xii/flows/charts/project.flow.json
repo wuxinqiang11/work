@@ -1,0 +1,50 @@
+{
+  "label": "测试项目",
+  "version": "1.0.0",
+  "description": "测试项目",
+  "nodes": [
+    {
+      "name": "适配测试",
+      "engine": "xiang",
+      "query": {
+        "select": [
+          ":COUNT(id) as 数量",
+          ":date_format(create_time, '%Y年%m月%d日') as 创建时间"
+        ],
+        "wheres": [{ ":status": "状态", "=": "进行中" }],
+        "groups": "创建时间",
+        "orders": "创建时间",
+        "from": "$project"
+      }
+    },
+    {
+      "name": "送测项目",
+      "engine": "xiang",
+      "query": {
+        "select": [
+          ":COUNT(id) as 数量",
+          ":date_format(create_time, '%Y年%m月%d日') as 创建时间"
+        ],
+        "wheres": [{ ":status": "状态", "=": "待审核" }],
+        "groups": "创建时间",
+        "orders": "创建时间",
+        "from": "$project"
+      }
+    },
+    {
+      "name": "完成测试",
+      "engine": "xiang",
+      "query": {
+        "select": [
+          ":COUNT(id) as 数量",
+          ":date_format(create_time, '%Y年%m月%d日') as 创建时间"
+        ],
+        "wheres": [{ ":status": "状态", "=": "已完成" }],
+        "groups": "创建时间",
+        "orders": "创建时间",
+        "from": "$project"
+      }
+    }
+  ],
+  "output": "{{$res}}"
+}

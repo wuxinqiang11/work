@@ -1,0 +1,75 @@
+{
+  "name": "数据大屏-指挥中心接口",
+  "version": "1.0.0",
+  "description": "数据大屏-指挥中心 API",
+  "group": "screen/index",
+  "guard": "cross-domain",
+  "paths": [
+    {
+      "comment": "数据概览",
+      "path": "/stat",
+      "method": "GET",
+      "process": "flows.screen.index.stat",
+      "in": [],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "comment": "信创软硬件汇总",
+      "path": "/product",
+      "method": "GET",
+      "process": "flows.screen.index.product",
+      "in": [],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "comment": "正在适配迁移系统",
+      "path": "/pending",
+      "method": "GET",
+      "process": "flows.screen.index.pending",
+      "in": [],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "comment": "测试成功展示",
+      "path": "/success",
+      "method": "GET",
+      "process": "flows.screen.index.success",
+      "in": [],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "comment": "信创业务系统类目",
+      "path": "/types",
+      "method": "GET",
+      "process": "flows.screen.index.types",
+      "in": [],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "comment": "适配迁移趋势",
+      "path": "/trends",
+      "method": "GET",
+      "process": "flows.screen.index.trends",
+      "in": [],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    }
+  ]
+}

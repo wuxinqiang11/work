@@ -1,0 +1,57 @@
+{
+  "label": "虚拟机数量",
+  "version": "1.0.0",
+  "description": "虚拟机数量",
+  "nodes": [
+    {
+      "name": "在线",
+      "engine": "xiang",
+      "query": {
+        "select": [
+          ":COUNT(resource.id) as 数量",
+          ":date_format(create_time, '%Y年%m月%d日') as 创建时间"
+        ],
+        "wheres": [
+          { ":status": "状态", "=": "在线" },
+          { ":sku.type": "类型", "=": "虚拟机" }
+        ],
+        "joins": [
+          {
+            "from": "sku",
+            "key": "resource.sku_id",
+            "foreign": "sku.id",
+            "left": true
+          }
+        ],
+        "groups": "创建时间",
+        "orders": "创建时间",
+        "from": "$resource"
+      }
+    },
+    {
+      "name": "下线",
+      "engine": "xiang",
+      "query": {
+        "select": [
+          ":COUNT(resource.id) as 数量",
+          ":date_format(create_time, '%Y年%m月%d日') as 创建时间"
+        ],
+        "wheres": [
+          { ":status": "状态", "=": "下线" },
+          { ":sku.type": "类型", "=": "虚拟机" }
+        ],
+        "joins": [
+          {
+            "from": "sku",
+            "key": "resource.sku_id",
+            "foreign": "sku.id",
+            "left": true
+          }
+        ],
+        "groups": "创建时间",
+        "orders": "创建时间",
+        "from": "$resource"
+      }
+    }
+  ]
+}

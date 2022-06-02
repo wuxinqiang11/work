@@ -1,0 +1,129 @@
+{
+  "name": "适配测试任务",
+  "table": {
+    "name": "project_adapt_job",
+    "comment": "适配测试任务",
+    "engine": "InnoDB"
+  },
+  "columns": [
+    {
+      "label": "ID",
+      "name": "id",
+      "type": "ID",
+      "comment": "ID"
+    },
+    {
+      "label": "构建任务ID",
+      "name": "job_id",
+      "type": "string",
+      "length": 60,
+      "unique": true,
+      "nullable": true,
+      "comment": "CSphere 构建任务ID"
+    },
+    {
+      "label": "适配测试ID",
+      "name": "adapt_id",
+      "type": "bigInteger",
+      "comment": "适配测试ID"
+    },
+    {
+      "label": "代码分支(或Tag)",
+      "name": "branch",
+      "type": "string",
+      "length": 200,
+      "nullable": true,
+      "comment": "代码分支(或Tag)"
+    },
+    {
+      "label": "镜像Tag",
+      "name": "tag",
+      "type": "string",
+      "length": 255,
+      "nullable": true,
+      "comment": "镜像Tag"
+    },
+    {
+      "label": "CPU厂商",
+      "name": "cpu",
+      "type": "enum",
+      "option": ["loongson", "zhaoxin"],
+      "nullable": true,
+      "comment": "CPU厂商"
+    },
+    {
+      "label": "OS类型",
+      "name": "os",
+      "type": "enum",
+      "option": ["ubuntu20.04", "ubuntu18.04"],
+      "nullable": true,
+      "comment": "OS类型"
+    },
+    {
+      "label": "Dockerfile位置",
+      "name": "dockerfile",
+      "type": "string",
+      "length": 255,
+      "nullable": true,
+      "comment": "Dockerfile位置"
+    },
+    {
+      "label": "编译环境",
+      "name": "build_env",
+      "type": "string",
+      "length": 255,
+      "nullable": true,
+      "comment": "编译环境"
+    },
+    {
+      "label": "制品包存放路径",
+      "name": "store_artifacts",
+      "type": "string",
+      "length": 255,
+      "nullable": true,
+      "comment": "制品包存放路径"
+    },
+    {
+      "label": "Posthook脚本",
+      "name": "script",
+      "type": "text",
+      "nullable": true,
+      "comment": "Posthook脚本"
+    },
+    {
+      "label": "接口回执",
+      "name": "response",
+      "type": "json",
+      "nullable": true,
+      "length": 60,
+      "comment": "CSphere 配置"
+    },
+    {
+      "label": "状态",
+      "name": "result",
+      "type": "enum",
+      "default": "已创建",
+      "option": ["已创建", "进行中", "成功", "失败"],
+      "comment": "状态: 已创建, 进行中, 成功, 失败",
+      "index": true
+    },
+    {
+      "label": "详情",
+      "name": "detail",
+      "type": "json",
+      "nullable": true,
+      "comment": "详情",
+      "index": true
+    }
+  ],
+  "relations": {
+    "adapt": {
+      "type": "hasOne",
+      "model": "project.adapt",
+      "key": "id",
+      "foreign": "adapt_id",
+      "query": { "select": ["id", "name"] }
+    }
+  },
+  "option": { "timestamps": true }
+}

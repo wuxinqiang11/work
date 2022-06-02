@@ -1,0 +1,38 @@
+{
+  "name": "选择器接口",
+  "version": "1.0.0",
+  "description": "厂商API",
+  "group": "cert",
+  "paths": [
+    {
+      "path": "/submit",
+      "method": "POST",
+      "process": "flows.cert.submit",
+      "in": [":payload"],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "path": "/resole",
+      "method": "POST",
+      "process": "flows.cert.resole",
+      "in": [":payload"],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "path": "/reject",
+      "method": "POST",
+      "process": "flows.cert.reject",
+      "in": [":payload"],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    }
+  ]
+}

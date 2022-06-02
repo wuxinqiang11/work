@@ -1,0 +1,87 @@
+{
+  "name": "测试用例",
+  "version": "1.0.0",
+  "decription": "测试用例表格",
+  "bind": {
+    "model": "project.case",
+    "withs": {
+      "proejct": {},
+      "feature": {},
+      "case": {}
+    }
+  },
+  "apis": {},
+  "columns": {
+    "项目": { "@": "components.所属项目" },
+    "测试目的": { "@": "components.TextArea", "in": ["测试目的", ":dest", 2] },
+    "评判标准": { "@": "components.TextArea", "in": ["评判标准", ":std", 2] },
+    "预置条件": {
+      "@": "components.TextArea",
+      "in": ["预置条件", ":prepare", 2]
+    },
+    "测试步骤": { "@": "components.TextArea", "in": ["测试步骤", ":steps", 2] },
+    "输入参数": { "@": "components.TextArea", "in": ["输入参数", ":input", 2] },
+    "期望结果": {
+      "@": "components.TextArea",
+      "in": ["期望结果", ":output", 2]
+    },
+    "判定原则": { "@": "components.TextArea", "in": ["判定原则", ":rule", 2] },
+    "备注": { "@": "components.TextArea", "in": ["备注", ":remark", 2] },
+    "功能": { "@": "components.所属功能" },
+    "相关用例": { "@": "components.相关用例" }
+  },
+  "filters": {
+    "关键词": { "@": "filter.关键词", "in": ["where.key.match"] }
+  },
+  "list": {
+    "primary": "id",
+    "layout": {
+      "columns": [
+        { "name": "用例编号", "width": 80 },
+        { "name": "用例名称", "width": 260 },
+        { "name": "功能", "width": 260 },
+        { "name": "备注" }
+      ],
+      "filters": [{ "name": "关键词" }]
+    },
+    "actions": {
+      "pagination": { "props": { "showTotal": true } },
+      "create": {
+        "type": "button",
+        "props": { "label": "添加", "icon": "fas fa-plus" }
+      }
+    },
+    "option": { "operation": { "width": 120, "unfold": true, "items": [] } }
+  },
+  "edit": {
+    "primary": "id",
+    "layout": {
+      "fieldset": [
+        {
+          "columns": [
+            { "name": "项目", "width": 24 },
+            { "name": "用例编号", "width": 12 },
+            { "name": "相关用例", "width": 12 },
+            { "name": "用例名称", "width": 12 },
+            { "name": "功能", "width": 12 },
+            { "name": "测试目的", "width": 24 },
+            { "name": "预置条件", "width": 24 },
+            { "name": "评判标准", "width": 24 },
+            { "name": "测试步骤", "width": 24 },
+            { "name": "输入参数", "width": 24 },
+            { "name": "期望结果", "width": 24 },
+            { "name": "判定原则", "width": 24 },
+            { "name": "备注", "width": 24 }
+          ]
+        }
+      ]
+    },
+    "actions": {
+      "cancel": {},
+      "save": { "@": "action.保存" },
+      "delete": { "@": "action.删除" }
+    }
+  },
+  "insert": {},
+  "view": {}
+}

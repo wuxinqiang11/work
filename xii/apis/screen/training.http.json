@@ -1,0 +1,64 @@
+{
+  "name": "数据大屏-信创人才接口",
+  "version": "1.0.0",
+  "description": "数据大屏-信创人才 API",
+  "group": "screen/training",
+  "guard": "cross-domain",
+  "paths": [
+    {
+      "comment": "数据统计",
+      "path": "/stat",
+      "method": "GET",
+      "process": "flows.screen.training.stat",
+      "in": [],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "comment": "信创人才数量",
+      "path": "/trainee",
+      "method": "GET",
+      "process": "flows.screen.training.trainee",
+      "in": [],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "comment": "信创人才等级",
+      "path": "/level",
+      "method": "GET",
+      "process": "flows.screen.training.level",
+      "in": [],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "comment": "信创课程",
+      "path": "/course",
+      "method": "GET",
+      "process": "flows.screen.training.course",
+      "in": [],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "comment": "认证考试通过率",
+      "path": "/exam",
+      "method": "GET",
+      "process": "flows.screen.training.exam",
+      "in": [],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    }
+  ]
+}

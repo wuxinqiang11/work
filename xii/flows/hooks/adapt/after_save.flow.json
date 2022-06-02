@@ -1,0 +1,13 @@
+{
+  "label": "同步数据到希云接口",
+  "version": "1.0.0",
+  "description": "同步数据到希云接口",
+  "nodes": [
+    {
+      "name": "数据",
+      "process": "flows.xii.project.save",
+      "args": ["{{$in.0}}"]
+    }
+  ],
+  "output": "{{$res.数据}}"
+}

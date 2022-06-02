@@ -1,0 +1,56 @@
+{
+  "name": "工单",
+  "version": "1.0.0",
+  "decription": "工单管理表格",
+  "bind": {
+    "model": "support.ticket",
+    "withs": { "project": {} }
+  },
+  "apis": { "search": { "default": [null, null, 10] } },
+  "columns": { "项目": { "@": "components.所属项目" } },
+  "filters": {
+    "关键词": { "@": "filter.关键词", "in": ["where.title.match"] }
+  },
+  "list": {
+    "primary": "id",
+    "layout": {
+      "columns": [
+        { "name": "ID", "width": 80 },
+        { "name": "项目" },
+        { "name": "标题" },
+        { "name": "状态" }
+      ],
+      "filters": [{ "name": "关键词" }]
+    },
+    "actions": {
+      "pagination": { "props": { "showTotal": true } },
+      "create": {
+        "type": "button",
+        "props": { "label": "新建工单", "icon": "fas fa-plus" }
+      }
+    },
+    "option": { "operation": { "width": 120, "items": [] } }
+  },
+  "edit": {
+    "primary": "id",
+    "layout": {
+      "fieldset": [
+        {
+          "columns": [
+            { "name": "标题", "width": 12 },
+            { "name": "项目", "width": 6 },
+            { "name": "状态", "width": 6 },
+            { "name": "详情", "width": 24 }
+          ]
+        }
+      ]
+    },
+    "actions": {
+      "cancel": {},
+      "save": { "@": "action.保存" },
+      "delete": { "@": "action.删除" }
+    }
+  },
+  "insert": {},
+  "view": {}
+}

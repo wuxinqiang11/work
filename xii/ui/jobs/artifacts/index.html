@@ -1,0 +1,21 @@
+<div>
+  {{#detail.artifacts}}
+  <div class="actions_wrap danger w_100 border_box flex flex_column">
+    <div class="action_items flex flex_column">
+      <div class="action_item w_100 border_box flex justify_between">
+        <div class="left_wrap flex flex_column">
+          <span class="title">下载制品包</span><span class="desc">{{.}}</span>
+        </div>
+        <a
+          type="button"
+          class="ant-btn btn_normal"
+          target="_blank"
+          href="/api/project/download/{{detail.project_id}}/{{detail.number}}/{{.}}"
+        >
+          <span>下载</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  {{/detail.artifacts}} {{^detail.artifacts}} 暂无制品 {{/detail.artifacts}}
+</div>

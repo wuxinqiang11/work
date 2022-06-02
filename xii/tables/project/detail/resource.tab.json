@@ -1,0 +1,63 @@
+{
+  "name": "资源",
+  "version": "1.0.0",
+  "decription": "资源管理表格",
+  "bind": {
+    "model": "project.resource",
+    "withs": { "sku": {} }
+  },
+  "apis": {},
+  "columns": {
+    "项目": { "@": "components.所属项目" },
+    "资源名称": { "@": "components.Label", "in": ["资源名称", ":sku.name"] },
+    "CPU(核)": { "@": "components.Label", "in": ["CPU(核)", ":sku.cpu"] },
+    "内存(M)": { "@": "components.Label", "in": ["内存(M)", ":sku.memory"] },
+    "磁盘(G)": { "@": "components.Label", "in": ["磁盘(G)", ":sku.disk"] },
+    "资源": { "@": "components.所属资源" }
+  },
+  "filters": {
+    "关键词": { "@": "filter.关键词", "in": ["where.key.match"] }
+  },
+  "list": {
+    "primary": "id",
+    "layout": {
+      "columns": [
+        { "name": "资源名称", "width": 300 },
+        { "name": "CPU(核)" },
+        { "name": "内存(M)" },
+        { "name": "磁盘(G)" },
+        { "name": "数量" }
+      ],
+      "filters": [{ "name": "关键词" }]
+    },
+    "actions": {
+      "pagination": { "props": { "showTotal": true } },
+      "create": {
+        "type": "button",
+        "props": { "label": "添加", "icon": "fas fa-plus" }
+      }
+    },
+    "option": { "operation": { "width": 120, "unfold": true, "items": [] } }
+  },
+  "edit": {
+    "primary": "id",
+    "layout": {
+      "fieldset": [
+        {
+          "columns": [
+            { "name": "项目", "width": 24 },
+            { "name": "资源", "width": 20 },
+            { "name": "数量", "width": 4 }
+          ]
+        }
+      ]
+    },
+    "actions": {
+      "cancel": {},
+      "save": { "@": "action.保存" },
+      "delete": { "@": "action.删除" }
+    }
+  },
+  "insert": {},
+  "view": {}
+}

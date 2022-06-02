@@ -1,0 +1,64 @@
+{
+  "name": "数据大屏-平台资源接口",
+  "version": "1.0.0",
+  "description": "数据大屏-平台资源 API",
+  "group": "screen/resource",
+  "guard": "cross-domain",
+  "paths": [
+    {
+      "comment": "数据摘要",
+      "path": "/stat",
+      "method": "GET",
+      "process": "flows.screen.resource.stat",
+      "in": [],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "comment": "虚拟机数量",
+      "path": "/vms",
+      "method": "GET",
+      "process": "flows.screen.resource.vms",
+      "in": [],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "comment": "轻虚拟机数量",
+      "path": "/lvms",
+      "method": "GET",
+      "process": "flows.screen.resource.lvms",
+      "in": [],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "comment": "物理机数量",
+      "path": "/ms",
+      "method": "GET",
+      "process": "flows.screen.resource.ms",
+      "in": [],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "comment": "资源利用率",
+      "path": "/usage",
+      "method": "GET",
+      "process": "flows.screen.resource.usage",
+      "in": [],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    }
+  ]
+}

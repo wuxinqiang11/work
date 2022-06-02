@@ -1,0 +1,133 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <script src="jquery.js"></script>
+    <script src="axios.min.js"></script>
+
+    <title>用户注册</title>
+  </head>
+  <body class="overscroll-none">
+    <div class="form">
+      <h2>账号申请</h2>
+      <p id="message">申请信创适配测试系统账号</p>
+      <div>
+        <div class="field">
+          <input
+            id="company"
+            class="input"
+            type="text"
+            placeholder="公司名称"
+            autocomplete="name"
+          />
+        </div>
+        <div class="field">
+          <input
+            id="name"
+            class="input"
+            type="text"
+            placeholder="姓名"
+            autocomplete="name"
+          />
+        </div>
+        <div class="field">
+          <input
+            id="email"
+            class="input"
+            type="text"
+            placeholder="公司邮箱地址(账号)"
+            autocomplete="email"
+          />
+        </div>
+
+        <div class="field">
+          <input
+            id="password"
+            class="input"
+            type="password"
+            placeholder="登录密码"
+            autocomplete="new-password"
+          />
+        </div>
+
+        <div class="field">
+          <input
+            id="repassword"
+            class="input"
+            type="password"
+            placeholder="再次输入确认密码"
+            autocomplete="new-password"
+          />
+        </div>
+        <div class="field">
+          <button id="signup">立即注册</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      function error(message) {
+        $("#message").hide().html(message).fadeIn(200);
+        $("#message").removeClass("success").addClass("error");
+        window.setTimeout(function () {
+          $("#message").removeClass("error");
+          $("#message").html("申请信创适配测试系统账号");
+        }, 2000);
+      }
+
+      function success(message) {
+        $("#message").hide().html(message).fadeIn(200);
+        $("#message").removeClass("error").addClass("success");
+        window.setTimeout(function () {
+          $("#message").removeClass("success");
+          $("#message").html("申请信创适配测试系统账号");
+        }, 2000);
+      }
+
+      $("#signup").click(function () {
+        $("#signup").attr("disabled", "disabled");
+        var name = $("#name").val();
+        var company = $("#company").val();
+        var email = $("#email").val();
+        var password = $("#password").val();
+        var repassword = $("#repassword").val();
+        const data = {
+          name: name,
+          company: company,
+          email: email,
+          password: password,
+          repassword: repassword,
+        };
+
+        axios
+          .post("/api/user/signup", data, {
+            responseType: "json",
+            headers: { "Content-Type": "application/json" },
+          })
+          .then(function (res) {
+            console.log(res);
+            if (res.status != 200) {
+              $("#signup").removeAttr("disabled");
+              var resp = res.data.json || {};
+              var message = resp.message || "1 注册失败";
+              resp = message.split(" ");
+              error(resp[resp.length - 1] || "注册失败");
+              return;
+            }
+            success("注册成功");
+            window.setTimeout(function () {
+              window.location.href = "/xiang/login/user";
+            }, 1000);
+          })
+          .catch(function (err) {
+            $("#signup").removeAttr("disabled");
+            var resp = err.response.data || {};
+            var message = resp.message || "1 注册失败";
+            resp = message.split(" ");
+            error(resp[resp.length - 1] || "注册失败");
+            return;
+          });
+      });
+    </script>
+  </body>
+</html>

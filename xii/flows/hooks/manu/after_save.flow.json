@@ -1,0 +1,68 @@
+{
+  "label": "创建CSphere分组",
+  "version": "1.0.0",
+  "description": "创建CSphere分组",
+  "nodes": [
+    {
+      "name": "检查数据",
+      "process": "xiang.flow.IF",
+      "args": [
+        {
+          "name": "忽略处理",
+          "when": [{ "忽略处理": "{{$in.1.gid}}", "is": "notnull" }],
+          "process": "xiang.flow.Throw",
+          "args": ["忽略处理", 101]
+        }
+      ]
+    },
+    {
+      "name": "配置",
+      "process": "flows.xii.config"
+    },
+    {
+      "name": "Host",
+      "process": "xiang.helper.StrConcat",
+      "args": ["{{$res.配置.XII_CSPHERE_HOST}}", "/group"]
+    },
+    {
+      "name": "名称",
+      "process": "xiang.helper.StrConcat",
+      "args": ["xiang-", "?:$in.0"]
+    },
+    {
+      "name": "分组",
+      "process": "xiang.network.PostJSON",
+      "args": [
+        "?:$res.Host",
+        {
+          "name": "?:$res.名称",
+          "role": "host"
+        },
+        { "Csphere-Api-Key": "{{$res.配置.XII_CSPHERE_KEY}}" }
+      ]
+    },
+    {
+      "name": "检查数据",
+      "process": "xiang.flow.IF",
+      "args": [
+        {
+          "name": "创建失败",
+          "when": [{ "创建失败": "{{$res.分组.data.id}}", "is": "null" }],
+          "process": "xiang.flow.Throw",
+          "args": ["创建失败", 400]
+        }
+      ]
+    },
+    {
+      "name": "保存数据",
+      "process": "models.manu.Save",
+      "args": [
+        {
+          "id": "?:$in.0",
+          "gid": "?:$res.分组.data.id"
+        }
+      ]
+    }
+  ],
+  "output": ["{{$res.保存数据}}"]
+}

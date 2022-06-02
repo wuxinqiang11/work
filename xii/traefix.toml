@@ -1,0 +1,13 @@
+[[tls.certificates]]
+  certFile = "/data/certs/star.iqka.com.cert"
+  keyFile = "/data/certs/star.iqka.com.key"
+
+[http.routers.xii]
+  tls = true
+  rule = "Host(`xii.iqka.com`)"
+  service = "xii@file"
+
+[http.services]
+  [http.services.xii.loadBalancer]
+    [[http.services.xii.loadBalancer.servers]]
+      url = "http://172.17.0.1:4096/"
