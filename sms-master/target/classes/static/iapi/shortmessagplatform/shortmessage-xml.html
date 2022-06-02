@@ -1,0 +1,287 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>渤海短信平台</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="../../dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../dist/css/wspdoc.min.css">
+    <link rel="stylesheet" href="../../common/css/demo.css">
+    <link rel="stylesheet"
+          href="../../dist/assets/font-awesome/css/font-awesome.css">
+</head>
+<body>
+<div class="page-subheading page-subheading-md">
+    <ol class="breadcrumb">
+        <li>短信平台</li>
+        <li>短信平台接口</li>
+    </ol>
+</div>
+<div class="page-heading page-heading-md">
+    <h2>短信平台接口</h2>
+    <div style="margin-top: 10px">
+        <p>短信平台接口XML格式</p>
+    </div>
+    <h4 style="margin-top: 10px">请求说明</h4>
+    <div style="margin-top: 10px">
+        <ul>
+            <li>http请求方式: POST</li>
+            <li id="url2">http://10.1.27.122:8080/gateway/msgsend/MSGSEND/sendSms</li>
+            <li>XML数据例子：<br>
+                <div class="onelevel">
+                    &lt;?xml version="1.0" encoding="utf-8" ?&gt;<br/>
+                    &lt;messages&gt;<br/>
+                    &lt;userId>channelcode&lt;/userId&gt;<br/>
+                    &lt;password>96e79218965eb72c92a549dd5a330112&lt;/password&gt;<br/>
+                    &lt;sendTime>2018-07-26&lt;/sendTime&gt;<br/>
+                    &lt;businessType>SMS_139986767&lt;/businessType&gt;<br/>
+                    &lt;organization>0000&lt;/organization&gt;<br/>
+                    &lt;sequenceNumber>123456789&lt;/sequenceNumber&gt;<br/>
+                    &lt;contents&gt;<br/>
+                    &lt;recvMobile&gt;18698151330&lt;/recvMobile&gt;<br/>
+                    &lt;messageContent>{
+                    "name1":"张三","name2":"意外险","name3":"2018-05-01","name4":"200","name5":"1310021656201",
+                    }&lt;/messageContent&gt;<br/>
+                    &lt;/contents&gt;<br/>
+                    &lt;/messages&gt;<br/>
+                </div>
+            </li>
+            <li style="display: none" id="url1"></li>
+        </ul>
+    </div>
+    <h4 style="margin-top: 10px">入参说明</h4>
+    <div style="margin-top: 10px">
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th width="15%">参数</th>
+                    <th width="15%">类型</th>
+                    <th width="15%">最大长度</th>
+                    <th width="15%">必传(Y是，N否，S条件必传)</th>
+                    <th width="40%">字段描述</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>userId</td>
+                    <td>String</td>
+                    <td>30</td>
+                    <td>Y</td>
+                    <td>渠道标识</td>
+                </tr>
+                <tr>
+                    <td>password</td>
+                    <td>String</td>
+                    <td>30</td>
+                    <td>Y</td>
+                    <td>渠道密码</td>
+                </tr>
+                <tr>
+                    <td>sendTime</td>
+                    <td>String</td>
+                    <td>20</td>
+                    <td>Y</td>
+                    <td>发送时间</td>
+                </tr>
+                <tr>
+                    <td>businessType</td>
+                    <td>String</td>
+                    <td>100</td>
+                    <td>Y</td>
+                    <td>业务模板号</td>
+                </tr>
+                <tr>
+                    <td>organization</td>
+                    <td>String</td>
+                    <td>30</td>
+                    <td>Y</td>
+                    <td>组织机构</td>
+                </tr>
+                <tr>
+                    <td>sequenceNumber</td>
+                    <td>String</td>
+                    <td>30</td>
+                    <td>Y</td>
+                    <td>短信唯一码</td>
+                </tr>
+                <tr>
+                    <td>recvMobile</td>
+                    <td>String</td>
+                    <td>30</td>
+                    <td>Y</td>
+                    <td>手机号码</td>
+                </tr>
+                <tr>
+                    <td>messageContent</td>
+                    <td>String</td>
+                    <td></td>
+                    <td>S</td>
+                    <td>短信内容</td>
+                </tr>
+                <tr>
+                    <td>businessNo</td>
+                    <td>String</td>
+                    <td></td>
+                    <td>S</td>
+                    <td>业务号</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <h4 style="margin-top: 10px">返回说明</h4>
+    <div style="margin-top: 10px">
+        &lt;?xml version="1.0" encoding="utf-8" ?&gt;<br/>
+            &lt;messagesResponse&gt;<br/>
+            &lt;result>001&lt;/result&gt;<br/>
+            &lt;/messagesResponse&gt;<br/>
+            <h4 style="margin-top: 10px">出参说明</h4>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th width="20%">参数</th>
+                        <th width="20%">类型</th>
+                        <th width="15%">最大长度</th>
+                        <th width="15%">必传(Y是，N否)</th>
+                        <th width="60%">说明</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Code</td>
+                        <td>String</td>
+                        <td>60</td>
+                        <td>Y</td>
+                        <td>状态码（001：成功、其它：失败）</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h4 style="margin-top: 10px">错误码列表</h4>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th width="40%">Code</th>
+                        <th width="40%">描述</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>001</td>
+                        <td>请求成功</td>
+                    </tr>
+                    <tr>
+                        <td>002</td>
+                        <td>服务异常</td>
+                    </tr>
+                    <tr>
+                        <td>003</td>
+                        <td>账号密码错误</td>
+                    </tr>
+                    <tr>
+                        <td>004</td>
+                        <td>单号不能为空</td>
+                    </tr>
+                    <tr>
+                        <td>005</td>
+                        <td>该单号查询不存在</td>
+                    </tr>
+                    <tr>
+                        <td>isp.RAM_PERMISSION_DENY</td>
+                        <td>RAM权限DENY</td>
+                    </tr>
+                    <tr>
+                        <td>isv.OUT_OF_SERVICE</td>
+                        <td>业务停机</td>
+                    </tr>
+                    <tr>
+                        <td>isv.PRODUCT_UN_SUBSCRIPT</td>
+                        <td>未开通云通信产品的阿里云客户</td>
+                    </tr>
+                    <tr>
+                        <td>isv.PRODUCT_UNSUBSCRIBE</td>
+                        <td>产品未开通</td>
+                    </tr>
+                    <tr>
+                        <td>isv.ACCOUNT_NOT_EXISTS</td>
+                        <td>账户不存在</td>
+                    </tr>
+                    <tr>
+                        <td>isv.ACCOUNT_ABNORMAL</td>
+                        <td>账户异常</td>
+                    </tr>
+                    <tr>
+                        <td>isp.RAM_PERMISSION_DENY</td>
+                        <td>RAM权限DENY</td>
+                    </tr>
+                    <tr>
+                        <td>isp.RAM_PERMISSION_DENY</td>
+                        <td>RAM权限DENY</td>
+                    </tr>
+                    <tr>
+                        <td>isv.SMS_TEMPLATE_ILLEGAL</td>
+                        <td>短信模板不合法</td>
+                    </tr>
+                    <tr>
+                        <td>isv.SMS_SIGNATURE_ILLEGAL</td>
+                        <td>短信签名不合法</td>
+                    </tr>
+                    <tr>
+                        <td>isv.INVALID_PARAMETERS</td>
+                        <td>参数异常</td>
+                    </tr>
+                    <tr>
+                        <td>isp.SYSTEM_ERROR</td>
+                        <td>系统错误</td>
+                    </tr>
+                    <tr>
+                        <td>isv.MOBILE_NUMBER_ILLEGAL</td>
+                        <td>非法手机号</td>
+                    </tr>
+                    <tr>
+                        <td>isv.MOBILE_COUNT_OVER_LIMIT</td>
+                        <td>手机号码数量超过限制</td>
+                    </tr>
+                    <tr>
+                        <td>isv.TEMPLATE_MISSING_PARAMETERS</td>
+                        <td>模板缺少变量</td>
+                    </tr>
+                    <tr>
+                        <td>isv.BUSINESS_LIMIT_CONTROL</td>
+                        <td>业务限流</td>
+                    </tr>
+                    <tr>
+                        <td>isv.INVALID_JSON_PARAM</td>
+                        <td>JSON参数不合法，只接受字符串值</td>
+                    </tr>
+                    <tr>
+                        <td>isv.BLACK_KEY_CONTROL_LIMIT</td>
+                        <td>黑名单管控</td>
+                    </tr>
+                    <tr>
+                        <td>isv.PARAM_LENGTH_LIMIT</td>
+                        <td>参数超出长度限制</td>
+                    </tr><tr>
+                        <td>isv.PARAM_NOT_SUPPORT_URL</td>
+                        <td>不支持URL</td>
+                    </tr><tr>
+                        <td>isv.AMOUNT_NOT_ENOUGH</td>
+                        <td>账户余额不足</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../static/js/util.js?v=1.1"></script>
+</html>
+
