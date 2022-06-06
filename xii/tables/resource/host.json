@@ -1,0 +1,91 @@
+{
+  "name": "主机",
+  "version": "1.0.0",
+  "decription": "主机管理查看",
+  "bind": { "model": "resource.xii" },
+  "apis": {
+    "search": { "process": "flows.xii.host.search" },
+    "find": { "process": "flows.xii.host.find" }
+  },
+  "columns": {
+    "ID": { "@": "components.HostView", "in": ["ID", ":id"] },
+    "名称": { "@": "components.HostView", "in": ["名称", ":hostname"] },
+    "CPU": { "@": "components.HostView", "in": ["CPU", ":num_cpus"] },
+    "内存": { "@": "components.HostView", "in": ["内存", ":memory"] },
+    "磁盘": { "@": "components.HostView", "in": ["磁盘", ":disk_size"] },
+    "状态": { "@": "components.HostView", "in": ["状态", ":status"] },
+    "创建时间": {
+      "@": "components.HostView",
+      "in": ["创建时间", ":created_at"]
+    },
+    "EID": { "@": "components.HostEdit", "in": ["ID", ":id"] },
+    "E名称": { "@": "components.HostEdit", "in": ["名称", ":hostname"] },
+    "ECPU": { "@": "components.HostEdit", "in": ["CPU", ":num_cpus"] },
+    "E内存": { "@": "components.HostEdit", "in": ["内存", ":memory"] },
+    "E磁盘": { "@": "components.HostEdit", "in": ["磁盘", ":disk_size"] },
+    "E状态": { "@": "components.HostEdit", "in": ["状态", ":status"] },
+    "E创建时间": {
+      "@": "components.HostEdit",
+      "in": ["创建时间", ":created_at"]
+    }
+  },
+  "filters": {
+    "关键词": { "@": "filter.关键词", "in": ["where.name.match"] }
+  },
+  "list": {
+    "primary": "id",
+    "layout": {
+      "columns": [
+        { "name": "ID", "width": 260 },
+        { "name": "名称" },
+        { "name": "CPU" },
+        { "name": "内存" },
+        { "name": "磁盘" },
+        { "name": "状态" },
+        { "name": "创建时间" }
+      ],
+      "filters": [{ "name": "关键词" }]
+    },
+    "actions": {},
+    "option": {
+      "operation": {
+        "width": 120,
+        "unfold": true,
+        "hideEdit": true,
+        "hideView": true,
+        "items": [
+          {
+            "useModal": true,
+            "type": "view",
+            "icon": "icon-eye"
+          }
+        ]
+      }
+    }
+  },
+  "edit": {
+    "primary": "id",
+    "layout": {
+      "fieldset": [
+        {
+          "columns": [
+            { "name": "EID", "width": 12 },
+            { "name": "E名称", "width": 12 },
+            { "name": "ECPU", "width": 12 },
+            { "name": "E内存", "width": 12 },
+            { "name": "E磁盘", "width": 12 },
+            { "name": "E状态", "width": 12 },
+            { "name": "E创建时间", "width": 12 }
+          ]
+        }
+      ]
+    },
+    "actions": {
+      "cancel": {},
+      "save": { "@": "action.保存" },
+      "delete": { "@": "action.删除" }
+    }
+  },
+  "insert": {},
+  "view": {}
+}

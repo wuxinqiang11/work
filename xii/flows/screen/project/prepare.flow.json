@@ -1,0 +1,27 @@
+{
+  "label": "送测项目数量",
+  "version": "1.0.0",
+  "description": "送测项目数量",
+  "nodes": [
+    {
+      "name": "日期",
+      "engine": "xiang",
+      "query": {
+        "select": ["创建时间"],
+        "query": {
+          "select": [":date_format(create_time, '%Y年%m月%d日') as 创建时间"],
+          "wheres": [{ ":status": "状态", "in": ["待提交", "待审核"] }],
+          "from": "$project",
+          "groups": "创建时间",
+          "orders": "创建时间"
+        },
+        "limit": 7
+      }
+    },
+    {
+      "name": "日增量",
+      "script": "data"
+    }
+  ],
+  "output": "{{$res.日增量}}"
+}

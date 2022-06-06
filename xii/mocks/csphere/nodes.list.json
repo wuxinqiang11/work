@@ -1,0 +1,233 @@
+{
+  "api": "/api/nodes?status=normal",
+  "method": "GET",
+  "payload": {},
+  "response": [
+    {
+      "id": "ef5fea3f94378f0e294bf34f",
+      "extra_id": "",
+      "provider": "",
+      "role": "",
+      "pool_id": "605d8a4f594c100e521ea87a",
+      "hostname": "controller",
+      "arch": "x86_64",
+      "ips": {
+        "eth0": ["192.168.16.201"]
+      },
+      "ip6s": {
+        "eth0": ["fe80::20fe:5eff:fee2:fea6"]
+      },
+      "memory_used": 608743424,
+      "memory": 2037358592,
+      "cpu_used": 2.385127819130716,
+      "num_cpus": 1,
+      "num_phycpus": 1,
+      "loadavg": 0.06,
+      "uptime": "310144.000000",
+      "docker_version": "20.10.12",
+      "docker_api_version": "1.41",
+      "docker_network_info": [
+        {
+          "name": "bridge",
+          "driver": "bridge",
+          "subnet": ["172.17.0.0/16"],
+          "default": false
+        },
+        {
+          "name": "host",
+          "driver": "host",
+          "subnet": [],
+          "default": false
+        },
+        {
+          "name": "none",
+          "driver": "null",
+          "subnet": [],
+          "default": false
+        }
+      ],
+      "docker_device": "/dev/mapper/vg_docker-lv_docker",
+      "csphere_version": "3.0.14",
+      "with_cos": false,
+      "num_running": 0,
+      "num_stopped": 1,
+      "num_paused": 0,
+      "num_images": 1,
+      "num_containers": 1,
+      "disk_size": 100723144,
+      "disk_used": 5030336,
+      "labels": {
+        "executiondriver": "<not supported>",
+        "kernelversion": "4.14.210-1.el7.centos.x86_64",
+        "operatingsystem": "CentOS Linux 7 (Core)",
+        "storagedriver": "overlay2"
+      },
+      "detected_public_ip": "",
+      "unixtime": 1641527683,
+      "str_pool_id": "",
+      "str_cluster_id": "",
+      "health": true,
+      "status": "normal",
+      "created_at": "2021-03-26T07:16:34.688Z",
+      "updated_at": "2022-01-07T03:54:43.948Z",
+      "rw": true,
+      "svp_name": "cSphere系统"
+    },
+    {
+      "id": "86a8bc809913490bb204620b",
+      "extra_id": "",
+      "provider": "",
+      "role": "",
+      "pool_id": "605d8a4f594c100e521ea879",
+      "hostname": "agent1",
+      "arch": "x86_64",
+      "ips": {
+        "ipvl0": ["192.168.16.202"]
+      },
+      "ip6s": {
+        "eth0": ["fe80::9cf0:46ff:fe0e:a545"],
+        "ipvl0": ["fe80::9ef0:4600:30e:a545"]
+      },
+      "memory_used": 570748928,
+      "memory": 4184186880,
+      "cpu_used": 0.16325671850671597,
+      "num_cpus": 4,
+      "num_phycpus": 1,
+      "loadavg": 0,
+      "uptime": "310115.000000",
+      "docker_version": "20.10.12",
+      "docker_api_version": "1.41",
+      "docker_network_info": [
+        {
+          "name": "host",
+          "driver": "host",
+          "subnet": [],
+          "default": false
+        },
+        {
+          "name": "bridge",
+          "driver": "bridge",
+          "subnet": ["172.17.0.0/16"],
+          "default": false
+        },
+        {
+          "name": "none",
+          "driver": "null",
+          "subnet": [],
+          "default": false
+        },
+        {
+          "name": "ipvl0",
+          "driver": "ipvlan",
+          "subnet": ["192.168.14.86/22"],
+          "default": true
+        }
+      ],
+      "docker_device": "/dev/mapper/vg_docker-lv_docker",
+      "csphere_version": "3.0.14",
+      "with_cos": false,
+      "num_running": 3,
+      "num_stopped": 0,
+      "num_paused": 0,
+      "num_images": 3,
+      "num_containers": 3,
+      "disk_size": 100723144,
+      "disk_used": 3195032,
+      "labels": {
+        "CPU_VENDOR": "zhaoxin",
+        "executiondriver": "<not supported>",
+        "kernelversion": "4.14.210-1.el7.centos.x86_64",
+        "operatingsystem": "CentOS Linux 7 (Core)",
+        "storagedriver": "overlay2"
+      },
+      "detected_public_ip": "",
+      "unixtime": 1641527655,
+      "str_pool_id": "",
+      "str_cluster_id": "",
+      "health": true,
+      "status": "normal",
+      "created_at": "2021-03-26T07:21:48.429Z",
+      "updated_at": "2022-01-07T03:54:15.648Z",
+      "rw": true,
+      "svp_name": "默认"
+    },
+    {
+      "id": "572bb62add1baa0c529306bf",
+      "extra_id": "",
+      "provider": "",
+      "role": "",
+      "pool_id": "605d8a4f594c100e521ea879",
+      "hostname": "agent2",
+      "arch": "x86_64",
+      "ips": {
+        "ipvl0": ["192.168.16.203"]
+      },
+      "ip6s": {
+        "eth0": ["fe80::e849:dff:fe6a:5d45"],
+        "ipvl0": ["fe80::ea49:d00:36a:5d45"]
+      },
+      "memory_used": 555999232,
+      "memory": 4184186880,
+      "cpu_used": 0.2620329050249808,
+      "num_cpus": 4,
+      "num_phycpus": 1,
+      "loadavg": 0.16,
+      "uptime": "151766.000000",
+      "docker_version": "20.10.12",
+      "docker_api_version": "1.41",
+      "docker_network_info": [
+        {
+          "name": "bridge",
+          "driver": "bridge",
+          "subnet": ["172.17.0.0/16"],
+          "default": false
+        },
+        {
+          "name": "none",
+          "driver": "null",
+          "subnet": [],
+          "default": false
+        },
+        {
+          "name": "ipvl0",
+          "driver": "ipvlan",
+          "subnet": ["192.168.14.86/22"],
+          "default": true
+        },
+        {
+          "name": "host",
+          "driver": "host",
+          "subnet": [],
+          "default": false
+        }
+      ],
+      "docker_device": "/dev/mapper/vg_docker-lv_docker",
+      "csphere_version": "3.0.14",
+      "with_cos": false,
+      "num_running": 0,
+      "num_stopped": 0,
+      "num_paused": 0,
+      "num_images": 1,
+      "num_containers": 0,
+      "disk_size": 100723144,
+      "disk_used": 3378396,
+      "labels": {
+        "CPU_VENDOR": "loongson",
+        "executiondriver": "",
+        "kernelversion": "5.4.124-1.el7.elrepo.x86_64",
+        "operatingsystem": "CentOS Linux 7 (Core)",
+        "storagedriver": "overlay2"
+      },
+      "detected_public_ip": "",
+      "unixtime": 1641528463,
+      "str_pool_id": "",
+      "str_cluster_id": "",
+      "health": true,
+      "status": "normal",
+      "created_at": "2022-01-05T10:05:54.504Z",
+      "updated_at": "2022-01-07T04:07:43.298Z",
+      "rw": true,
+      "svp_name": "默认"
+    }
+  ]
+}

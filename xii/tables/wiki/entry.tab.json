@@ -1,0 +1,49 @@
+{
+  "name": "词条",
+  "version": "1.0.0",
+  "decription": "词条管理表格",
+  "bind": {
+    "model": "wiki.entry",
+    "withs": {}
+  },
+  "apis": { "search": { "default": [null, null, 10] } },
+  "columns": {},
+  "filters": {
+    "关键词": { "@": "filter.关键词", "in": ["where.name.match"] }
+  },
+  "list": {
+    "primary": "id",
+    "layout": {
+      "columns": [{ "name": "ID", "width": 80 }, { "name": "名称" }],
+      "filters": [{ "name": "关键词" }]
+    },
+    "actions": {
+      "pagination": { "props": { "showTotal": true } },
+      "create": {
+        "type": "button",
+        "props": { "label": "新建词条", "icon": "fas fa-plus" }
+      }
+    },
+    "option": { "operation": { "width": 120, "items": [] } }
+  },
+  "edit": {
+    "primary": "id",
+    "layout": {
+      "fieldset": [
+        {
+          "columns": [
+            { "name": "名称", "width": 24 },
+            { "name": "详情", "width": 24 }
+          ]
+        }
+      ]
+    },
+    "actions": {
+      "cancel": {},
+      "save": { "@": "action.保存" },
+      "delete": { "@": "action.删除" }
+    }
+  },
+  "insert": {},
+  "view": {}
+}

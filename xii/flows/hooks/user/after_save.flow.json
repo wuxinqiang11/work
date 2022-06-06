@@ -1,0 +1,145 @@
+{
+  "label": "创建CSphere用户",
+  "version": "1.0.0",
+  "description": "创建CSphere用户",
+  "nodes": [
+    {
+      "name": "用户",
+      "process": "models.manu.user.Find",
+      "args": [
+        "?:$in.0",
+        {
+          "withs": { "manu": { "query": { "select": ["name", "id", "gid"] } } }
+        }
+      ]
+    },
+    {
+      "name": "检查数据-Step1",
+      "process": "xiang.flow.IF",
+      "args": [
+        {
+          "name": "忽略处理",
+          "when": [{ "忽略处理": "?:$res.用户.uid", "is": "notnull" }],
+          "process": "xiang.flow.Throw",
+          "args": ["忽略处理", 101]
+        }
+      ]
+    },
+    {
+      "name": "检查数据-Step2",
+      "process": "xiang.flow.IF",
+      "args": [
+        {
+          "name": "忽略处理",
+          "when": [{ "忽略处理": "?:$in.1.password", "is": "null" }],
+          "process": "xiang.flow.Throw",
+          "args": ["忽略处理-密码为空", 101]
+        }
+      ]
+    },
+    {
+      "name": "检查数据-Step3",
+      "process": "xiang.flow.IF",
+      "args": [
+        {
+          "name": "忽略处理",
+          "when": [{ "忽略处理": "?:$res.用户.email", "is": "null" }],
+          "process": "xiang.flow.Throw",
+          "args": ["忽略处理-邮箱为空", 101]
+        }
+      ]
+    },
+    {
+      "name": "检查数据-Step4",
+      "process": "xiang.flow.IF",
+      "args": [
+        {
+          "name": "忽略处理",
+          "when": [{ "忽略处理": "?:$res.用户.manu.gid", "is": "null" }],
+          "process": "xiang.flow.Throw",
+          "args": ["忽略处理-CSphere缺少厂商数据", 404]
+        }
+      ]
+    },
+    {
+      "name": "配置",
+      "process": "flows.xii.config"
+    },
+    {
+      "name": "HostUser",
+      "process": "xiang.helper.StrConcat",
+      "args": ["{{$res.配置.XII_CSPHERE_HOST}}", "/users"]
+    },
+    {
+      "name": "希云用户",
+      "process": "xiang.network.PostJSON",
+      "args": [
+        "?:$res.HostUser",
+        {
+          "email": "?:$res.用户.email",
+          "password": "?:$in.1.password",
+          "sys_role": "normal"
+        },
+        { "Csphere-Api-Key": "{{$res.配置.XII_CSPHERE_KEY}}" }
+      ]
+    },
+    {
+      "name": "检查数据-Step5",
+      "process": "xiang.flow.IF",
+      "args": [
+        {
+          "name": "创建失败",
+          "when": [{ "创建失败": "{{$res.希云用户.data.id}}", "is": "null" }],
+          "process": "xiang.flow.Throw",
+          "args": ["创建失败-创建希云用户失败", 500]
+        }
+      ]
+    },
+    {
+      "name": "Host",
+      "process": "xiang.helper.StrConcat",
+      "args": [
+        "{{$res.配置.XII_CSPHERE_HOST}}",
+        "/group/",
+        "?:$res.用户.manu.gid",
+        "/addmember?user_id=",
+        "?:$res.希云用户.data.id"
+      ]
+    },
+    {
+      "name": "分组",
+      "process": "xiang.network.Send",
+      "args": [
+        "PATCH",
+        "?:$res.Host",
+        {},
+        {},
+        { "Csphere-Api-Key": "{{$res.配置.XII_CSPHERE_KEY}}" }
+      ]
+    },
+    { "name": "xx", "process": "xiang.sys.Print", "args": ["?:$res.分组"] },
+    {
+      "name": "检查数据-Step6",
+      "process": "xiang.flow.IF",
+      "args": [
+        {
+          "name": "创建失败",
+          "when": [{ "创建失败": "{{$res.分组.status}}", "!=": 200 }],
+          "process": "xiang.flow.Throw",
+          "args": ["创建失败-添加到用户分组", 400]
+        }
+      ]
+    },
+    {
+      "name": "保存数据",
+      "process": "models.manu.user.Save",
+      "args": [
+        {
+          "id": "?:$in.0",
+          "uid": "?:$res.希云用户.data.id"
+        }
+      ]
+    }
+  ],
+  "output": ["{{$res.保存数据}}"]
+}

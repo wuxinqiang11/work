@@ -1,0 +1,26 @@
+{
+  "label": "希云配置",
+  "version": "1.0.0",
+  "description": "相关案例选择器",
+  "nodes": [
+    {
+      "name": "配置",
+      "process": "flows.xii.config"
+    },
+    {
+      "name": "Host",
+      "process": "xiang.helper.StrConcat",
+      "args": ["{{$res.配置.XII_CSPHERE_HOST}}", "{{$in.0}}"]
+    },
+    {
+      "name": "结果",
+      "process": "xiang.network.Get",
+      "args": [
+        "{{$res.Host}}",
+        "{{$in.1}}",
+        { "Csphere-Api-Key": "{{$res.配置.XII_CSPHERE_KEY}}" }
+      ]
+    }
+  ],
+  "output": "{{$res.结果.data}}"
+}

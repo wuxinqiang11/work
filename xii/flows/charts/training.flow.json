@@ -1,0 +1,39 @@
+{
+  "label": "信创人才",
+  "version": "1.0.0",
+  "description": "信创人才",
+  "nodes": [
+    {
+      "name": "信创人才数量",
+      "engine": "xiang",
+      "query": {
+        "select": [
+          ":COUNT(id) as 数量",
+          ":date_format(create_time, '%Y年%m月%d日') as 创建时间"
+        ],
+        "groups": "创建时间",
+        "orders": "创建时间",
+        "from": "$trainee"
+      }
+    },
+    {
+      "name": "信创人才等级",
+      "engine": "xiang",
+      "query": {
+        "select": [":COUNT(id) as 数量", "title as name"],
+        "groups": "title",
+        "from": "$trainee"
+      }
+    },
+    {
+      "name": "认证考试通过率",
+      "engine": "xiang",
+      "query": {
+        "select": [":COUNT(id) as 数量", "status as name"],
+        "groups": "status",
+        "from": "$training.cert"
+      }
+    }
+  ],
+  "output": "{{$res}}"
+}

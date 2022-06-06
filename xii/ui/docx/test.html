@@ -1,0 +1,146 @@
+<html>
+  <head>
+    <script src="js/jquery.js"></script>
+    <script src="js/docx.js"></script>
+    <script src="js/filesaver.js"></script>
+  </head>
+
+  <body>
+    <div id="status">下载中请稍侯...</div>
+
+    <script language="javascript">
+      var url = window.location.href;
+      var id = url.split("?id=")[1];
+      var token = sessionStorage.getItem("token");
+      if (!token) {
+        window.location = "/xiang/login/admin";
+      }
+
+      (function () {
+        Date.prototype.toYMD = Date_toYMD;
+        // generate();
+
+        $.ajax({
+          url: "/api/xiang/table/project.index/find/" + id,
+          type: "GET",
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+          },
+          data: {},
+          success: function (data) {
+            console.log(data);
+            generate(data);
+          },
+          error: function () {},
+        });
+      })();
+
+      function Date_toYMD(now) {
+        var year, month, day;
+        year = String(now.getFullYear());
+        month = String(now.getMonth() + 1);
+        if (month.length == 1) {
+          month = "0" + month;
+        }
+        day = String(now.getDate());
+        if (day.length == 1) {
+          day = "0" + day;
+        }
+        return year + "年" + month + "月" + day + "日";
+      }
+
+      function generate(data) {
+        var create_time = new Date(data.create_time);
+        var create_time_str = Date_toYMD(create_time);
+
+        const tab1 = new docx.Table({
+          columnWidths: [3505, 5505],
+          alignment: docx.AlignmentType.CENTER,
+          rows: [
+            new docx.TableRow({
+              children: [
+                new docx.TableCell({
+                  width: {
+                    size: 3505,
+                    type: docx.WidthType.DXA,
+                  },
+                  children: [new docx.Paragraph("项目")],
+                }),
+
+                new docx.TableCell({
+                  width: {
+                    size: 3505,
+                    type: docx.WidthType.DXA,
+                  },
+                  children: [new docx.Paragraph("送检时间")],
+                }),
+
+                new docx.TableCell({
+                  width: {
+                    size: 3505,
+                    type: docx.WidthType.DXA,
+                  },
+                  children: [new docx.Paragraph("检测结果")],
+                }),
+              ],
+            }),
+            new docx.TableRow({
+              children: [
+                new docx.TableCell({
+                  width: {
+                    size: 3505,
+                    type: docx.WidthType.DXA,
+                  },
+                  children: [new docx.Paragraph(data.name)],
+                }),
+
+                new docx.TableCell({
+                  width: {
+                    size: 3505,
+                    type: docx.WidthType.DXA,
+                  },
+                  children: [new docx.Paragraph(create_time_str)],
+                }),
+
+                new docx.TableCell({
+                  width: {
+                    size: 3505,
+                    type: docx.WidthType.DXA,
+                  },
+                  children: [new docx.Paragraph(data.result)],
+                }),
+              ],
+            }),
+          ],
+        });
+
+        const doc = new docx.Document({
+          sections: [
+            {
+              properties: {},
+              children: [
+                new docx.Paragraph({
+                  alignment: docx.AlignmentType.CENTER,
+                  children: [
+                    new docx.TextRun({
+                      text: "检测报告(DEMO)",
+                      heading: docx.HeadingLevel.HEADING_1,
+                      thematicBreak: true,
+                      bold: true,
+                    }),
+                  ],
+                }),
+                tab1,
+              ],
+            },
+          ],
+        });
+
+        docx.Packer.toBlob(doc).then((blob) => {
+          saveAs(blob, data.name + ".docx");
+          $("#status").html("下载完毕");
+        });
+      }
+    </script>
+  </body>
+</html>

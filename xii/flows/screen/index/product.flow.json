@@ -1,0 +1,42 @@
+{
+  "label": "信创软硬件汇总",
+  "version": "1.0.0",
+  "description": "信创软硬件汇总",
+  "nodes": [
+    {
+      "name": "信创软硬件",
+      "engine": "xiang",
+      "query": {
+        "select": [":COUNT(kind.id) as 数量", "kind.name as 类型"],
+        "wheres": [
+          {
+            ":kind.name": "类型",
+            "in": [
+              "CPU",
+              "服务器",
+              "存储",
+              "云平台",
+              "操作系统",
+              "中间件",
+              "数据库",
+              "软件包",
+              "安全"
+            ]
+          }
+        ],
+        "groups": "类型",
+        "orders": "数量",
+        "from": "$product",
+        "joins": [
+          {
+            "from": "product_kind as kind",
+            "key": "kind.id",
+            "foreign": "product.kind_id",
+            "left": true
+          }
+        ]
+      }
+    }
+  ],
+  "output": "{{$res.信创软硬件}}"
+}

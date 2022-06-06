@@ -1,0 +1,97 @@
+{
+  "name": "适配测试",
+  "version": "1.0.0",
+  "decription": "适配测试表格",
+  "bind": {
+    "model": "project.adapt",
+    "withs": { "project": {}, "jobs": {} }
+  },
+  "hooks": {
+    "after:find": "flows.hooks.adapt.after_find",
+    "after:save": "flows.hooks.adapt.after_save"
+  },
+  "apis": {
+    "search": {
+      "default": [{ "withs": { "project": {}, "jobs": {} } }, null, 10]
+    }
+  },
+  "columns": {
+    "项目": { "@": "components.所属项目" },
+    "构建参数": {
+      "@": "components.TextArea",
+      "in": ["构建参数", ":customize_args", 4]
+    },
+    "构建任务": {
+      "@": "components.Table",
+      "in": [
+        "构建任务",
+        "project.detail.adapt.job",
+        { "where.adapt_id.eq": ":id" }
+      ]
+    },
+    "状态": { "@": "components.ReadOnly", "in": ["状态", ":result", 1] },
+    "构建项目ID": {
+      "@": "components.ReadOnly",
+      "in": ["构建项目ID", ":cicds_id", 1]
+    },
+    "公钥": { "@": "components.ReadOnly", "in": ["公钥", ":public_key", 5] }
+  },
+  "filters": {},
+  "list": {
+    "primary": "id",
+    "layout": {
+      "columns": [
+        { "name": "名称" },
+        { "name": "代码仓库地址" },
+        { "name": "构建项目ID" },
+        { "name": "状态" }
+      ],
+      "filters": []
+    },
+    "actions": {
+      "create": {
+        "type": "button",
+        "props": { "label": "添加", "icon": "fas fa-plus" }
+      }
+    },
+    "option": { "operation": { "width": 120, "unfold": true, "items": [] } }
+  },
+  "edit": {
+    "primary": "id",
+    "layout": {
+      "fieldset": [
+        {
+          "columns": [
+            { "name": "项目", "width": 24 },
+            { "name": "名称", "width": 24 },
+            { "name": "代码仓库类型", "width": 4 },
+            { "name": "代码仓库地址", "width": 20 },
+            { "name": "构建任务", "width": 24 },
+            { "name": "公钥", "width": 24 }
+          ]
+        }
+      ]
+    },
+    "actions": {
+      "cancel": {},
+      "save": { "@": "action.保存" },
+      "delete": { "@": "action.删除" }
+    },
+    "option": {
+      "dev": true,
+      "operation": [
+        {
+          "title": "开始构建",
+          "type": "success",
+          "icon": "icon-play",
+          "confirm": true,
+          "disabled": ":pending",
+          "api": "/api/project/build/start",
+          "data": {
+            "id": ":id"
+          }
+        }
+      ]
+    }
+  }
+}

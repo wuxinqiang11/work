@@ -1,0 +1,23 @@
+{
+  "label": "场景分布",
+  "version": "1.0.0",
+  "description": "导入场景分布",
+  "nodes": [
+    {
+      "name": "场景分布",
+      "engine": "xiang",
+      "query": {
+        "select": [
+          ":COUNT(id) as 数量",
+          ":RAND() as 内存",
+          ":RAND() as CPU",
+          ":RAND() as 磁盘",
+          "scene as name"
+        ],
+        "groups": "scene",
+        "from": "$product"
+      }
+    }
+  ],
+  "output": "{{$res.场景分布}}"
+}

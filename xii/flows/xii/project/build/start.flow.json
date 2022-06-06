@@ -1,0 +1,91 @@
+{
+  "label": "运行构建",
+  "version": "1.0.0",
+  "description": "运行构建",
+  "nodes": [
+    {
+      "name": "适配",
+      "process": "models.project.adapt.Find",
+      "args": [
+        "{{$in.0}}",
+        {
+          "withs": {
+            "jobs": {
+              "query": { "orders": [{ "column": "id", "option": "desc" }] }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "ID",
+      "process": "xiang.helper.MapGet",
+      "args": ["{{$res.适配}}", "id"]
+    },
+    {
+      "name": "CICDS_ID",
+      "process": "xiang.helper.MapGet",
+      "args": ["{{$res.适配}}", "cicds_id"]
+    },
+    {
+      "name": "配置",
+      "process": "flows.xii.config"
+    },
+    {
+      "name": "Host",
+      "process": "xiang.helper.StrConcat",
+      "args": [
+        "{{$res.配置.XII_CSPHERE_HOST}}",
+        "/builder/projects/",
+        "{{$res.CICDS_ID}}",
+        "/start"
+      ]
+    },
+    {
+      "name": "jobs",
+      "process": "xiang.helper.ArrayMapSet",
+      "args": ["{{$res.适配.jobs}}", "customize_args", {}]
+    },
+    {
+      "name": "build_args",
+      "process": "xiang.helper.ArrayIndexes",
+      "args": ["{{$res.jobs}}"]
+    },
+    {
+      "name": "customize_args",
+      "process": "xiang.helper.ArrayColumn",
+      "args": ["{{$res.jobs}}", "customize_args"]
+    },
+    {
+      "name": "请求构建",
+      "process": "xiang.network.PostJSON",
+      "args": [
+        "{{$res.Host}}",
+        {
+          "build_args": "{{$res.build_args}}",
+          "customize_args": "{{$res.customize_args}}"
+        },
+        { "Csphere-Api-Key": "{{$res.配置.XII_CSPHERE_KEY}}" }
+      ]
+    },
+    {
+      "name": "处理结果",
+      "process": "xiang.helper.Case",
+      "args": [
+        {
+          "when": [{ "更新项目": "{{$res.请求构建.status}}", "=": 200 }],
+          "name": "请求成功, 更新任务信息",
+          "process": "flows.xii.project.build.update",
+          "args": ["{{$res.ID}}", "{{$res.jobs}}", "{{$res.请求构建.data}}"]
+        },
+        {
+          "when": [{ "抛出异常": "{{$res.请求构建.status}}", "!=": 200 }],
+          "name": "请求失败, 抛出异常",
+          "process": "xiang.helper.Throw",
+          "args": ["{{$res.请求构建.data.message}}", "{{$res.请求构建.status}}"]
+        }
+      ]
+    }
+  ],
+  "output": "{{$res.处理结果}}"
+}

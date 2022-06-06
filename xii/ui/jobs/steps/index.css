@@ -1,0 +1,87 @@
+.group {
+  margin-bottom: 20px;
+}
+
+.group:last-child {
+  margin-bottom: 0;
+}
+.group .title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.group .body {
+  border: 1px solid var(--color_border);
+  margin-top: 1em;
+  border-radius: 6px;
+}
+
+.group .body .item {
+  display: flex;
+  line-height: 24px;
+  padding: 0.8em;
+  border-bottom: 1px solid var(--color_border);
+}
+
+.group .body .item:last-child {
+  border-bottom: none;
+}
+
+.group .body .item .fold-icon {
+  font-size: 16px;
+  color: rgb(162, 165, 185);
+  font-weight: 600;
+  margin-top: 4px;
+  margin-right: 0.6em;
+}
+
+.group .body .item .success-icon,
+.group .body .item .doing-icon {
+  font-size: 16px;
+  color: var(--color_primary);
+  margin-top: 4px;
+  margin-right: 0.5em;
+}
+
+.group .body .item .doing-icon {
+  color: hsl(35deg 95% 62%);
+}
+
+.group .body .item .failed-icon {
+  font-size: 16px;
+  color: var(--color_danger);
+  margin-top: 4px;
+  margin-right: 0.5em;
+}
+
+.group .body .item .doing-icon.icon-check::before {
+  content: "\e98e";
+}
+
+.group .body .item .failed-icon.icon-check::before {
+  content: "\ea11";
+}
+
+.group .body .item .content .name {
+  font-weight: 500;
+  color: #a2a5b9;
+}
+
+.group .body .item .content .log {
+  font-size: 12px;
+  font-weight: 300;
+  color: #a2a5b9;
+  display: none;
+}
+
+.group .body .item:hover .content .name {
+  color: #41b883;
+}
+
+.group .body .item:hover .content .log {
+  display: block;
+}
+
+.group .body .item:hover .icon-chevron-right::before {
+  content: "\e92e" !important;
+}

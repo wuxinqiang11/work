@@ -1,0 +1,18 @@
+{
+  "label": "分列城市地区",
+  "version": "1.0.0",
+  "description": "分列城市地区",
+  "nodes": [
+    {
+      "name": "设置省份",
+      "process": "xiang.helper.MapSet",
+      "args": ["{{$in.0}}", "province", "{{$in.0.area.0}}"]
+    },
+    {
+      "name": "设置城市",
+      "process": "xiang.helper.MapSet",
+      "args": ["{{$res.设置省份}}", "city", "{{$in.0.area.1}}"]
+    }
+  ],
+  "output": ["{{$res.设置城市}}"]
+}

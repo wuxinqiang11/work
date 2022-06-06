@@ -1,0 +1,72 @@
+{
+  "name": "型号",
+  "table": {
+    "name": "sku",
+    "comment": "型号",
+    "engine": "InnoDB"
+  },
+  "columns": [
+    {
+      "label": "ID",
+      "name": "id",
+      "type": "ID",
+      "comment": "ID"
+    },
+    {
+      "label": "名称",
+      "name": "name",
+      "type": "string",
+      "length": 100,
+      "comment": "型号名称",
+      "index": true
+    },
+    {
+      "label": "内存",
+      "name": "memory",
+      "type": "integer",
+      "comment": "内存",
+      "default": 0,
+      "index": true
+    },
+    {
+      "label": "磁盘",
+      "name": "disk",
+      "type": "integer",
+      "comment": "磁盘空间",
+      "default": 0,
+      "index": true
+    },
+    {
+      "label": "CPU",
+      "name": "cpu",
+      "type": "integer",
+      "comment": "CPU核心数量",
+      "default": 0,
+      "index": true
+    },
+    {
+      "label": "库存",
+      "name": "stock",
+      "type": "integer",
+      "comment": "库存数量",
+      "default": 0,
+      "index": true
+    },
+    {
+      "label": "创建参数",
+      "name": "params",
+      "type": "json",
+      "comment": "希云创建参数",
+      "nullable": true
+    },
+    {
+      "label": "类型",
+      "name": "type",
+      "type": "enum",
+      "default": "容器",
+      "option": ["物理机", "虚拟机", "轻虚拟机", "容器"],
+      "comment": "类型:物理机, 虚拟机, 轻虚拟机, 容器",
+      "index": true
+    }
+  ]
+}
